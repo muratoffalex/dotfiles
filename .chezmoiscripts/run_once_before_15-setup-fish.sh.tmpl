@@ -1,0 +1,26 @@
+#!/bin/bash
+
+set -eufo pipefail
+
+echo -e ">>> Begin Setting Up Fish Shell"
+
+# Install fish
+{{ if (eq .chezmoi.os "darwin") }}
+	brew install fish
+{{ else if (eq .chezmoi.os "linux") -}}
+	{{ if (eq .chezmoi.osRelease.id "arch") -}}
+		pacman -S fish
+	{{ else if (eq .chezmoi.osRelease.id "ubuntu" "debian") -}}
+		sudo apt install fish
+	{{ end }}
+{{ end }}
+
+# Set fish as default
+echo -e "Setting fish as default shell"
+# if fish not main shell make it main shell via chsh
+if [[ ! $(echo $SHELL) == $(which fish) ]]; then
+    echo "fish is not main shell, making it main shell"
+    chsh -s $(which fish)
+fi
+
+echo -e "<<< Finish Setting Up Fish Shell"

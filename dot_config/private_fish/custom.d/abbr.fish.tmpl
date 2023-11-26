@@ -1,0 +1,61 @@
+if type -q chezmoi  
+    abbr chct  chezmoi chattr +template
+    abbr che   chezmoi edit 
+    abbr chea  chezmoi edit --apply 
+    abbr cha   chezmoi apply 
+    abbr chadd chezmoi add
+    abbr chcd  chezmoi cd
+    abbr chef  chezmoi edit --apply $FISH_CONFIG_PATH
+end
+
+set -Ux TMUX_CONFIG_PATH $HOME/.config/tmux/tmux.conf
+set -Ux NVIM_CONFIG_PATH $HOME/.config/nvim
+set -Ux WEZTERM_CONFIG_PATH $HOME/.config/wezterm/wezterm.lua
+
+if type -q chezmoi
+  alias chea='chezmoi edit --apply'
+  abbr etmux chea $TMUX_CONFIG_PATH
+else
+  abbr etmux nvim $TMUX_CONFIG_PATH
+end
+
+if type -q git
+  abbr ga git add
+  abbr gc git commit
+  abbr gcm --set-cursor 'git commit -m "%"'
+  abbr gs git status
+  abbr gp git push
+  abbr gpl git pull
+  abbr gco git checkout
+  abbr gl git log
+  abbr gb git branch
+  abbr gd git diff
+  abbr grs git restore --staged
+end
+
+if type -q brew
+  abbr bi brew install
+  abbr bun brew uninstall
+  abbr bu brew upgrade
+end
+
+if type -q tmux
+  abbr tnew tmux new -s
+  abbr tkill tmux kill-session -t
+  abbr tls tmux ls
+  abbr ta tmux attach -t
+  abbr tks tmux kill-server
+end
+
+if type -q lazygit
+  abbr lg lazygit
+end
+
+if type -q thefuck
+  abbr fu fuck
+end
+
+abbr --position anywhere fconf $FISH_CONFIG_PATH
+abbr nvroot cd ~/.config/nvim
+abbr uf source $FISH_CONFIG_PATH
+
