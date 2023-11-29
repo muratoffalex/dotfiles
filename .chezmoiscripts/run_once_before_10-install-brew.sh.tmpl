@@ -1,15 +1,14 @@
+{{ if (eq .chezmoi.os "darwin") -}}
 #!/bin/bash
 
 set -eufo pipefail
 
-echo -e ">>> Begin Install Brew"
+echo -e "<<< Begin Install Brew"
 
-{{ if (eq .chezmoi.os "darwin") -}}
-  if [[ -z $(command -v brew) ]]; then
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  fi
-{{- else if (eq .chezmoi.os "linux") -}}
-  # TODO: install brew (?) for arch and ubuntu
+if [[ -z $(command -v brew) ]]; then
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+
+echo -e ">>> Finish Install Brew"
+
 {{- end }}
-
-echo -e "<<< Finish Install Brew"

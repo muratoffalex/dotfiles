@@ -2,7 +2,7 @@
 
 set -eufo pipefail
 
-echo -e ">>> Begin Install Packages"
+echo -e "<<< Begin Install Packages"
 
 packages=(
   # headless
@@ -19,6 +19,8 @@ packages=(
   tlrc
   lf
   eza
+  bitwarden-cli
+  wakatime-cli
 )
 
 cask_packages=(
@@ -26,6 +28,8 @@ cask_packages=(
   raycast
   stats
   rectangle
+  obsidian
+  insomnia
 )
 
 {{ if (eq .chezmoi.os "darwin") -}}
@@ -35,8 +39,7 @@ cask_packages=(
       fi
   done
 
-
-  # Check that file /Users/$USER/Library/Fonts/JetBrainsMonoNerdFontPropo-ThinItalic.ttf exists
+  # Install Nerd font if not exists
   FONT_FILE=/Users/$USER/Library/Fonts/JetBrainsMonoNerdFontPropo-ThinItalic.ttf
   [[ ! -f "$FONT_FILE" ]] && brew tap homebrew/cask-fonts && brew install --cask font-jetbrains-mono-nerd-font
 
@@ -49,4 +52,4 @@ cask_packages=(
   # TODO: install packages for arch and ubuntu
 {{- end }}
 
-echo -e "<<< Finish Install Packages"
+echo -e ">>> Finish Install Packages"
