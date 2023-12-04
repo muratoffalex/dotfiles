@@ -52,4 +52,9 @@ config.window_padding = {
     bottom = "0.5cell",
 }
 
+config.keys = {
+    -- open t - tmux smart session manager <ctrl+a>T
+    { key = "j", mods = "CMD", action = wezterm.action.SendString("\x01\x54") },
+}
+
 return config
