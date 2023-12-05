@@ -11,12 +11,19 @@ end
 set -Ux TMUX_CONFIG_PATH $HOME/.config/tmux/tmux.conf
 set -Ux NVIM_CONFIG_PATH $HOME/.config/nvim
 set -Ux WEZTERM_CONFIG_PATH $HOME/.config/wezterm/wezterm.lua
+set -Ux GIT_CONFIG_PATH $HOME/.gitconfig
 
 if type -q chezmoi
   alias chea='chezmoi edit --apply'
   abbr etmux chea $TMUX_CONFIG_PATH
+  abbr efish chea $FISH_CONFIG_PATH
+  abbr ewez chea $WEZTERM_CONFIG_PATH
+  abbr egit chea $GIT_CONFIG_PATH
 else
   abbr etmux nvim $TMUX_CONFIG_PATH
+  abbr efish nvim $FISH_CONFIG_PATH
+  abbr ewez nvim $WEZTERM_CONFIG_PATH
+  abbr egit nvim $GIT_CONFIG_PATH
 end
 
 if type -q git

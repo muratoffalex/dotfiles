@@ -1,5 +1,4 @@
 set -g fish_greeting # Disable fish greeting 
-#fish_vi_key_bindings # Load vi key bindings TODO: move to function fish_user_key_bindings
 set -Ux EDITOR nvim
 set -Ux LC_ALL ru_RU.UTF-8
 set -Ux FISH_CONFIG_PATH $__fish_config_dir/config.fish
