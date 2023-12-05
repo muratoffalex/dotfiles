@@ -23,5 +23,9 @@ if type -q bat
   set -Ux BAT_THEME Monokai Extended Bright # Set theme for BAT
 end
 
+if type -q fzf
+  set -Ux FZF_DEFAULT_COMMAND 'fd --type f --hidden --follow --exclude .git'
+end
+
 set -Ux MIKROTIK_SSH_CREDENTIALS admin@router.lan
 set -Ux MIKROTIK_VPN_NAME full_vpn
