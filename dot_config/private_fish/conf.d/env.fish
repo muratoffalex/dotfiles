@@ -2,6 +2,7 @@ set -g fish_greeting # Disable fish greeting
 set -Ux EDITOR nvim
 set -Ux LC_ALL ru_RU.UTF-8
 set -Ux FISH_CONFIG_PATH $__fish_config_dir/config.fish
+set -Ux PGP_TTY $(tty) # Fix gpg tty error
 
 # Add my custom functions to be autoloaded
 if test -d $__fish_config_dir/custom_functions.d
