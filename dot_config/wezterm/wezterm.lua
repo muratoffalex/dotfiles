@@ -26,6 +26,8 @@ end)
 
 local config = wezterm.config_builder()
 
+config.front_end = "Software"
+
 -- Contrasting color scheme
 config.color_scheme = "deep"
 config.enable_tab_bar = false
@@ -42,7 +44,7 @@ config.adjust_window_size_when_changing_font_size = false
 
 -- Font settings
 config.font = wezterm.font("JetBrainsMono Nerd Font", { weight = "DemiBold" })
-config.font_size = 14
+config.font_size = 15
 config.harfbuzz_features = { "calt=0", "clig=0", "liga=0" } -- disable ligatures
 
 config.window_padding = {
