@@ -20,7 +20,7 @@ echo -e "Setting fish as default shell"
 if [[ ! $(echo $SHELL) == $(which fish) ]]; then
     echo "fish is not main shell, making it main shell"
     
-    {{ if (eq .chezmoi.osRelease.id "arch") -}}
+    {{ if (eq .chezmoi.os "darwin") -}}
         echo "/usr/local/bin/fish" | sudo tee -a /etc/shells
     {{ end }}
 
