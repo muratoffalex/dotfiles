@@ -9,7 +9,9 @@ echo -e "<<< Begin Setting Up Fish Shell"
 	brew install fish
 {{ else if (eq .chezmoi.os "linux") -}}
 	{{ if (eq .chezmoi.osRelease.id "arch") -}}
-		pacman -S --noconfirm fish
+		if [[ -z $(command -v fish) ]]; then
+			sudo pacman -S --noconfirm fish
+		fi
 	{{ else if (eq .chezmoi.osRelease.id "ubuntu" "debian") -}}
 		sudo apt install fish
 	{{ end }}
