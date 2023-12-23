@@ -16,7 +16,6 @@ packages=(
   fzf
   ripgrep
   fd
-  tlrc
   lf
   eza
   bitwarden-cli
@@ -26,9 +25,10 @@ packages=(
 )
 
 aur_packages=(
+  tlrc-bin
 )
 
-{{   if (not .headless) -}}
+{{   if or (not (index . "headless") (not .headless)) -}}
 packages+=(
   wezterm
 )
