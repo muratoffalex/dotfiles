@@ -33,8 +33,8 @@ config.color_scheme = "deep"
 config.enable_tab_bar = false
 config.enable_scroll_bar = false
 -- Comfortable opacity with blur
-config.window_background_opacity = 0.8
-config.macos_window_background_blur = 80
+config.window_background_opacity = 0.82
+config.macos_window_background_blur = 35
 -- Remove all decorations
 config.window_decorations = "RESIZE|MACOS_FORCE_DISABLE_SHADOW"
 -- Enable wezterm full mode (faster)
