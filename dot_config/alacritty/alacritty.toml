@@ -1,0 +1,69 @@
+live_config_reload = true
+
+[env]
+TERM = "xterm-256color"
+
+[cursor]
+style = "Beam"
+unfocused_hollow = false
+
+[font]
+size = 15
+
+[font.normal]
+family = "JetbrainsMono Nerd Font"
+style = "SemiBold"
+
+[font.bold]
+family = "JetbrainsMono Nerd Font"
+style = "Bold"
+
+[font.italic]
+family = "JetbrainsMono Nerd Font"
+style = "Italic"
+
+[window]
+startup_mode = "Windowed"
+decorations = "Buttonless"
+dynamic_padding = false
+opacity = 0.92
+# only for mac
+option_as_alt = "OnlyLeft"
+
+[window.padding]
+x = 6
+y = 6
+
+[window.dimensions]
+columns = 90
+lines = 30
+
+[colors]
+draw_bold_text_with_bright_colors = false
+
+[colors.normal]
+black = "#21222c"
+red = "#ff5555"
+green = "#50fa7b"
+yellow = "#f1fa8c"
+blue = "#a2aaff"
+magenta = "#ff79c6"
+cyan = "#8be9fd"
+white = "#f8f8f2"
+
+[colors.primary]
+background = "#090909"
+foreground = "#f8f8f2"
+
+[colors.cursor]
+text = "CellBackground"
+cursor = "CellForeground"
+
+[keyboard]
+bindings = [
+  # open t - tmux smart session manager <Ctrl-a>T
+  { key = "J", mods = "Command", chars = "\u0001\u0054" },
+  { key = "Key0",     mods = "Command", action = "ResetFontSize"    },
+  { key = "Plus",   mods = "Command", action = "IncreaseFontSize" },
+  { key = "Minus",    mods = "Command", action = "DecreaseFontSize" }
+]
