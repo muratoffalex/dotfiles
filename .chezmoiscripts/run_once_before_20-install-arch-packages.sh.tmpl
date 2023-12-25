@@ -8,7 +8,9 @@ echo -e "<<< Begin Install Packages"
 packages=(
   curl
   git
+  make
   tmux
+  starship
   npm
   neovim
   bat
@@ -19,8 +21,6 @@ packages=(
   fd
   lf
   eza
-  bitwarden-cli
-  wakatime-cli
   lazygit
   ttf-jetbrains-mono-nerd
 )
@@ -29,7 +29,7 @@ aur_packages=(
   tlrc-bin
 )
 
-{{   if or (not (index . "headless") (not .headless)) -}}
+{{   if or (not (index . "headless")) (not .headless) -}}
 packages+=(
   wezterm
 )
@@ -62,15 +62,15 @@ if [ ! $(command -v paru) ]; then
   pacman -S --needed --noconfirm git base-devel
 {{-   end }}
   git clone https://aur.archlinux.org/paru.git /tmp/paru
-  cd paru
+  cd /tmp/paru
   makepkg -si
   rm -rf /tmp/paru
 fi
 
 for aur_package in ${aur_packages[@]}; do
-  if [ $(pacman -Qq $aur_package 2> /dev/null) != $aur_package ]; then
+  if [ "$(pacman -Qq $aur_package 2> /dev/null)" != $aur_package ]; then
     echo "installing $aur_package from AUR"
-    paru --noconfirm $aur_package
+    paru --noconfirm -S $aur_package
   fi
 done
 

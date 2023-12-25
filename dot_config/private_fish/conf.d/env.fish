@@ -1,6 +1,6 @@
 set -g fish_greeting # Disable fish greeting 
 set -Ux EDITOR nvim
-set -Ux LC_ALL ru_RU.UTF-8
+# set -gx LC_ALL ru_RU.UTF-8
 set -Ux FISH_CONFIG_PATH $__fish_config_dir/config.fish
 set -Ux PGP_TTY $(tty) # Fix gpg tty error
 
@@ -21,12 +21,12 @@ else
 end
 
 if type -q bat
-  set -Ux BAT_THEME Monokai Extended Bright # Set theme for BAT
+  set -gx BAT_THEME Monokai Extended Bright # Set theme for BAT
 end
 
 if type -q fzf
   set -Ux FZF_DEFAULT_COMMAND 'fd --type f --hidden --follow --exclude .git'
 end
 
-set -Ux MIKROTIK_SSH_CREDENTIALS admin@router.lan
-set -Ux MIKROTIK_VPN_NAME full_vpn
+set -gx MIKROTIK_SSH_CREDENTIALS admin@router.lan
+set -gx MIKROTIK_VPN_NAME full_vpn
