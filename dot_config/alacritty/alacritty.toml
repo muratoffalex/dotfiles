@@ -1,4 +1,4 @@
-# import = ["~/.config/alacritty/themes/tokyonight_storm.toml"]
+import = ["~/.config/alacritty/themes/tokyonight-day.toml"]
 
 live_config_reload = true
 
@@ -28,7 +28,6 @@ style = "Italic"
 startup_mode = "Windowed"
 decorations = "Buttonless"
 dynamic_padding = false
-opacity = 0.92
 # only for mac
 option_as_alt = "OnlyLeft"
 
@@ -42,20 +41,6 @@ lines = 30
 
 [colors]
 draw_bold_text_with_bright_colors = false
-
-[colors.normal]
-black = "#21222c"
-red = "#f10000"
-green = "#50fa7b"
-yellow = "#FADB08"
-blue = "#a2aaff"
-magenta = "#ff79c6"
-cyan = "#8be9fd"
-white = "#f8f8f2"
-
-[colors.primary]
-background = "#090909"
-foreground = "#f8f8f2"
 
 [colors.cursor]
 text = "CellBackground"

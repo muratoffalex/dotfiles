@@ -3,6 +3,8 @@ set -Ux EDITOR nvim
 # set -gx LC_ALL ru_RU.UTF-8
 set -Ux FISH_CONFIG_PATH $__fish_config_dir/config.fish
 set -Ux PGP_TTY $(tty) # Fix gpg tty error
+set -Ux GEM_HOME $HOME/.gem
+set -Ux PATH $GEM_HOME/bin:$PATH
 
 # Add my custom functions to be autoloaded
 if test -d $__fish_config_dir/custom_functions.d

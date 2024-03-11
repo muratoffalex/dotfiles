@@ -1,0 +1,110 @@
+#!/bin/sh
+
+# Toggle dark and light themes for tmux, alacritty and neovim
+# https://shapeshed.com/vim-tmux-alacritty-theme-switcher/
+
+THEME=$1
+[[ -z "$2" ]] && CHANGE_SYSTEM_THEME=1 || CHANGE_SYSTEM_THEME=$2
+
+LIGHTTHEME="tokyonight-day"
+DARKTHEME="tokyonight-storm"
+TRANSPARENTTHEME="transparent"
+VIMCONF="$HOME/.config/nvim/lua/config/init.lua"
+ALACRITTYCONF="$HOME/.config/alacritty/alacritty.toml"
+TMUXCONF="$HOME/.config/tmux/tmux.conf"
+
+{{ if (eq .chezmoi.os "darwin") }}
+CURRENT_MODE=$(defaults read -g AppleInterfaceStyle 2> /dev/null)
+{{ else if (eq .chezmoi.os "linux") -}}
+CURRENT_MODE=$(gsettings get org.gnome.desktop.interface color-scheme)
+{{ end }}
+
+# prefer-dark for linux
+if [ "$CURRENT_MODE" = "Dark" ] || [ "$CURRENT_MODE" = "prefer-dark" ]; then
+  CURRENT_MODE='dark'
+else
+  CURRENT_MODE='light'
+fi
+
+switch_vim_theme() {
+  theme_for_vim_panes="$1"
+  colorscheme=$DARKTHEME
+  transparent="Disable"
+
+  if [ "$theme_for_vim_panes" = "light" ]; then
+    colorscheme=$LIGHTTHEME
+  elif [ "$theme_for_vim_panes" = "transparent" ]; then
+    transparent="Enable"
+    theme_for_vim_panes="dark"
+  fi
+
+  tmux list-panes -a -F '#{pane_id} #{pane_current_command}' |
+    grep vim |
+    cut -d ' ' -f 1 |
+    xargs -I PANE tmux send-keys -t PANE ESCAPE \
+      ":set background=${theme_for_vim_panes}" ENTER \
+      ":Transparent${transparent}" ENTER
+}
+
+enable_dark_theme() {
+  sed -E -i '' "s/${TRANSPARENTTHEME}|${LIGHTTHEME}/${DARKTHEME}/" "$ALACRITTYCONF"
+  sed -i '' 's/light/dark/' "$VIMCONF"
+  switch_vim_theme "dark"
+  change_system_theme "dark"
+}
+
+enable_light_theme() {
+  sed -E -i '' "s/${TRANSPARENTTHEME}|${DARKTHEME}/${LIGHTTHEME}/" "$ALACRITTYCONF"
+  sed -i '' 's/dark/light/' "$VIMCONF"
+  switch_vim_theme "light"
+  change_system_theme "light"
+}
+
+enable_transparent_theme() {
+  sed -E -i '' "s/${LIGHTTHEME}|${DARKTHEME}/${TRANSPARENTTHEME}/" "$ALACRITTYCONF"
+  sed -i '' 's/light/dark/' "$VIMCONF"
+  switch_vim_theme "transparent"
+}
+
+change_system_theme() {
+  # send a signal to the system to change the theme when
+  # the CHANGE_SYSTEM_THEME var is set to 1 or empty and the THEME variable is set
+  if [[ "$CHANGE_SYSTEM_THEME" = "1" && ! -z "$THEME" ]]; then
+  {{ if (eq .chezmoi.os "darwin") }}
+    dark=false
+    [[ "$1" = "dark" ]] && dark=true
+    osascript -l JavaScript -e "Application('System Events').appearancePreferences.darkMode = $dark" > /dev/null
+  {{ else if (eq .chezmoi.os "linux") -}}
+    theme='prefer-light'
+    [[ "$1" = "dark" ]] && theme='prefer-dark'
+    gsettings set org.gnome.desktop.interface color-scheme $theme
+  {{ end }}
+  fi
+}
+
+if [ -z "$THEME" ]; then
+  if [ "$CURRENT_MODE" = "dark" ]; then
+    enable_dark_theme
+  else
+    enable_light_theme
+  fi
+else 
+  if [ "$THEME" = "dark" ]; then
+    enable_dark_theme
+  elif [ "$THEME" = "transparent" ]; then
+    enable_transparent_theme
+  else
+    enable_light_theme
+  fi
+fi
+
+if [[ "$CHANGE_SYSTEM_THEME" = "1" && ! -z "$THEME" ]]; then
+  echo "System theme set to $THEME"
+else  
+  if [ -z "$THEME" ]; then
+    THEME=$CURRENT_MODE
+  fi
+  echo "Theme set to $THEME"
+fi
+
+# tmux source-file "$TMUXCONF"
