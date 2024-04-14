@@ -22,6 +22,7 @@ TRANSPARENTTHEME="transparent"
 VIMCONF="$HOME/.config/nvim/lua/config/init.lua"
 ALACRITTYCONF="$HOME/.config/alacritty/alacritty.toml"
 TMUXCONF="$HOME/.config/tmux/tmux.conf"
+THEMEENV="theme"
 
 {{ if (eq .chezmoi.os "darwin") }}
 CURRENT_MODE=$(defaults read -g AppleInterfaceStyle 2> /dev/null)
@@ -81,8 +82,8 @@ enable_transparent_theme() {
 }
 
 set_env() {
-  # set the environment variable for the theme globally
-  fish -c "set -Ux theme $1"
+  # set the environment variable across all sessions
+  fish -c "set -e $THEMEENV && set -Ux theme $1"
 }
 
 change_alacritty_theme() {

@@ -13,4 +13,5 @@ background = "#090909"
 foreground = "#f8f8f2"
 
 [window]
-opacity = 0.92
+opacity = 0.75
+blur = true
