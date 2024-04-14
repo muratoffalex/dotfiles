@@ -1,5 +1,15 @@
 #!/bin/sh
 
+# Required parameters:
+# @raycast.schemaVersion 1
+# @raycast.title Change theme
+# @raycast.mode silent
+
+# Optional parameters:
+# @raycast.icon 🌓
+# @raycast.argument1 { "type": "dropdown", "placeholder": "light/dark/transparent", "optional": true, "data": [{"title": "Dark", "value": "dark"},{"title": "Light", "value": "light"},{"title": "Transparent", "value": "transparent"}]}
+# @raycast.argument2 { "type": "text", "placeholder": "system 0/1", "optional": true }
+
 # Toggle dark and light themes for tmux, alacritty and neovim
 # https://shapeshed.com/vim-tmux-alacritty-theme-switcher/
 
@@ -26,7 +36,7 @@ else
   CURRENT_MODE='light'
 fi
 
-switch_vim_theme() {
+change_vim_theme() {
   theme_for_vim_panes="$1"
   colorscheme=$DARKTHEME
   transparent="Disable"
@@ -47,23 +57,42 @@ switch_vim_theme() {
 }
 
 enable_dark_theme() {
-  sed -E -i '' "s/${TRANSPARENTTHEME}|${LIGHTTHEME}/${DARKTHEME}/" "$ALACRITTYCONF"
-  sed -i '' 's/light/dark/' "$VIMCONF"
-  switch_vim_theme "dark"
-  change_system_theme "dark"
+  theme="dark"
+  set_env $theme
+  change_vim_theme $theme
+  change_alacritty_theme $theme
+  change_system_theme $theme
 }
 
 enable_light_theme() {
-  sed -E -i '' "s/${TRANSPARENTTHEME}|${DARKTHEME}/${LIGHTTHEME}/" "$ALACRITTYCONF"
-  sed -i '' 's/dark/light/' "$VIMCONF"
-  switch_vim_theme "light"
-  change_system_theme "light"
+  theme="light"
+  set_env $theme
+  change_vim_theme $theme
+  change_alacritty_theme $theme
+  change_system_theme $theme
 }
 
 enable_transparent_theme() {
-  sed -E -i '' "s/${LIGHTTHEME}|${DARKTHEME}/${TRANSPARENTTHEME}/" "$ALACRITTYCONF"
-  sed -i '' 's/light/dark/' "$VIMCONF"
-  switch_vim_theme "transparent"
+  # set dark theme because transparent theme is based on dark theme
+  theme="dark"
+  set_env $theme
+  change_vim_theme "transparent"
+  change_alacritty_theme "transparent"
+}
+
+set_env() {
+  # set the environment variable for the theme globally
+  fish -c "set -Ux theme $1"
+}
+
+change_alacritty_theme() {
+  if [ "$1" = "dark" ]; then
+    sed -E -i '' "s/${TRANSPARENTTHEME}|${LIGHTTHEME}/${DARKTHEME}/" "$ALACRITTYCONF"
+  elif [ "$1" = "light" ]; then
+    sed -E -i '' "s/${TRANSPARENTTHEME}|${DARKTHEME}/${LIGHTTHEME}/" "$ALACRITTYCONF"
+  elif [ "$1" = "transparent" ]; then
+    sed -E -i '' "s/${LIGHTTHEME}|${DARKTHEME}/${TRANSPARENTTHEME}/" "$ALACRITTYCONF"
+  fi
 }
 
 change_system_theme() {
