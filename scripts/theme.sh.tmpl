@@ -1,5 +1,5 @@
 #!/bin/sh
-
+{{ if (eq .chezmoi.os "darwin") }}
 # Required parameters:
 # @raycast.schemaVersion 1
 # @raycast.title Change theme
@@ -9,7 +9,7 @@
 # @raycast.icon 🌓
 # @raycast.argument1 { "type": "dropdown", "placeholder": "light/dark/transparent", "optional": true, "data": [{"title": "Dark", "value": "dark"},{"title": "Light", "value": "light"},{"title": "Transparent", "value": "transparent"}]}
 # @raycast.argument2 { "type": "text", "placeholder": "system 0/1", "optional": true }
-
+{{ end }}
 # Toggle dark and light themes for tmux, alacritty and neovim
 # https://shapeshed.com/vim-tmux-alacritty-theme-switcher/
 
