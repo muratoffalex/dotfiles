@@ -1,4 +1,4 @@
-# Dotfiles
+# Dotfiles for macos and arch
 
 ## Setup
 
