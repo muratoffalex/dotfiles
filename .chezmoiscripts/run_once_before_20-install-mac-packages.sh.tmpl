@@ -42,7 +42,7 @@ brew upgrade
 
 for package in ${packages[@]}; do
     if [[ -z $(brew ls --versions $package) ]]; then
-        brew install $package
+        brew install --overwrite $package
     fi
 done
 
