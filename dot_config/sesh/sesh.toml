@@ -1,0 +1,59 @@
+[default_session]
+startup_command = "nvim"
+# startup_command = "nvim -c ':Telescope find_files'"
+
+# NOTE: potential feature ideas
+# [[session]]
+# name = "session"
+# path = "~/path/to/session"
+# startup_script = "~/git_repos/dotfiles/sesh/bin/spotify.sh"
+# detached = true # never attach to this session, just create it in the background
+# tmuxp = "~/.config/tmux/tmuxp/joshmedeski.com.yml"
+# tmuxinator = "~/.config/tmux/tmuxinator/joshmedeski.com.yml"
+
+[[session]]
+name = "dotfiles"
+path = "~/.local/share/chezmoi"
+
+[[session]]
+name = "nvim config"
+path = "~/.config/nvim"
+
+[[session]]
+name = "home"
+path = "~"
+startup_command = "ls"
+
+[[session]]
+name = "tmp"
+path = "~/tmp"
+startup_command = "ls"
+
+[[session]]
+name = "qmk-userspace"
+path = "~/dev/misc/qmk_userspace"
+
+[[session]]
+name = "dev"
+path = "~/dev"
+startup_command = "ls"
+
+[[session]]
+name = "work projects"
+path = "~/dev/work"
+startup_command = "ls"
+
+[[session]]
+name = "pet projects"
+path = "~/dev/pet"
+startup_command = "ls"
+
+[[session]]
+name = "miscellaneous"
+path = "~/dev/misc"
+startup_command = "ls"
+
+[[session]]
+name = "scripts"
+path = "~/dev/scripts"
+startup_command = "ls"

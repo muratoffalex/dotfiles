@@ -48,8 +48,10 @@ cursor = "CellForeground"
 
 [keyboard]
 bindings = [
-  # open t - tmux smart session manager <Ctrl-a>T
+  # open sesh fzf <Ctrl-a>T
   { key = "J", mods = "Command", chars = "\u0001\u0054" },
+  # open sesh gum <Ctrl-a>K
+  { key = "K", mods = "Command", chars = "\u0001\u004b" },
   { key = "Key0",     mods = "Command", action = "ResetFontSize"    },
   { key = "Plus",   mods = "Command", action = "IncreaseFontSize" },
   { key = "Minus",    mods = "Command", action = "DecreaseFontSize" }
