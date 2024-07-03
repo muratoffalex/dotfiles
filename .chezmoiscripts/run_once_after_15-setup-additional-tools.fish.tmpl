@@ -6,6 +6,7 @@ echo ">>> Begin setup additional tools"
 if not test -d ~/.config/tmux/plugins/tpm
   echo "Installing tpm"
   git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
+  ~/.config/tmux/plugins/tpm/bin/install_plugins
 end
 
 echo "<<< End setup additional tools"

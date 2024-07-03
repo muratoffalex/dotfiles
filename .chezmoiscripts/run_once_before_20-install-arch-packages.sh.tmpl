@@ -23,6 +23,7 @@ packages=(
   eza
   lazygit
   ttf-jetbrains-mono-nerd
+  chezmoi
 )
 
 aur_packages=(
@@ -31,7 +32,7 @@ aur_packages=(
 
 {{   if or (not (index . "headless")) (not .headless) -}}
 packages+=(
-  wezterm
+  alacritty
 )
 {{   end -}}
 
