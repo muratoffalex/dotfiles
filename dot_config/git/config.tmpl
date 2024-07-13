@@ -1,0 +1,15 @@
+[core]
+	excludesfile = "{{ .chezmoi.homeDir }}/.config/git/ignore"
+	filemode = false
+	editor = nvim
+[user]
+	name = Alexander Muratov
+	email = muratoffalex@gmail.com
+	signingKey = "{{ .chezmoi.homeDir }}/.ssh/id_ed25519.pub"
+[commit]
+	template = "{{ .chezmoi.homeDir }}/.config/git/message"
+	gpgSign = true
+[gpg]
+	format = ssh
+[init]
+	defaultBranch = main
