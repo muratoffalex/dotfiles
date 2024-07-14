@@ -10,7 +10,8 @@ style = "Beam"
 unfocused_hollow = true
 
 [font]
-size = 15
+# comfortable for fhd (14 inch), qhd
+size = 18
 
 [font.normal]
 family = "JetbrainsMono Nerd Font"
