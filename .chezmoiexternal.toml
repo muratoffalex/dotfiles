@@ -1,4 +1,10 @@
 [".config/nvim"]
 	type = "git-repo"
 	url = "https://github.com/muratoffalex/nvim.git"
-	refreshPeriod = "168h"
+	refreshPeriod = "1h"
+
+# various images - wallpapers, etc.
+["images"]
+	type = "git-repo"
+	url = "http://github.com/muratoffalex/images.git"
+	refreshPeriod = "1h"
