@@ -3,10 +3,13 @@ fish_add_path /usr/local/opt/mysql-client/bin
 fish_add_path /usr/local/opt/libpq/bin
 # macports
 fish_add_path /opt/local/bin
-# pipx
-fish_add_path /Users/muratoffalex/.local/bin
+# pipx, custom bin etc.
+fish_add_path {{ .chezmoi.homeDir }}/.local/bin
 
 # ruby
 set -gx GEM_HOME $HOME/.gem
 fish_add_path $GEM_HOME/bin
 fish_add_path /usr/local/opt/ruby/bin
+
+# custom bin/raycast scripts
+fish_add_path  {{ .chezmoi.homeDir }}/scripts
