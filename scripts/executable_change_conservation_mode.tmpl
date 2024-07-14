@@ -1,0 +1,38 @@
+#!/bin/sh
+
+# ThinkPad: update the conservation mode  
+
+ACTION=$1
+IOIO="{{ .chezmoi.homeDir }}/.local/bin/ioio -s ThinkVPC"
+
+[[ -z "$2" ]] && START=55 || START=$2
+[[ -z "$3" ]] && STOP=60 || STOP=$3
+
+
+enable() {
+  $IOIO Battery 0 > /dev/null
+  $IOIO setCMstart $START > /dev/null
+  $IOIO setCMstop $STOP > /dev/null
+
+  echo "Conservation mode enabled"
+}
+
+disable() { 
+  $IOIO Battery 0 > /dev/null
+  $IOIO setCMstart 0 > /dev/null
+  $IOIO setCMstop 0 > /dev/null
+
+  echo "Conservation mode disabled"
+}
+
+case $ACTION in
+  enable|on|1)
+    enable
+    ;;
+  disable|off|0)
+    disable
+    ;;
+  *)
+    echo "Invalid action"
+    ;;
+esac

@@ -1,0 +1,32 @@
+#!/bin/sh
+
+# ThinkPad: update force discharge mode
+  
+ACTION=$1
+IOIO="{{ .chezmoi.homeDir }}/.local/bin/ioio -s ThinkVPC"
+
+enable() {
+  $IOIO Battery 0 > /dev/null
+  $IOIO setCMForceDischarge 0x0003 > /dev/null
+
+  echo "Discharge mode enabled"
+}
+
+disable() {
+  $IOIO Battery 0 > /dev/null
+  $IOIO setCMForceDischarge 0x0002 > /dev/null
+
+  echo "Discharge mode disabled"
+}
+
+case $ACTION in
+  enable|on|1)
+    enable
+    ;;
+  disable|off|0)
+    disable
+    ;;
+  *)
+    echo "Invalid action"
+    ;;
+esac

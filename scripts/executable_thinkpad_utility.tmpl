@@ -1,0 +1,29 @@
+#!/bin/sh
+{{ if (eq .chezmoi.os "darwin") }}
+# Required parameters:
+# @raycast.schemaVersion 1
+# @raycast.title ThinkPad utility
+# @raycast.mode silent
+
+# Optional parameters:
+# @raycast.icon 💻
+# @raycast.argument1 { "type": "dropdown", "placeholder": "Action", "optional": false, "data": [{"title": "Conservation mode", "value": "1"},{"title": "Discharge mode", "value": "2"}]}
+# @raycast.argument2 { "type": "dropdown", "placeholder": "on/off", "optional": false, "data": [{"title": "On", "value": "on"},{"title": "Off", "value": "off"}]}
+{{ end }}
+  
+IOIO="{{ .chezmoi.homeDir }}/.local/bin/ioio -s ThinkVPC"
+
+MODE=$1
+ACTION=$2
+
+case $MODE in
+  1|cm)
+    change_conservation_mode $ACTION
+    ;;
+  2|fdm)
+    change_force_discharge_mode $ACTION
+    ;;
+  *)
+    echo "Invalid mode"
+    ;;
+esac
