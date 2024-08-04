@@ -1,0 +1,57 @@
+#!/bin/bash
+
+# Define the directories
+directories=(~/.local/share/chezmoi ~/.config/nvim ~/images)
+
+# Loop over the directories
+for dir in "${directories[@]}"; do
+  # Change to the directory
+  cd "$dir"
+
+  # Fetch the remote branches
+  git fetch origin
+
+  # Display the project name in bold blue
+  echo -e "\033[1;34m$dir\033[0m"
+
+  # Check the git status
+  if [ -z "$(git status --porcelain)" ]; then
+    # If there are no changes, echo "No changes" in green
+    echo -e "\033[0;32mNo changes\033[0m"
+  else
+    # If there are changes, check if they are uncommitted, unpushed, unstaged, new or deleted, or unpulled
+    if [ -n "$(git diff --cached --name-only)" ]; then
+      # If there are uncommitted changes, echo the list of files in orange
+      echo -e "\033[1;33mUncommitted changes:\033[0m"
+      git diff --cached --name-only
+    fi
+    if [ -n "$(git diff --name-only)" ]; then
+      # If there are unstaged changes, echo the list of files in orange
+      echo -e "\033[1;33mUnstaged changes:\033[0m"
+      git diff --name-only
+    fi
+    if [ -n "$(git ls-files --others --exclude-standard)" ]; then
+      # If there are new files, echo the list of files in orange
+      echo -e "\033[1;33mNew files:\033[0m"
+      git ls-files --others --exclude-standard
+    fi
+    if [ -n "$(git ls-files --deleted --exclude-standard)" ]; then
+      # If there are deleted files, echo the list of files in orange
+      echo -e "\033[1;33mDeleted files:\033[0m"
+      git ls-files --deleted --exclude-standard
+    fi
+    if [ -n "$(git log origin/$(git rev-parse --abbrev-ref HEAD)..HEAD --name-only)" ]; then
+      # If there are unpushed changes, echo the list of files in orange
+      echo -e "\033[1;33mUnpushed changes:\033[0m"
+      git diff origin/$(git rev-parse --abbrev-ref HEAD)..HEAD --name-only
+    fi
+    if [ -n "$(git log HEAD..origin/$(git rev-parse --abbrev-ref HEAD) --name-only)" ]; then
+      # If there are unpulled changes, echo the list of files in red
+      echo -e "\033[1;31mUnpulled changes:\033[0m"
+      git diff HEAD..origin/$(git rev-parse --abbrev-ref HEAD) --name-only
+    fi
+  fi
+
+  # Add a whitespace before the next project
+  echo ""
+done
