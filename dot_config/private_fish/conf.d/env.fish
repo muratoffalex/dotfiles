@@ -27,6 +27,3 @@ end
 if type -q fzf
   set -Ux FZF_DEFAULT_COMMAND 'fd --type f --hidden --follow --exclude .git'
 end
-
-set -gx MIKROTIK_SSH_CREDENTIALS admin@router.lan
-set -gx MIKROTIK_VPN_NAME full_vpn
