@@ -17,7 +17,7 @@ THEME=$1
 [[ -z "$2" ]] && CHANGE_SYSTEM_THEME=1 || CHANGE_SYSTEM_THEME=$2
 
 LIGHTTHEME="tokyonight-day"
-DARKTHEME="tokyonight-storm"
+DARKTHEME="tokyonight-night"
 TRANSPARENTTHEME="transparent"
 VIMCONF="$HOME/.config/nvim/lua/config/init.lua"
 ALACRITTYCONF="$HOME/.config/alacritty/alacritty.toml"
@@ -54,6 +54,7 @@ change_vim_theme() {
     cut -d ' ' -f 1 |
     xargs -I PANE tmux send-keys -t PANE ESCAPE \
       ":set background=${theme_for_vim_panes}" ENTER \
+      ":lua vim.cmd.colorscheme('${colorscheme}')" ENTER \
       ":Transparent${transparent}" ENTER
 }
 
@@ -137,4 +138,5 @@ else
   echo "Theme set to $THEME"
 fi
 
+# disabled because current tmux style looks great with any theme
 # tmux source-file "$TMUXCONF"
