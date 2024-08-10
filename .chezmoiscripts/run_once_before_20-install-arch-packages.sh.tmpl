@@ -19,19 +19,21 @@ packages=(
   fzf
   ripgrep
   fd
-  lf
   eza
   lazygit
   ttf-jetbrains-mono-nerd
   chezmoi
   gum
   yq
+	atac
+	yazi
 )
 
 aur_packages=(
   tlrc-bin
   sesh-bin
   gitmux-bin
+	sshs-bin
 )
 
 {{   if or (not (index . "headless")) (not .headless) -}}

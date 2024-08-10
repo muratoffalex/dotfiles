@@ -20,6 +20,11 @@ else
   set -gx VISUAL vi
 end
 
+if type -q atac
+	set -gx ATAC_MAIN_DIR $HOME/.config/atac
+	set -gx ATAC_KEY_BINDINGS $ATAC_MAIN_DIR/keybindings.toml
+end
+
 if type -q bat
   set -gx BAT_THEME Monokai Extended Bright # Set theme for BAT
 end

@@ -1,0 +1,13 @@
+[manager]
+count_copied   = { fg = "black", bg = "green" }
+count_cut      = { fg = "black", bg = "red" }
+count_selected = { fg = "black", bg = "yellow" }
+
+[status]
+separator_open = ""
+separator_close = ""
+separator_style = { fg = "reset", bg = "darkgray" }
+
+mode_normal = { fg = "black", bg = "blue", bold = true }
+mode_select = { fg = "black", bg = "magenta", bold = true }
+mode_unset  = { fg = "black", bg = "yellow", bold = true }

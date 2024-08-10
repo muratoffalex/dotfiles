@@ -5,5 +5,8 @@ config:
   icon-position: "left" # show the icon to the "left" or "right" of the window name (defaults to left)
 
 icons:
- btop: ""
- ssh: ""
+  btop: ""
+  ssh: ""
+  sshs: ""
+  yazi: ""
+  atac: "󰖟"
