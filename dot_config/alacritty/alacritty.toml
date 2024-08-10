@@ -6,8 +6,8 @@ live_config_reload = true
 TERM = "xterm-256color"
 
 [cursor]
-style = "Beam"
-unfocused_hollow = true
+style = "Block"
+unfocused_hollow = false
 
 [font]
 # comfortable for fhd (14 inch), qhd
@@ -33,8 +33,8 @@ dynamic_padding = false
 option_as_alt = "OnlyLeft"
 
 [window.padding]
-x = 6
-y = 6
+x = 4
+y = 3
 
 [window.dimensions]
 columns = 90
