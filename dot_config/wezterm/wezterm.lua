@@ -26,14 +26,12 @@ end)
 
 local config = wezterm.config_builder()
 
-config.front_end = "Software"
-
 -- Contrasting color scheme
 config.color_scheme = "deep"
 config.enable_tab_bar = false
 config.enable_scroll_bar = false
 -- Comfortable opacity with blur
-config.window_background_opacity = 0.82
+config.window_background_opacity = 0.85
 config.macos_window_background_blur = 35
 -- Remove all decorations
 config.window_decorations = "RESIZE|MACOS_FORCE_DISABLE_SHADOW"
@@ -44,7 +42,7 @@ config.adjust_window_size_when_changing_font_size = false
 
 -- Font settings
 config.font = wezterm.font("JetBrainsMono Nerd Font", { weight = "DemiBold" })
-config.font_size = 15
+config.font_size = 18
 config.harfbuzz_features = { "calt=0", "clig=0", "liga=0" } -- disable ligatures
 
 config.window_padding = {
@@ -57,6 +55,8 @@ config.window_padding = {
 config.keys = {
     -- open t - tmux smart session manager <ctrl+a>T
     { key = "j", mods = "CMD", action = wezterm.action.SendString("\x01\x54") },
+		-- open sesh gum <Ctrl-a>K
+    { key = "j", mods = "CMD", action = wezterm.action.SendString("\x01\x4b") },
 }
 
 return config
