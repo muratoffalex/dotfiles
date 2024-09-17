@@ -11,7 +11,7 @@ next_environment = "Shift-E"
 display_cookies = "Shift-C"
 
 [keybindings.generic]
-display_help = "Shift-h" # Take care to not overlap other inputs, the help can be triggered from anywhere
+display_help = "Ctrl-h" # Take care to not overlap other inputs, the help can be triggered from anywhere
 
 # Collection name, request name, URL, Header, Query param, Basic Auth, Bearer Token
 [keybindings.generic.text_inputs.text_input]

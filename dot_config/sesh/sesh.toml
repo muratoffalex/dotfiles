@@ -5,7 +5,8 @@ startup_command = "nvim"
 # [[session]]
 # name = "session"
 # path = "~/path/to/session"
-# startup_script = "~/git_repos/dotfiles/sesh/bin/spotify.sh"
+
+# startup_command = "nvim -c ':RestoreSession'"
 # detached = true # never attach to this session, just create it in the background
 # tmuxp = "~/.config/tmux/tmuxp/joshmedeski.com.yml"
 # tmuxinator = "~/.config/tmux/tmuxinator/joshmedeski.com.yml"
