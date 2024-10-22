@@ -1,7 +1,7 @@
 abbr v $EDITOR
 abbr vr nvim -c ':RestoreSession'
 
-if type -q chezmoi  
+if type -q chezmoi
     abbr chct  chezmoi chattr +template
     abbr che   chezmoi edit 
     abbr chea  chezmoi edit --apply 
@@ -11,13 +11,18 @@ if type -q chezmoi
     abbr chef  chezmoi edit --apply $FISH_CONFIG_PATH
 end
 
+if type -q gh
+	abbr gce --set-cursor 'gh copilot explain "%"'
+	abbr gcs --set-cursor 'gh copilot suggest -t shell "%"'
+end
+
 set -Ux TMUX_CONFIG_PATH $HOME/.config/tmux/tmux.conf
 set -Ux NVIM_CONFIG_PATH $HOME/.config/nvim
 set -Ux WEZTERM_CONFIG_PATH $HOME/.config/wezterm/wezterm.lua
 set -Ux GIT_CONFIG_PATH $HOME/.gitconfig
 
 if type -q chezmoi
-  alias chea='chezmoi edit --apply'
+  abbr chea 'chezmoi edit --apply'
   abbr etmux chea $TMUX_CONFIG_PATH
   abbr efish chea $FISH_CONFIG_PATH
   abbr ewez chea $WEZTERM_CONFIG_PATH
