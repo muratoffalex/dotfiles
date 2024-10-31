@@ -1,0 +1,7 @@
+function wallpaper --argument path --description "Change desktop wallpaper"
+  if test -z "$path"
+    echo "Error: No path provided."
+  else
+    automator -i "$path" ~/automator/set_wallpaper.workflow
+  end
+end
