@@ -2,7 +2,7 @@
 
 ## Setup
 
-sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply muratoffalex
+sh -c "$(curl -fsLS get.chezmoi.io)" -- init --ssh --apply muratoffalex
 
 ## Todo
 
