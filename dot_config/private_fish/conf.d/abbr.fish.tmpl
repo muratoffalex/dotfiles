@@ -1,6 +1,37 @@
 abbr v $EDITOR
 abbr vr nvim -c ':RestoreSession'
 
+if type -q jj
+  abbr j jj
+  abbr j5 jj log -n 5
+  abbr jl jj log
+  abbr jlha 'jj log -r "heads(all())"' # head of every anonymous/named branch/bookmark
+  abbr jo jj op
+  abbr ju jj undo
+  abbr js jj st
+  abbr jb jj bookmark
+  abbr jbn jj bookmark new
+  abbr jbt jj bookmark track
+  abbr jbs jj bookmark set
+  abbr jnb --set-cursor 'jj new -B @ -m "%"'
+  abbr je jj edit
+  abbr j- jj edit @-
+  abbr j+ jj edit @+
+  abbr jd jj desc
+  abbr jdm --set-cursor 'jj desc -m "%"'
+  abbr jdf jj diff
+  abbr jc jj commit
+  abbr jcm --set-cursor 'jj commit -m "%"'
+  abbr jgp jj git push
+  abbr jgf jj git fetch
+  abbr ja jj abandon
+  abbr jr jj rebase
+  abbr jrr --set-cursor 'jj rebase -r % -d @'
+  abbr jsq jj squash
+  abbr jsqi jj squash -i
+  abbr jgr jj git remote
+end
+
 if type -q chezmoi
     abbr chct  chezmoi chattr +template
     abbr che   chezmoi edit 
@@ -74,5 +105,5 @@ end
 
 abbr --position anywhere fconf $FISH_CONFIG_PATH
 abbr nvroot cd ~/.config/nvim
-abbr uf source $FISH_CONFIG_PATH
+abbr uf "source $FISH_CONFIG_PATH && exec fish" # source full fish config
 
