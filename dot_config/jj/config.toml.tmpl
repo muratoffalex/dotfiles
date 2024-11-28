@@ -1,14 +1,14 @@
 [ui]
-editor = 'nvim'
-diff-editor = ':builtin'
+editor = '{{ .editor }}'
+diff-editor = ["nvim", "-c", "DiffEditor $left $right $output"]
 default-command = 'log'
 
 [git]
 auto-local-bookmark = true
 
 [user]
-name = "Alexander Muratov"
-email = "muratoffalex@gmail.com"
+name = "{{ .name }}"
+email = "{{ .email }}"
 
 [signing]
 sign-all = true
