@@ -1,7 +1,7 @@
 abbr v $EDITOR
 abbr vr nvim -c ':RestoreSession'
 
-abbr dev --set-cursor "cd /Volumes/data/dev/%"
+abbr dev --set-cursor "cd {{ .dev_path }}/%"
 
 if type -q jj
   abbr j jj
