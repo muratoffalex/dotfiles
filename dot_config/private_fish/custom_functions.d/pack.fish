@@ -5,6 +5,7 @@ function pack --description "Archive directory while excluding common dependency
         --exclude='./node_modules' \
         --exclude='.DS_Store' \
         --exclude='./Pods' \
-        --exclude='./.cache'
+        --exclude='./.cache' \
+        --exclude='._*'
     tar $excludes -czf "$dest.tar.gz" "$src"
 end
