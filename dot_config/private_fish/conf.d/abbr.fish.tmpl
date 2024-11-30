@@ -3,6 +3,22 @@ abbr vr nvim -c ':RestoreSession'
 
 abbr dev --set-cursor "cd {{ .dev_path }}/%"
 
+if type -q bob
+  abbr bbun bob use nightly
+  abbr bbus bob use stable
+  abbr bbul bob use stable
+  abbr bbu --set-cursor bob use '0.%'
+  abbr bbi bob install
+  abbr bbl bob ls
+  abbr bblr bob ls-remote
+end
+
+if type -q brew
+  abbr bi brew install
+  abbr br brew remove
+  abbr bu brew upgrade
+end
+
 if type -q jj
   abbr j jj
   abbr j5 jj log -n 5
@@ -82,12 +98,6 @@ if type -q git
   abbr gb git branch
   abbr gd git diff
   abbr grs git restore --staged
-end
-
-if type -q brew
-  abbr bi brew install
-  abbr bun brew uninstall
-  abbr bu brew upgrade
 end
 
 if type -q tmux

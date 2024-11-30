@@ -5,6 +5,7 @@ fish_add_path /usr/local/opt/libpq/bin
 fish_add_path /opt/local/bin
 # pipx, custom bin etc.
 fish_add_path {{ .chezmoi.homeDir }}/.local/bin
+fish_add_path $HOME/.local/share/bob/nvim-bin 
 
 # ruby
 set -gx GEM_HOME $HOME/.gem
