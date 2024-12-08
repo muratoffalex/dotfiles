@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# First try graceful termination
+pkill -f nvim
+# Wait a moment to let processes terminate gracefully
+sleep 1
+# Force kill any remaining nvim processes
+pkill -9 -f nvim
+
