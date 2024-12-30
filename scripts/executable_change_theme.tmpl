@@ -13,6 +13,9 @@
 # Toggle dark and light themes for tmux, alacritty and neovim
 # https://shapeshed.com/vim-tmux-alacritty-theme-switcher/
 
+CACHE_DIR="$HOME/.cache/settings"
+mkdir -p "$CACHE_DIR"
+
 THEME=$1
 [[ -z "$2" ]] && CHANGE_SYSTEM_THEME=1 || CHANGE_SYSTEM_THEME=$2
 
@@ -37,6 +40,25 @@ else
   CURRENT_MODE='light'
 fi
 
+set_cache_value() {
+    key="$1"
+    value="$2"
+    echo "$value" > "$CACHE_DIR/$key"
+    # Обновляем значение для текущих сессий fish
+    fish -c "set -Ue $key && set -ge $key && set -Ux $key $value"
+}
+
+get_cache_value() {
+    key="$1"
+    default="$2"
+    cat "$CACHE_DIR/$key" 2>/dev/null || echo "$default"
+}
+
+set_theme() {
+    theme="$1"
+    set_cache_value "theme" "$theme"
+}
+
 change_vim_theme() {
   theme_for_vim_panes="$1"
   colorscheme=$DARKTHEME
@@ -60,7 +82,7 @@ change_vim_theme() {
 
 enable_dark_theme() {
   theme="dark"
-  set_env $theme
+  set_theme $theme
   change_vim_theme $theme
   change_alacritty_theme $theme
   change_system_theme $theme
@@ -68,7 +90,7 @@ enable_dark_theme() {
 
 enable_light_theme() {
   theme="light"
-  set_env $theme
+  set_theme $theme
   change_vim_theme $theme
   change_alacritty_theme $theme
   change_system_theme $theme
@@ -77,14 +99,9 @@ enable_light_theme() {
 enable_transparent_theme() {
   # set dark theme because transparent theme is based on dark theme
   theme="dark"
-  set_env $theme
+  set_theme $theme
   change_vim_theme "transparent"
   change_alacritty_theme "transparent"
-}
-
-set_env() {
-  # set the environment variable across all sessions
-  fish -c "set -e $THEMEENV && set -Ux theme $1"
 }
 
 change_alacritty_theme() {
@@ -119,7 +136,7 @@ if [ -z "$THEME" ]; then
   else
     enable_light_theme
   fi
-else 
+else
   if [ "$THEME" = "dark" ]; then
     enable_dark_theme
   elif [ "$THEME" = "transparent" ]; then
@@ -131,7 +148,7 @@ fi
 
 if [[ "$CHANGE_SYSTEM_THEME" = "1" && ! -z "$THEME" ]]; then
   echo "System theme set to $THEME"
-else  
+else
   if [ -z "$THEME" ]; then
     THEME=$CURRENT_MODE
   fi
