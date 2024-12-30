@@ -1,16 +1,5 @@
-[colors.normal]
-black = "#21222c"
-red = "#f10000"
-green = "#50fa7b"
-yellow = "#FADB08"
-blue = "#a2aaff"
-magenta = "#ff79c6"
-cyan = "#8be9fd"
-white = "#f8f8f2"
-
-[colors.primary]
-background = "#090909"
-foreground = "#f8f8f2"
+[general]
+import = ["~/.config/alacritty/themes/tokyonight-night.toml"]
 
 [window]
 opacity = 0.85
