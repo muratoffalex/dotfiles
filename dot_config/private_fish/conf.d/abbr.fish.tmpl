@@ -55,24 +55,24 @@ if type -q jj
 end
 
 if type -q chezmoi
-    abbr chct  chezmoi chattr +template
-    abbr che   chezmoi edit 
-    abbr chea  chezmoi edit --apply 
-    abbr cha   chezmoi apply 
-    abbr chadd chezmoi add
-    abbr chcd  chezmoi cd
-    abbr chef  chezmoi edit --apply $FISH_CONFIG_PATH
+  abbr chct  chezmoi chattr +template
+  abbr che   chezmoi edit 
+  abbr chea  chezmoi edit --apply 
+  abbr cha   chezmoi apply 
+  abbr chadd chezmoi add
+  abbr chcd  chezmoi cd
+  abbr chef  chezmoi edit --apply $FISH_CONFIG_PATH
 end
 
 if type -q gh
-	abbr gce --set-cursor 'gh copilot explain "%"'
-	abbr gcs --set-cursor 'gh copilot suggest -t shell "%"'
+  abbr gce --set-cursor 'gh copilot explain "%"'
+  abbr gcs --set-cursor 'gh copilot suggest -t shell "%"'
 end
 
-set -Ux TMUX_CONFIG_PATH $HOME/.config/tmux/tmux.conf
-set -Ux NVIM_CONFIG_PATH $HOME/.config/nvim
-set -Ux WEZTERM_CONFIG_PATH $HOME/.config/wezterm/wezterm.lua
-set -Ux GIT_CONFIG_PATH $HOME/.gitconfig
+set -gx TMUX_CONFIG_PATH $HOME/.config/tmux/tmux.conf
+set -gx NVIM_CONFIG_PATH $HOME/.config/nvim
+set -gx WEZTERM_CONFIG_PATH $HOME/.config/wezterm/wezterm.lua
+set -gx GIT_CONFIG_PATH $HOME/.gitconfig
 
 if type -q chezmoi
   abbr chea 'chezmoi edit --apply'
