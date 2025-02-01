@@ -2,25 +2,27 @@
 import = ["~/.config/alacritty/themes/tokyonight-day.toml"]
 live_config_reload = true
 
+[terminal.shell]
+args = ["-l", "-c", "session_manager"]
+program = "/usr/local/bin/fish"
+
 [cursor]
 style = "Block"
 unfocused_hollow = false
 
 [font]
 # comfortable for fhd (14 inch), qhd
-size = 18
+size = 20
 
 [font.normal]
-family = "JetbrainsMono Nerd Font"
-style = "Regular"
-
+family = "CaskaydiaCove Nerd Font"
+style = "SemiLight"
 [font.bold]
-family = "JetbrainsMono Nerd Font"
-style = "Bold"
-
+style = "SemiBold"
 [font.italic]
-family = "JetbrainsMono Nerd Font"
-style = "Italic"
+style = "SemiLight Italic"
+[font.bold_italic]
+style = "SemiBold Italic"
 
 [window]
 startup_mode = "Windowed"
@@ -46,9 +48,11 @@ cursor = "CellForeground"
 
 [keyboard]
 bindings = [
-  # open sesh fzf <Ctrl-a>T
+	# open default tmux session list <Ctrl-a>T
   { key = "J", mods = "Command", chars = "\u0001\u0054" },
-  # open sesh gum <Ctrl-a>K
+  # open last session <Ctrl-a>L
+  { key = "L", mods = "Command", chars = "\u0001\u004c" },
+  # open sesh fzf <Ctrl-a>K
   { key = "K", mods = "Command", chars = "\u0001\u004b" },
   { key = "Key0",     mods = "Command", action = "ResetFontSize"    },
   { key = "Plus",   mods = "Command", action = "IncreaseFontSize" },
