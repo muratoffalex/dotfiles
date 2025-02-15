@@ -19,8 +19,8 @@ mkdir -p "$CACHE_DIR"
 THEME=$1
 [[ -z "$2" ]] && CHANGE_SYSTEM_THEME=1 || CHANGE_SYSTEM_THEME=$2
 
-LIGHTTHEME="tokyonight-day"
-DARKTHEME="tokyonight-night"
+LIGHTTHEME="kanagawa-lotus"
+DARKTHEME="kanagawa-wave"
 TRANSPARENTTHEME="transparent"
 VIMCONF="$HOME/.config/nvim/lua/config/init.lua"
 ALACRITTYCONF="$HOME/.config/alacritty/alacritty.toml"
@@ -55,7 +55,9 @@ get_cache_value() {
 }
 
 set_theme() {
-    theme="$1"
+    local background="$1"
+    local theme="$2"
+    set_cache_value "background" "$background"
     set_cache_value "theme" "$theme"
 }
 
@@ -82,7 +84,7 @@ change_vim_theme() {
 
 enable_dark_theme() {
   theme="dark"
-  set_theme $theme
+  set_theme $theme $DARKTHEME
   change_vim_theme $theme
   change_alacritty_theme $theme
   change_system_theme $theme
@@ -90,7 +92,7 @@ enable_dark_theme() {
 
 enable_light_theme() {
   theme="light"
-  set_theme $theme
+  set_theme $theme $LIGHTTHEME
   change_vim_theme $theme
   change_alacritty_theme $theme
   change_system_theme $theme
@@ -98,20 +100,14 @@ enable_light_theme() {
 
 enable_transparent_theme() {
   # set dark theme because transparent theme is based on dark theme
-  theme="dark"
-  set_theme $theme
+  local theme="dark"
+  set_theme $theme $DARKTHEME
   change_vim_theme "transparent"
   change_alacritty_theme "transparent"
 }
 
 change_alacritty_theme() {
-  if [ "$1" = "dark" ]; then
-    sed -E -i '' "s/${TRANSPARENTTHEME}|${LIGHTTHEME}/${DARKTHEME}/" "$ALACRITTYCONF"
-  elif [ "$1" = "light" ]; then
-    sed -E -i '' "s/${TRANSPARENTTHEME}|${DARKTHEME}/${LIGHTTHEME}/" "$ALACRITTYCONF"
-  elif [ "$1" = "transparent" ]; then
-    sed -E -i '' "s/${LIGHTTHEME}|${DARKTHEME}/${TRANSPARENTTHEME}/" "$ALACRITTYCONF"
-  fi
+  sed -i '' "2s|.*|import = [\"~/.config/alacritty/themes/${1}.toml\"]|" "$ALACRITTYCONF"
 }
 
 change_system_theme() {

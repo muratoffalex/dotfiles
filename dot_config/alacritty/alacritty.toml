@@ -1,5 +1,5 @@
 [general]
-import = ["~/.config/alacritty/themes/tokyonight-day.toml"]
+import = ["~/.config/alacritty/themes/kanagawa-lotus.toml"]
 live_config_reload = true
 
 [terminal.shell]
@@ -48,7 +48,7 @@ cursor = "CellForeground"
 
 [keyboard]
 bindings = [
-	# open default tmux session list <Ctrl-a>T
+  # open default tmux session list <Ctrl-a>T
   { key = "J", mods = "Command", chars = "\u0001\u0054" },
   # open last session <Ctrl-a>L
   { key = "L", mods = "Command", chars = "\u0001\u004c" },
