@@ -1,3 +1,4 @@
+{{ if ne .chezmoi.osRelease.id "nixos" }}
 #!/bin/bash
 
 set -eufo pipefail
@@ -30,3 +31,5 @@ if [[ ! $(echo $SHELL) == $(which fish) ]]; then
 fi
 
 echo -e ">>> Finish Setting Up Fish Shell"
+
+{{ end }}
