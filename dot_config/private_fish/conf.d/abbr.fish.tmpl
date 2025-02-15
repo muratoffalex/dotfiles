@@ -23,6 +23,8 @@ if type -q brew
 end
 
 if type -q jj
+  # git commit -p behavior
+  abbr jgc --set-cursor 'jj new -B @ -m "%" && jj edit @+ && jj squash -i'
   abbr j jj
   abbr j5 jj log -n 5
   abbr jl jj log
