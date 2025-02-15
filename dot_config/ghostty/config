@@ -1,0 +1,31 @@
+initial-command = "/usr/local/bin/fish -l -c session_manager"
+
+theme = light:tokyonight-day,dark:tokyonight_night
+
+font-family = CaskaydiaCove Nerd Font
+font-style = SemiLight
+
+font-style-bold = SemiBold
+font-style-italic = SemiLight Italic
+font-style-bold-italic = SemiBold Italic
+
+font-size = 18
+font-thicken = true
+font-feature = -liga
+
+shell-integration-features = no-cursor
+cursor-style = block
+cursor-style-blink = false
+cursor-invert-fg-bg = true
+
+background-opacity = 1
+background-blur-radius = 20
+
+window-decoration = false
+
+macos-titlebar-style = hidden
+
+# open sesh
+keybind = cmd+k=text:\x01\x4b
+keybind = cmd+l=text:\x01\x4c
+keybind = global:cmd+apostrophe=toggle_quick_terminal
