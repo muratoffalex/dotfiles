@@ -4,7 +4,11 @@ live_config_reload = true
 
 [terminal.shell]
 args = ["-l", "-c", "session_manager"]
-program = "/usr/local/bin/fish"
+{{- if eq .chezmoi.osRelease.id "nixos" }}
+program = "/run/current-system/sw/bin/fish"
+{{- else }}
+program = "/usr/bin/fish" 
+{{- end }}
 
 [cursor]
 style = "Block"
@@ -12,21 +16,21 @@ unfocused_hollow = false
 
 [font]
 # comfortable for fhd (14 inch), qhd
-size = 20
+size = {{ if eq .chezmoi.os "darwin" }}20{{ else }}18{{ end }}
 
 [font.normal]
 family = "CaskaydiaCove Nerd Font"
-style = "SemiLight"
+style = "Regular"
 [font.bold]
-style = "SemiBold"
+style = "Bold"
 [font.italic]
 style = "SemiLight Italic"
 [font.bold_italic]
-style = "SemiBold Italic"
+style = "Bold Italic"
 
 [window]
 startup_mode = "Windowed"
-decorations = "Buttonless"
+decorations = {{ if eq .chezmoi.os "darwin" }}"Buttonless"{{ else }}"None"{{ end }}
 dynamic_padding = false
 # only for mac
 option_as_alt = "OnlyLeft"
@@ -34,6 +38,7 @@ option_as_alt = "OnlyLeft"
 [window.padding]
 x = 4
 y = 3
+
 
 [window.dimensions]
 columns = 90
