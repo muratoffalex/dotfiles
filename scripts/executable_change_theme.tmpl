@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 {{ if (eq .chezmoi.os "darwin") }}
 # Required parameters:
 # @raycast.schemaVersion 1
@@ -86,7 +86,7 @@ enable_dark_theme() {
   theme="dark"
   set_theme $theme $DARKTHEME
   change_vim_theme $theme
-  change_alacritty_theme $theme
+  change_alacritty_theme $DARKTHEME
   change_system_theme $theme
 }
 
@@ -94,7 +94,7 @@ enable_light_theme() {
   theme="light"
   set_theme $theme $LIGHTTHEME
   change_vim_theme $theme
-  change_alacritty_theme $theme
+  change_alacritty_theme $LIGHTTHEME
   change_system_theme $theme
 }
 
@@ -107,7 +107,11 @@ enable_transparent_theme() {
 }
 
 change_alacritty_theme() {
+  {{ if (eq .chezmoi.os "darwin") }}
   sed -i '' "2s|.*|import = [\"~/.config/alacritty/themes/${1}.toml\"]|" "$ALACRITTYCONF"
+  {{ else }}
+  sed -i "2s|.*|import = [\"~/.config/alacritty/themes/${1}.toml\"]|" "$ALACRITTYCONF"
+  {{ end }}
 }
 
 change_system_theme() {
