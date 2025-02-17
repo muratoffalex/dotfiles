@@ -4,10 +4,10 @@ live_config_reload = true
 
 [terminal.shell]
 args = ["-l", "-c", "session_manager"]
-{{- if eq .chezmoi.osRelease.id "nixos" }}
+{{ if not (and (eq .chezmoi.os "linux") (hasKey .chezmoi.osRelease "id") (eq .chezmoi.osRelease.id "nixos")) }}
 program = "/run/current-system/sw/bin/fish"
 {{- else }}
-program = "/usr/bin/fish" 
+program = "/usr/bin/fish"
 {{- end }}
 
 [cursor]
