@@ -6,6 +6,10 @@ abbr icloud --position anywhere "$HOME/Library/Mobile\ Documents/com~apple~Cloud
 
 abbr se session_end
 
+if type -q nix
+  abbr nix-diff nix store diff-closures $(ls -d /nix/var/nix/profiles/system-*-link | sort -V | tail -n2)
+end
+
 if type -q bob
   abbr bbun bob use nightly
   abbr bbus bob use stable
