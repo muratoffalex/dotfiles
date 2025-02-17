@@ -4,7 +4,7 @@ live_config_reload = true
 
 [terminal.shell]
 args = ["-l", "-c", "session_manager"]
-{{ if not (and (eq .chezmoi.os "linux") (hasKey .chezmoi.osRelease "id") (eq .chezmoi.osRelease.id "nixos")) }}
+{{ if and (eq .chezmoi.os "linux") (hasKey .chezmoi.osRelease "id") (eq .chezmoi.osRelease.id "nixos") }}
 program = "/run/current-system/sw/bin/fish"
 {{- else }}
 program = "/usr/bin/fish"
@@ -38,7 +38,6 @@ option_as_alt = "OnlyLeft"
 [window.padding]
 x = 4
 y = 3
-
 
 [window.dimensions]
 columns = 90
