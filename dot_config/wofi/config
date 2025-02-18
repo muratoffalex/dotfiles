@@ -1,0 +1,10 @@
+width=600
+height=500
+show=drun
+filter_rate=100
+no_actions=true
+term=alacritty
+allow_markup=true
+allow_images=false
+prompt=Search
+insensitive=true
