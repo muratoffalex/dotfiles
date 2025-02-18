@@ -1,14 +1,25 @@
-{ config, pkgs, inputs, ... }: {
-  imports =
-  [
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
+{
+  imports = [
     ./hardware-configuration.nix
   ];
 
   nix = {
-		settings = {
-			trusted-users = [ "root" "muratoffalex" ];
-			experimental-features = [ "nix-command" "flakes" ];
-		};
+    settings = {
+      trusted-users = [
+        "root"
+        "muratoffalex"
+      ];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
+    };
     gc = {
       automatic = true;
       dates = "weekly";
@@ -29,50 +40,51 @@
     useXkbConfig = true;
   };
 
-	programs = {
-		fish = {
-			enable = true;
-			loginShellInit = ''
-				if test (tty) = "/dev/tty1"
-					exec Hyprland
-				end
-			'';
-		};
-		neovim = {
-			enable = true;
-			package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
-		};
-		hyprland = {
-			enable = true;
-			package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-			portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
-		};
-		nm-applet = {
-			enable = true;
-			indicator = true;
-		};
-		hyprlock = {
-			enable = true;
-		};
-	};
+  programs = {
+    fish = {
+      enable = true;
+      loginShellInit = ''
+        				if test (tty) = "/dev/tty1"
+        					exec Hyprland
+        				end
+        			'';
+    };
+    neovim = {
+      enable = true;
+      package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
+    };
+    hyprland = {
+      enable = true;
+      package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+      portalPackage =
+        inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+    };
+    nm-applet = {
+      enable = true;
+      indicator = true;
+    };
+    hyprlock = {
+      enable = true;
+    };
+  };
 
   nixpkgs.config.allowUnfree = true;
 
-	fonts = {
-		fontDir.enable = true;
-		packages = with pkgs; [
+  fonts = {
+    fontDir.enable = true;
+    packages = with pkgs; [
       nerd-fonts.caskaydia-cove
-		];
+    ];
 
-		fontconfig = {
-			enable = true;
-			defaultFonts = {
-				monospace = [ "CaskaydiaCove Nerd Font" ];
-				# sansSerif = [ "CaskaydiaCove Nerd Font" ];
-				# serif = [ "CaskaydiaCove Nerd Font" ];
-			};
-		};
-	};
+    fontconfig = {
+      enable = true;
+      defaultFonts = {
+        monospace = [ "CaskaydiaCove Nerd Font" ];
+        # sansSerif = [ "CaskaydiaCove Nerd Font" ];
+        # serif = [ "CaskaydiaCove Nerd Font" ];
+      };
+    };
+  };
 
   environment.systemPackages = with pkgs; [
     zoxide
@@ -104,83 +116,83 @@
     bitwarden
     telegram-desktop
     inputs.zen-browser.packages."${system}".twilight
-		acpi
-		inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default
+    acpi
+    inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default
 
-		maestral
+    maestral
 
     nodejs_23
     go_1_24
-		cargo
-		#nodePackages.kulala-ls
+    cargo
+    #nodePackages.kulala-ls
 
-		apfs-fuse
-		jq
-		nixfmt-rfc-style
+    apfs-fuse
+    jq
+    nixfmt-rfc-style
 
     # apps
     alacritty
 
-		# hyprland packages
-		networkmanagerapplet
-		brightnessctl
-		wlsunset # night shift
-		pavucontrol
-		dolphin
+    # hyprland packages
+    networkmanagerapplet
+    brightnessctl
+    wlsunset # night shift
+    pavucontrol
+    dolphin
     # hyprland above
-    waybar           # Статус бар
-    wofi            # Лаунчер приложений
-		swaynotificationcenter
-    wl-clipboard    # Менеджер буфера обмена
-    hyprpaper       # Обои
-		hypridle
-		hyprpicker
-		hyprcursor
-		hyprshot
+    waybar # Статус бар
+    wofi # Лаунчер приложений
+    swaynotificationcenter
+    wl-clipboard # Менеджер буфера обмена
+    hyprpaper # Обои
+    hypridle
+    hyprpicker
+    hyprcursor
+    hyprshot
   ];
 
   services.openssh.enable = true;
-	services.logind = {
-		lidSwitch = "suspend";
-		extraConfig = ''
-			HandlePowerKey=suspend
-		'';
-	};
+  services.logind = {
+    lidSwitch = "suspend";
+    extraConfig = ''
+      			HandlePowerKey=suspend
+      		'';
+  };
 
-	systemd.user.services.maestral = {
-		description = "Maestral Dropbox Client";
-		wantedBy = [ "default.target" ];
-		after = [ "network-online.target" ];
-		
-		serviceConfig = {
-			Type = "simple";
-			ExecStart = "${pkgs.maestral}/bin/maestral start -f";
-			ExecStop = "${pkgs.maestral}/bin/maestral stop";
-			Restart = "on-failure";
-			RestartSec = "10s";
-		};
+  systemd.user.services.maestral = {
+    description = "Maestral Dropbox Client";
+    wantedBy = [ "default.target" ];
+    after = [ "network-online.target" ];
 
-		environment = {
-			"https_proxy" = "";
-			"http_proxy" = "";
-			"all_proxy" = "";
-		};
-	};
+    serviceConfig = {
+      Type = "simple";
+      ExecStart = "${pkgs.maestral}/bin/maestral start -f";
+      ExecStop = "${pkgs.maestral}/bin/maestral stop";
+      Restart = "on-failure";
+      RestartSec = "10s";
+    };
 
-	hardware.bluetooth = {
-		enable = true;
-		powerOnBoot = true;
-	};
-	services.blueman.enable = true;
+    environment = {
+      "https_proxy" = "";
+      "http_proxy" = "";
+      "all_proxy" = "";
+    };
+  };
 
-	# Для PipeWire
-	security.rtkit.enable = true;
-	services.pipewire = {
-		enable = true;
-		alsa.enable = true;
-		alsa.support32Bit = true;
-		pulse.enable = true;
-	};
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+  };
+  services.blueman.enable = true;
+
+  # Для PipeWire
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+  };
 
   time.timeZone = "Asia/Yekaterinburg";
   i18n.defaultLocale = "en_US.UTF-8";
@@ -192,7 +204,11 @@
 
   users.users.muratoffalex = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "video" ];
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+      "video"
+    ];
     # mkpasswd --method=sha-512
     hashedPassword = "$6$6E4ccds90qX/D6P3$iMcNxicNyi5g5UAF9ykJzoooiykikLmzJ4Cq6.vv5HgNl2Ra8UDxJ/HczWBFznVhyMTY56VjctHeBu0Q9q/NZ1";
     shell = pkgs.fish;
@@ -205,11 +221,11 @@
   };
 
   services = {
-		displayManager.sddm.enable = false;
+    displayManager.sddm.enable = false;
     xserver = {
       enable = true;
-			displayManager.gdm.enable = false;
-			displayManager.lightdm.enable = false;
+      displayManager.gdm.enable = false;
+      displayManager.lightdm.enable = false;
       xkb = {
         layout = "us,ru,us";
         variant = "colemak,,";
