@@ -13,6 +13,8 @@
   };
 
   inputs = {
+		hyprland.url = "github:hyprwm/Hyprland";
+		rose-pine-hyprcursor.url = "github:ndom91/rose-pine-hyprcursor";
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
@@ -21,15 +23,11 @@
     # nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
   };
 
-  outputs = { self, nixpkgs, zen-browser, neovim-nightly-overlay }: {
+  outputs = { self, nixpkgs, ... } @inputs: {
     nixosConfigurations = {
       main = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-				specialArgs = {
-					inputs = { 
-						inherit zen-browser neovim-nightly-overlay;
-					};
-				};
+				specialArgs = { inherit inputs; };
         modules = [
           ./configuration.nix
         ];

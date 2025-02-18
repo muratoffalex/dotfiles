@@ -44,7 +44,8 @@
 		};
 		hyprland = {
 			enable = true;
-			xwayland.enable = true;
+			package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+			portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
 		};
 		nm-applet = {
 			enable = true;
@@ -66,7 +67,7 @@
 		fontconfig = {
 			enable = true;
 			defaultFonts = {
-				monospace = [ "CaskaydiaCove Nerd Font Mono" ];
+				monospace = [ "CaskaydiaCove Nerd Font" ];
 				# sansSerif = [ "CaskaydiaCove Nerd Font" ];
 				# serif = [ "CaskaydiaCove Nerd Font" ];
 			};
@@ -104,6 +105,7 @@
     telegram-desktop
     inputs.zen-browser.packages."${system}".twilight
 		acpi
+		inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default
 
 		maestral
 
@@ -113,6 +115,8 @@
 		#nodePackages.kulala-ls
 
 		apfs-fuse
+		jq
+		nixfmt-rfc-style
 
     # apps
     alacritty
@@ -130,6 +134,9 @@
     wl-clipboard    # Менеджер буфера обмена
     hyprpaper       # Обои
 		hypridle
+		hyprpicker
+		hyprcursor
+		hyprshot
   ];
 
   services.openssh.enable = true;
