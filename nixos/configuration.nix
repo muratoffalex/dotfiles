@@ -100,6 +100,7 @@
   };
 
   environment.systemPackages = with pkgs; [
+    aerc
     starship
     zoxide
     vim
