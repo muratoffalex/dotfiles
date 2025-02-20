@@ -4,7 +4,6 @@
 		"tooltip": true,
 		"tooltip-format": "btw"
 	},
-
 	"hyprland/workspaces": {
 		"disable-scroll": true,
 		"all-outputs": true,
@@ -37,7 +36,11 @@
 			"phone": "",
 			"portable": "",
 			"car": "",
-			"default": ["", "", ""]
+			"default": [
+				"",
+				"",
+				""
+			]
 		},
 		"on-click": "pavucontrol"
 	},
@@ -48,7 +51,6 @@
 		"format-linked": "{ifname} (No IP) ",
 		"format-disconnected": "Disconnected ⚠",
 		"on-click": "nm-connection-editor"
-
 	},
 	"cpu": {
 		"format": "  {usage}%",
@@ -60,16 +62,16 @@
 	},
 	"temperature": {
 		"interval": 10,
-		"hwmon-path": "/sys/devices/platform/coretemp.0/hwmon/hwmon4/temp1_input",
+		"hwmon-path": "/sys/devices/platform/coretemp.0/hwmon/hwmon6/temp1_input",
 		"critical-threshold": 100,
 		"format-critical": " {temperatureC}",
 		"format": " {temperatureC}°C"
 	},
-"hyprland/language": {
-    "format": "{}",
-    "format-en": "CO",
-    "format-ru": "RU"
-},
+	"hyprland/language": {
+		"format": "{}",
+		"format-en": "CO",
+		"format-ru": "RU"
+	},
 	"battery": {
 		"states": {
 			"warning": 30,
@@ -80,13 +82,43 @@
 		"format-charging": "  {capacity}%",
 		"format-plugged": "  {capacity}%",
 		"format-alt": "{time}  {icon}",
-		"format-icons": ["", "", "", "", ""]
+		"format-icons": [
+			"",
+			"",
+			"",
+			"",
+			""
+		]
 	},
 	"clock": {
-    "interval": 1,
+		"interval": 1,
 		"format": "{:%H:%M:%S | %e %B} ",
 		"tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
 		"format-alt": "{:%Y-%m-%d}"
+	},
+	"custom/keyboard-battery-level": {
+		"interval": 30,
+		"format": " {}",
+		"exec": "$HOME/scripts/sweep_battery_level"
+	},
+	"custom/notifications": {
+		"tooltip": false,
+		"format": "{icon}",
+		"format-icons": {
+			"notification": "󰂚 ",
+			"none": "󰂛 ",
+			"dnd-notification": "⏾ ",
+			"dnd-none": "⏾ ",
+			"inhibited-notification": "󰂚 ",
+			"inhibited-none": "󰂛 ",
+			"dnd-inhibited-notification": "⏾ ",
+			"dnd-inhibited-none": "⏾ "
+		},
+		"return-type": "json",
+		"exec-on-event": true,
+		"exec": "swaync-client -swb",
+		"on-click": "swaync-client -t -sw",
+		"on-click-right": "swaync-client -d -sw",
+		"escape": true
 	}
-
 }

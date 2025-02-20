@@ -29,8 +29,11 @@ THEMEENV="theme"
 
 {{ if (eq .chezmoi.os "darwin") }}
 CURRENT_MODE=$(defaults read -g AppleInterfaceStyle 2> /dev/null)
-{{ else if (eq .chezmoi.os "linux") -}}
+{{ else if and (eq .chezmoi.os "linux") (ne .chezmoi.osRelease.id "nixos") -}}
 CURRENT_MODE=$(gsettings get org.gnome.desktop.interface color-scheme)
+{{else}}
+# TODO: implement nixos
+CURRENT_MODE="unknown"
 {{ end }}
 
 # prefer-dark for linux
@@ -123,9 +126,11 @@ change_system_theme() {
     [[ "$1" = "dark" ]] && dark=true
     osascript -l JavaScript -e "Application('System Events').appearancePreferences.darkMode = $dark" > /dev/null
   {{ else if (eq .chezmoi.os "linux") -}}
-    theme='prefer-light'
-    [[ "$1" = "dark" ]] && theme='prefer-dark'
-    gsettings set org.gnome.desktop.interface color-scheme $theme
+    if command -v gsettings >/dev/null 2>&1; then
+      theme='prefer-light'
+      [[ "$1" = "dark" ]] && theme='prefer-dark'
+      gsettings set org.gnome.desktop.interface color-scheme $theme
+    fi
   {{ end }}
   fi
 }

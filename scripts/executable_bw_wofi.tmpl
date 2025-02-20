@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+
+notify() {
+    if command -v dunstify >/dev/null 2>&1; then
+        dunstify "$1" "$2"
+    else
+        echo "[$1] $2" >&2
+    fi
+}
+
+    # Запрашиваем пароль через wofi только если нет действующей сессии
+    master_password=$(wofi --dmenu --password --prompt "Введите мастер-пароль: ")
+    
+    if [ -z "$master_password" ]; then
+        notify "Ошибка" "Пароль не введен"
+        exit 1
+    fi
+
+    # Разблокируем без синхронизации
+    BW_SESSION=$(echo "$master_password" | bw unlock --raw)
+    
+    if [ $? -ne 0 ] || [ -z "$BW_SESSION" ]; then
+        notify "Ошибка" "Неверный мастер-пароль"
+        exit 1
+    fi
+    export BW_SESSION
+
+# Ускоряем получение списка элементов используя кэширование в переменной
+items=$(bw list items --nointeraction)
+if [ $? -ne 0 ] || [ -z "$items" ]; then
+    notify "Ошибка" "Не удалось получить список элементов"
+    exit 1
+fi
+
+selection=$(echo "$items" | jq -r '.[] | "\(.name) | \(.login.username) | \(.id)"' | wofi --dmenu -M fuzzy --prompt "Поиск:")
+
+if [ -n "$selection" ]; then
+    name=$(echo "$selection" | cut -d '|' -f1 | xargs)
+    id=$(echo "$selection" | cut -d '|' -f3 | xargs)
+    
+    password=$(bw get password "$id" --nointeraction)
+    if [ $? -eq 0 ] && [ -n "$password" ]; then
+        echo -n "$password" | wl-copy
+        notify "Успех" "Пароль для $name скопирован в буфер обмена"
+    else
+        notify "Ошибка" "Не удалось получить пароль"
+    fi
+fi
