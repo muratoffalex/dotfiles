@@ -22,32 +22,37 @@
     };
     gc = {
       automatic = true;
-      dates = "weekly";
+      dates = "daily";
       options = "--delete-older-than 7d";
+      randomizedDelaySec = "45min";
     };
   };
 
-  boot.loader = {
-    systemd-boot.enable = true;
-    efi.canTouchEfiVariables = true;
+  boot = {
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
+    kernelPackages = pkgs.linuxPackages_6_13;
   };
 
-  networking.hostName = "nixos";
+  networking.hostName = "nixos-laptop";
   networking.networkmanager.enable = true;
 
   console = {
-    #keyMap = "colemak";
-    useXkbConfig = true;
+    keyMap = "colemak";
   };
 
   programs = {
     fish = {
       enable = true;
       loginShellInit = ''
-        				if test (tty) = "/dev/tty1"
-        					exec Hyprland
-        				end
-        			'';
+        if test (tty) = "/dev/tty1"
+          if uwsm check may-start
+            exec uwsm start hyprland-uwsm.desktop
+          end
+        end
+      '';
     };
     neovim = {
       enable = true;
@@ -55,6 +60,7 @@
     };
     hyprland = {
       enable = true;
+      withUWSM = true;
       package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
       portalPackage =
         inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
@@ -65,6 +71,13 @@
     };
     hyprlock = {
       enable = true;
+    };
+    # fix unpatched dynamic libraries (ex., installed via neovim mason)
+    nix-ld = {
+      enable = true;
+      libraries = with pkgs; [
+        stdenv.cc.cc
+      ];
     };
   };
 
@@ -87,8 +100,8 @@
   };
 
   environment.systemPackages = with pkgs; [
-    zoxide
     starship
+    zoxide
     vim
     tmux
     chezmoi
@@ -108,27 +121,31 @@
     curl
     wget
     btop
-    gnumake
-    gcc
-    pkg-config
-    clang
     sesh
-    bitwarden
     telegram-desktop
     inputs.zen-browser.packages."${system}".twilight
     acpi
     inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default
+    cachix
+
+    nixfmt-rfc-style
+    clang
+    # clients for dadbod
+    mysql-client
+
+    gnumake
+    gcc
+    pkg-config
 
     maestral
+    unzip # need for install stylua with nvim MasonToolsInstall
 
     nodejs_23
     go_1_24
     cargo
-    #nodePackages.kulala-ls
 
     apfs-fuse
     jq
-    nixfmt-rfc-style
 
     # apps
     alacritty
@@ -140,23 +157,33 @@
     pavucontrol
     dolphin
     # hyprland above
-    waybar # Статус бар
-    wofi # Лаунчер приложений
+    waybar
+    wofi
     swaynotificationcenter
-    wl-clipboard # Менеджер буфера обмена
-    hyprpaper # Обои
+    wl-clipboard
+    hyprpaper
     hypridle
     hyprpicker
     hyprcursor
     hyprshot
   ];
 
-  services.openssh.enable = true;
-  services.logind = {
-    lidSwitch = "suspend";
-    extraConfig = ''
-      			HandlePowerKey=suspend
-      		'';
+  services = {
+    xserver.enable = false;
+    displayManager.sddm.enable = false;
+    openssh.enable = true;
+    blueman.enable = true;
+    logind = {
+      lidSwitch = "suspend";
+      extraConfig = ''
+        			HandlePowerKey=suspend
+        		'';
+    };
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      pulse.enable = true;
+    };
   };
 
   systemd.user.services.maestral = {
@@ -183,55 +210,36 @@
     enable = true;
     powerOnBoot = true;
   };
-  services.blueman.enable = true;
-
-  # Для PipeWire
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
 
   time.timeZone = "Asia/Yekaterinburg";
   i18n.defaultLocale = "en_US.UTF-8";
 
-  users.users.root = {
-    shell = pkgs.fish;
-    hashedPassword = null;
-  };
-
-  users.users.muratoffalex = {
-    isNormalUser = true;
-    extraGroups = [
-      "wheel"
-      "networkmanager"
-      "video"
-    ];
-    # mkpasswd --method=sha-512
-    hashedPassword = "$6$6E4ccds90qX/D6P3$iMcNxicNyi5g5UAF9ykJzoooiykikLmzJ4Cq6.vv5HgNl2Ra8UDxJ/HczWBFznVhyMTY56VjctHeBu0Q9q/NZ1";
-    shell = pkgs.fish;
+  users.users = {
+    root = {
+      shell = pkgs.fish;
+      hashedPassword = null;
+    };
+    muratoffalex = {
+      isNormalUser = true;
+      extraGroups = [
+        "wheel"
+        "networkmanager"
+        "video"
+      ];
+      # mkpasswd --method=sha-512
+      hashedPassword = "$6$6E4ccds90qX/D6P3$iMcNxicNyi5g5UAF9ykJzoooiykikLmzJ4Cq6.vv5HgNl2Ra8UDxJ/HczWBFznVhyMTY56VjctHeBu0Q9q/NZ1";
+      shell = pkgs.fish;
+    };
   };
 
   security = {
-    sudo.enable = true;
-    sudo.wheelNeedsPassword = false;
-    polkit.enable = true;
-  };
-
-  services = {
-    displayManager.sddm.enable = false;
-    xserver = {
+    sudo = {
       enable = true;
-      displayManager.gdm.enable = false;
-      displayManager.lightdm.enable = false;
-      xkb = {
-        layout = "us,ru,us";
-        variant = "colemak,,";
-        options = "grp:ctrl_space_toggle";
-      };
+      wheelNeedsPassword = false;
     };
+    polkit.enable = true;
+    # Для PipeWire
+    rtkit.enable = true;
   };
 
   system.stateVersion = "24.11";
