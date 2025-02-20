@@ -100,7 +100,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    aerc
     starship
     zoxide
     vim
@@ -117,7 +116,6 @@
     wakatime-cli
     lazygit
     lazydocker
-    yazi
     git
     curl
     wget
