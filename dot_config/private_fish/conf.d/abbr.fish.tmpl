@@ -9,10 +9,9 @@ abbr se session_end
 if type -q nix
   set -l QUERY_FZF_SEARCH '$(nix-store --query --requisites /run/current-system | fzf)'
 
-  abbr nix-diff 'nix store diff-closures $(ls -d /nix/var/nix/profiles/system-*-link | sort -V | tail -n2)'
   abbr nix-latest 'ls -d /nix/var/nix/profiles/system-*-link | sort -V | tail -n1'
-  abbr nrs "chezmoi apply && sudo nixos-rebuild switch --flake ~/nixos#main"
-  abbr nfu "chezmoi apply && sudo nix flake update --flake ~/nixos && sudo nixos-rebuild switch --flake ~/nixos#main"
+  abbr nrs "chezmoi apply && sudo nixos-rebuild switch --flake ~/nixos#main && nix-diff"
+  abbr nfu "chezmoi apply && sudo nix flake update --flake ~/nixos && sudo nixos-rebuild switch --flake ~/nixos#main && nix-diff"
   abbr nix-deps "nix-store --query --references $QUERY_FZF_SEARCH"
   abbr nix-rdeps "nix-store --query --referrers $QUERY_FZF_SEARCH"
   abbr nix-tree "nix-store --query --tree $QUERY_FZF_SEARCH"
