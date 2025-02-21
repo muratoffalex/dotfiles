@@ -3,11 +3,11 @@ function nix-upgrade
     set -l old_system_gen (ls -d /nix/var/nix/profiles/system-*-link | sort -V | tail -n1 | grep -o '[0-9]*')
     set -l old_home (ls -d ~/.local/state/nix/profiles/home-manager* | sort -V | tail -n1)
 
-    if chezmoi apply && sudo nix flake update --flake ~/nixos && sudo nixos-rebuild switch --flake ~/nixos#main
+    if chezmoi apply && sudo nix flake update --flake ~/nixos && sudo nixos-rebuild switch --flake ~/nixos#{{ .host }}
         echo -e "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
         set -l new_system (readlink /run/current-system)
-        set -l new_system_gen (echo $new_system | grep -o '[0-9]\+$')
+        set -l new_system_gen (ls -d /nix/var/nix/profiles/system-*-link | sort -V | tail -n1 | grep -o '[0-9]*')
         set -l new_home (ls -d ~/.local/state/nix/profiles/home-manager* | sort -V | tail -n1)
 
         set -l changes_found false

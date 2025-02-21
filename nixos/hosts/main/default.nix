@@ -135,7 +135,6 @@
     telegram-desktop
     inputs.zen-browser.packages."${system}".twilight
     acpi
-    inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default
 
     nixfmt-rfc-style
     clang

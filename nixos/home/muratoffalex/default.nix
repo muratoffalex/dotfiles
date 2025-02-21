@@ -12,7 +12,6 @@
       sesh
       hiddify-app
       gnome-calculator
-      # flat-remix-gtk
       # kanagawa-gtk-theme
     ];
 
@@ -48,31 +47,4 @@
 
   programs.home-manager.enable = true;
   programs.yazi.enable = true;
-
-  # Пример настройки программ
-  # programs = {
-  #   git = {
-  #     enable = true;
-  #     userName = "Alex Muratoff";
-  #     userEmail = "muratoffalex@gmail.com";
-  #   };
-  #
-  #   fish = {
-  #     enable = true;
-  #     shellAliases = {
-  #       ll = "ls -l";
-  #       update = "sudo nixos-rebuild switch";
-  #     };
-  #   };
-  #
-  #   starship = {
-  #     enable = true;
-  #     enableFishIntegration = true;
-  #   };
-  # };
-
-  # Включаем управление файлами конфигурации
-  # home.file = {
-  #   ".config/alacritty/alacritty.yml".source = ./dotfiles/alacritty.yml;
-  # };
 }
