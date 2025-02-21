@@ -1,0 +1,34 @@
+function nix-upgrade
+    set -l old_system (readlink /run/current-system)
+    set -l old_system_gen (ls -d /nix/var/nix/profiles/system-*-link | sort -V | tail -n1 | grep -o '[0-9]*')
+    set -l old_home (ls -d ~/.local/state/nix/profiles/home-manager* | sort -V | tail -n1)
+
+    if chezmoi apply && sudo nix flake update --flake ~/nixos && sudo nixos-rebuild switch --flake ~/nixos#main
+        echo -e "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+
+        set -l new_system (readlink /run/current-system)
+        set -l new_system_gen (echo $new_system | grep -o '[0-9]\+$')
+        set -l new_home (ls -d ~/.local/state/nix/profiles/home-manager* | sort -V | tail -n1)
+
+        set -l changes_found false
+
+        if test "$old_system" != "$new_system"
+            echo -e "\033[1;33m=== System profile: $old_system_gen → $new_system_gen ===\033[0m"
+            nix store diff-closures "$old_system" "$new_system"
+            set changes_found true
+        end
+
+        if test "$old_home" != "$new_home"
+            echo -e "\n\033[1;33m=== Home Manager: $(basename $old_home) → $(basename $new_home) ===\033[0m"
+            nix store diff-closures "$old_home" "$new_home" 2>/dev/null || echo -e "\033[1;31mUnable to show home-manager profile changes\033[0m"
+            set changes_found true
+        end
+
+        if test "$changes_found" = false
+            echo -e "\033[1;32mUpdate completed. No changes detected in generations.\033[0m"
+        end
+    else
+        echo -e "\033[1;31mSystem update failed!\033[0m"
+        return 1
+    end
+end
