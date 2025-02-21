@@ -43,6 +43,18 @@
     keyMap = "colemak";
   };
 
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    config = {
+      common = {
+        default = [
+          "gtk"
+        ];
+      };
+    };
+  };
+
   programs = {
     fish = {
       enable = true;
@@ -120,12 +132,10 @@
     curl
     wget
     btop
-    sesh
     telegram-desktop
     inputs.zen-browser.packages."${system}".twilight
     acpi
     inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default
-    cachix
 
     nixfmt-rfc-style
     clang
@@ -154,7 +164,7 @@
     brightnessctl
     wlsunset # night shift
     pavucontrol
-    dolphin
+    nautilus
     # hyprland above
     waybar
     wofi
