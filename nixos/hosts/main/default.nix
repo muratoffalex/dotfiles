@@ -135,6 +135,8 @@
     telegram-desktop
     inputs.zen-browser.packages."${system}".twilight
     acpi
+    socat
+    playerctl
 
     nixfmt-rfc-style
     clang

@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   home = {
@@ -12,7 +12,6 @@
       sesh
       hiddify-app
       gnome-calculator
-      # kanagawa-gtk-theme
     ];
 
     pointerCursor = {

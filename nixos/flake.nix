@@ -14,14 +14,15 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    hyprland.url = "github:hyprwm/Hyprland";
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    zen-browser.url = "github:0xc000022070/zen-browser-flake";
+    neovim-nightly-overlay.url = "github:muratoffalex/neovim-nightly-overlay";
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-    hyprland.url = "github:hyprwm/Hyprland";
-    zen-browser.url = "github:0xc000022070/zen-browser-flake";
-    neovim-nightly-overlay.url = "github:muratoffalex/neovim-nightly-overlay";
   };
 
   outputs =
@@ -38,6 +39,7 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
+              home-manager.extraSpecialArgs = { inherit inputs; };
               home-manager.users.muratoffalex = import ./home/muratoffalex;
             }
           ];
