@@ -20,6 +20,7 @@
       swayosd
       maestral
       yandex-music
+      kooha
     ];
 
     pointerCursor = {
