@@ -54,7 +54,7 @@ window#waybar {
 
 
 #language {
-	min-width: 30px;
+	min-width: 24px;
 }
 
 #clock:hover,

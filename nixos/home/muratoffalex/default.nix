@@ -21,6 +21,8 @@
       maestral
       yandex-music
       kooha
+      vlc
+      sway-audio-idle-inhibit
     ];
 
     pointerCursor = {
