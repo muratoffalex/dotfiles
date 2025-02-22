@@ -55,6 +55,8 @@
     };
   };
 
+  virtualisation.docker.enable = true;
+
   programs = {
     fish = {
       enable = true;
@@ -120,8 +122,6 @@
     jujutsu
     fzf
     eza
-    colima
-    docker
     ripgrep
     fd
     bitwarden-cli
@@ -138,7 +138,6 @@
     socat
     playerctl
 
-    nixfmt-rfc-style
     clang
     # clients for dadbod
     mysql-client
@@ -147,7 +146,6 @@
     gcc
     pkg-config
 
-    maestral
     unzip # need for install stylua with nvim MasonToolsInstall
 
     nodejs_23
@@ -196,26 +194,6 @@
     };
   };
 
-  systemd.user.services.maestral = {
-    description = "Maestral Dropbox Client";
-    wantedBy = [ "default.target" ];
-    after = [ "network-online.target" ];
-
-    serviceConfig = {
-      Type = "simple";
-      ExecStart = "${pkgs.maestral}/bin/maestral start -f";
-      ExecStop = "${pkgs.maestral}/bin/maestral stop";
-      Restart = "on-failure";
-      RestartSec = "10s";
-    };
-
-    environment = {
-      "https_proxy" = "";
-      "http_proxy" = "";
-      "all_proxy" = "";
-    };
-  };
-
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
@@ -233,6 +211,7 @@
       isNormalUser = true;
       extraGroups = [
         "wheel"
+        "docker"
         "networkmanager"
         "video"
       ];
