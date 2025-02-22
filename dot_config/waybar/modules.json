@@ -4,6 +4,10 @@
 		"tooltip": true,
 		"tooltip-format": "btw"
 	},
+	"tray": {
+		"icon-size": 16,
+		"spacing": 10
+	},
 	"hyprland/workspaces": {
 		"disable-scroll": true,
 		"all-outputs": true,
@@ -25,8 +29,8 @@
 	"pulseaudio": {
 		"format": "{icon}  {volume}%",
 		"format-bluetooth": "{icon} {volume}%  {format_source}",
-		"format-bluetooth-muted": " {icon} {format_source}",
-		"format-muted": " {format_source}",
+		"format-bluetooth-muted": "{icon} {format_source}",
+		"format-muted": "{format_source}",
 		"format-source": " {volume}%",
 		"format-source-muted": "",
 		"format-icons": {
