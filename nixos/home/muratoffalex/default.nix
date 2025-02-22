@@ -12,6 +12,7 @@
       sesh
       hiddify-app
       gnome-calculator
+      swayosd
     ];
 
     pointerCursor = {
@@ -41,6 +42,20 @@
     font = {
       name = "Sans";
       size = 11;
+    };
+  };
+
+  systemd.user.services.swayosd = {
+    Unit = {
+      Description = "Sway On-Screen-Display";
+      PartOf = ["graphical-session.target"];
+    };
+    Service = {
+      ExecStart = "${pkgs.swayosd}/bin/swayosd-server";
+      Restart = "always";
+    };
+    Install = {
+      WantedBy = ["graphical-session.target"];
     };
   };
 
