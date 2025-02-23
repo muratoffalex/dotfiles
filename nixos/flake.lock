@@ -219,11 +219,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1740245535,
-        "narHash": "sha256-65Jt61DGE5kVMFut8JLH7Zw8FwxiZV3dTHtHbjtf9mk=",
+        "lastModified": 1740283128,
+        "narHash": "sha256-R61wtNknWWejnl+K0l4sxu/wnLNFbNe44tNM2zbj5yE=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "7ceacd98a9fc99743ae7d9a5c0a4ea7c72314da6",
+        "rev": "ed030a787938cae01d693ebaad52bbb672a4a69d",
         "type": "github"
       },
       "original": {
@@ -502,11 +502,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1740236692,
-        "narHash": "sha256-U/7tIHgf218dKGd5+ITS3Qh/Uj2F1yLTY8mKtLZ6/54=",
+        "lastModified": 1740312420,
+        "narHash": "sha256-pjndUWLjsivgRx4ypJfQDez/MxtyvODSsb1SjZn1BF8=",
         "owner": "muratoffalex",
         "repo": "neovim-nightly-overlay",
-        "rev": "6e85315effa258c483a047a121b30be218598890",
+        "rev": "2db00cd58b08de85e2b6646fc66e1f898865fa46",
         "type": "github"
       },
       "original": {
@@ -518,11 +518,11 @@
     "neovim-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1740230255,
-        "narHash": "sha256-RJIpPi7H/zTbybiBuzhION2IW7RlbtlEDku9OuMRJok=",
+        "lastModified": 1740307109,
+        "narHash": "sha256-1V9pFW1dhCjOU0q2gTKFAroXoVTOowt37V4EUUMPWCI=",
         "owner": "neovim",
         "repo": "neovim",
-        "rev": "e641155b023c3e8164927248f937e2a5fcdc48e2",
+        "rev": "4a0ee22e77d169191e7163d1340b835145f4dac9",
         "type": "github"
       },
       "original": {
@@ -726,15 +726,15 @@
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
-        "lastModified": 1739667343,
-        "narHash": "sha256-fNEz+Yd0t9jXz27qKRMAEBradTwYBeBLOECx+ydG25s=",
-        "owner": "0xc000022070",
+        "lastModified": 1740308916,
+        "narHash": "sha256-oWaSyWhlodxi00gIwqMibTjJhfuryA2bs8A/YCcZfxg=",
+        "owner": "muratoffalex",
         "repo": "zen-browser-flake",
-        "rev": "8c7f6ca49f87b4e114f775a4dad956ceb6df4220",
+        "rev": "44688095a3d8e15215d325a3e88d5d712b16c58b",
         "type": "github"
       },
       "original": {
-        "owner": "0xc000022070",
+        "owner": "muratoffalex",
         "repo": "zen-browser-flake",
         "type": "github"
       }

@@ -23,6 +23,7 @@
       kooha
       vlc
       sway-audio-idle-inhibit
+      inputs.zen-browser.packages."${system}".twilight
     ];
 
     pointerCursor = {
@@ -44,12 +45,19 @@
     package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
     extraPackages = with pkgs; [
       nixfmt-rfc-style
+      marksman
+      lua-language-server
+      intelephense
+      gopls
     ];
   };
 
   gtk = {
     enable = true;
 
+    gtk4.extraConfig = {
+      gtk-application-prefer-dark-theme = "false";
+    };
     # theme = {
     #   package = pkgs.gruvbox-gtk-theme;
     #   name = "Gruvbox-Light";
