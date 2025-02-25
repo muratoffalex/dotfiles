@@ -2,7 +2,12 @@ function cr --argument name dir_name --description "Create or enter directory an
     set -l base_dir $DEV_PATH
 
     if test -z "$name"
-        echo "Usage: cr <name|git_url> [directory]"
+        echo "Error: Project name or Git URL required"
+        echo "Usage: cr <name|git_url> [directory=tmp]"
+        echo "Examples:"
+        echo "  cr myproject           # Creates in tmp"
+        echo "  cr myproject work      # Creates in work"
+        echo "  cr git@github.com:user/repo.git   # Clones to tmp"
         return 1
     end
 
