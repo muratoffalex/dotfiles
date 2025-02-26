@@ -18,6 +18,7 @@
       hiddify-app
       gnome-calculator
       swayosd
+      direnv
       maestral
       yandex-music
       kooha
@@ -37,6 +38,7 @@
     };
   };
 
+  services.lorri.enable = true;
   programs.home-manager.enable = true;
   programs.yazi.enable = true;
 
