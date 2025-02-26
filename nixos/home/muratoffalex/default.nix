@@ -15,16 +15,25 @@
       home-manager
       aerc
       sesh
-      hiddify-app
-      gnome-calculator
-      swayosd
+      yazi
+      gitmux
       direnv
+
+      # services
       maestral
-      yandex-music
-      kooha
-      vlc
+      swayosd
       sway-audio-idle-inhibit
+
+      # apps
+      kooha
+      swappy
+      gnome-calculator
+      vlc
+      alacritty
       inputs.zen-browser.packages."${system}".twilight
+      hiddify-app
+      telegram-desktop
+      yandex-music
     ];
 
     pointerCursor = {
@@ -40,8 +49,12 @@
 
   services.lorri.enable = true;
   programs.home-manager.enable = true;
-  programs.yazi.enable = true;
-
+  # programs.gauntlet = {
+  #   enable = true;
+  #   package = inputs.gauntlet.packages.${pkgs.system}.default;
+  #   service.enable = true;
+  #   config = {};
+  # };
   programs.neovim = {
     enable = true;
     package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
@@ -51,6 +64,7 @@
       lua-language-server
       intelephense
       gopls
+      mysql-client # for dadbod
     ];
   };
 
@@ -76,37 +90,40 @@
     };
   };
 
-  systemd.user.services.swayosd = {
-    Unit = {
-      Description = "Sway On-Screen-Display";
-      PartOf = [ "graphical-session.target" ];
+  systemd.user.services = {
     };
-    Service = {
-      ExecStart = "${pkgs.swayosd}/bin/swayosd-server";
-      Restart = "always";
+    swayosd = {
+      Unit = {
+        Description = "Sway On-Screen-Display";
+        PartOf = [ "graphical-session.target" ];
+      };
+      Service = {
+        ExecStart = "${pkgs.swayosd}/bin/swayosd-server";
+        Restart = "always";
+        RestartSec = "5s";
+      };
+      Install = {
+        WantedBy = [ "graphical-session.target" ];
+      };
     };
-    Install = {
-      WantedBy = [ "graphical-session.target" ];
-    };
-  };
+    maestral = {
+      Unit = {
+        Description = "Maestral Dropbox Client";
+        PartOf = [ "graphical-session.target" ];
+        After = [ "network-online.target" ];
+      };
 
-  systemd.user.services.maestral = {
-    Unit = {
-      Description = "Maestral Dropbox Client";
-      PartOf = [ "graphical-session.target" ];
-      After = [ "network-online.target" ];
-    };
+      Service = {
+        Type = "simple";
+        ExecStart = "${pkgs.maestral}/bin/maestral start -f";
+        ExecStop = "${pkgs.maestral}/bin/maestral stop";
+        Restart = "on-failure";
+        RestartSec = "10s";
+      };
 
-    Service = {
-      Type = "simple";
-      ExecStart = "${pkgs.maestral}/bin/maestral start -f";
-      ExecStop = "${pkgs.maestral}/bin/maestral stop";
-      Restart = "on-failure";
-      RestartSec = "10s";
-    };
-
-    Install = {
-      WantedBy = [ "graphical-session.target" ];
+      Install = {
+        WantedBy = [ "graphical-session.target" ];
+      };
     };
   };
 }

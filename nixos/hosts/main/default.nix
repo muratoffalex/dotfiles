@@ -68,10 +68,6 @@
         end
       '';
     };
-    neovim = {
-      enable = true;
-      package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
-    };
     hyprland = {
       enable = true;
       withUWSM = true;
@@ -132,38 +128,32 @@
     curl
     wget
     btop
-    telegram-desktop
-    acpi
-    socat
-    playerctl
-
-    clang
-    # clients for dadbod
-    mysql-client
 
     gnumake
     gcc
     pkg-config
+    unzip
 
-    unzip # need for install stylua with nvim MasonToolsInstall
 
+    clang
     nodejs_23
     go_1_24
     cargo
 
+    # utils
+    acpi # hypridle
+    socat # hyprland monitors
     apfs-fuse
     jq
-
-    # apps
-    alacritty
+    libnotify
 
     # hyprland packages
     networkmanagerapplet
     brightnessctl
-    wlsunset # night shift
+    playerctl
     pavucontrol
+    wlsunset # night shift
     nautilus
-    # hyprland above
     waybar
     wofi
     swaynotificationcenter
@@ -196,6 +186,12 @@
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
+    settings = {
+      General = {
+        Enable = "Source,Sink,Media,Socket";
+        Experimental = true;
+      };
+    };
   };
 
   time.timeZone = "Asia/Yekaterinburg";
