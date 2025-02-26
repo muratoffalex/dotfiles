@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# ref: https://github.com/radityaharya/bw-fzf
 
 trap 'exit_handler' INT TERM
 trap 'cleanup' EXIT
@@ -10,8 +11,9 @@ SESSION_FILE="$HOME/.bw-fzf-session"
 TIMEOUT_PID=
 TIMESTAMP_FILE="/tmp/bw-fzf-active.timestamp"
 TEMP_ITEMS_FILE=
-USE_CLI=false
+USE_CLI=true
 UNLOCKED=false
+API_URL=http://localhost:49186
 
 # Determine the clipboard command based on the session type
 if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
@@ -26,20 +28,16 @@ function api_request() {
   local endpoint="$1"
   local method="${2:-GET}"
   local search_param="$3"
-  local url="http://localhost:8087${endpoint}"
+  local url="${API_URL}${endpoint}"
 
   if [[ -n "$search_param" ]]; then
     url="${url}?search=${search_param}"
   fi
 
-  if [[ -n "$BW_SESSION" ]]; then
-    curl --connect-timeout 1 -s -X "$method" -H "Authorization: Bearer $BW_SESSION" "$url"
-  else
-    curl --connect-timeout 1 -s -X "$method" "$url"
-  fi
+  curl --connect-timeout 1 -s -X "$method" "$url"
 }
 
-if ! STATUS=$(api_request "/status"); then
+if ! STATUS=$(curl -s "${API_URL}/status"); then
   USE_CLI=true
   echo "Bitwarden server not running, using CLI mode"
 else
@@ -83,26 +81,21 @@ function monitor_inactivity() {
   TIMEOUT_PID=$!
 }
 
-function check_session() {
-  if [[ "$UNLOCKED" == "true" ]]; then
-	return 0
-  fi
-
+function get_session() {
   if [[ -n "${BW_SESSION}" ]]; then
-    if api_request "/status" &>/dev/null; then
-      echo "Using existing session from environment"
-      return 0
-    fi
+    echo "${BW_SESSION}"
+    return 0
   fi
 
   if [[ -f "$SESSION_FILE" ]]; then
-    export BW_SESSION=$(cat "$SESSION_FILE")
-    if api_request "/status" &>/dev/null; then
-      echo "Using existing session from file"
+    local session
+    session=$(cat "$SESSION_FILE")
+    if [[ -n "$session" ]]; then
+      echo "$session"
       return 0
     fi
   fi
-  
+
   return 1
 }
 
@@ -110,7 +103,16 @@ function handle_session_save() {
   read -p "Do you want to save this session? [y/N] " save_session
   local session
 
-  session=$(echo "$password" | bw unlock --raw 2>/dev/null)
+  if [[ "$USE_CLI" == "true" ]]; then
+	  session=$(echo "$password" | bw unlock --raw 2>/dev/null)
+  else
+    local response
+    response=$(curl -s -X POST "${API_URL}/unlock" \
+      -H "Content-Type: application/json" \
+      -d "{\"password\": \"$password\"}")
+    
+    session=$(echo "$response" | jq -r '.data.raw')
+  fi
   if [[ -z "$session" ]]; then
     echo "Could not unlock vault"
     exit 1
@@ -135,10 +137,6 @@ function handle_session_save() {
 function ask_password() {
   local password
 
-  if check_session; then
-    return 0
-  fi
-
   if command -v systemd-ask-password &>/dev/null; then
     password=$(systemd-ask-password "Password: ")
   else
@@ -153,31 +151,36 @@ function load_items() {
   local search_term="$1"
   echo "Loading items..."
 
-  if $USE_CLI; then
-    if [[ -n "$search_term" ]]; then
-      if ! ITEMS=$(bw list items --search "$search_term" --session "$BW_SESSION" 2>/dev/null); then
-        echo "Could not load items or operation timed out"
-        exit 1
+  export BW_SESSION=$(get_session)
+
+  while true; do
+    if $USE_CLI; then
+      if [[ -n "$search_term" ]]; then
+        ITEMS=$(bw list items --search "$search_term" --session "$BW_SESSION"2>&1)
+      else
+        ITEMS=$(bw list items --nointeraction --session "$BW_SESSION" 2>&1)
       fi
     else
-      if ! ITEMS=$(bw list items --session "$BW_SESSION" 2>/dev/null); then
-        echo "Could not load items or operation timed out"
-        exit 1
-      fi
+      ITEMS=$(api_request "/list/object/items" "GET" "$search_term")
     fi
-  else
-    if ! ITEMS=$(api_request "/list/object/items" "GET" "$search_term"); then
-      echo "Could not load items or operation timed out"
+
+    if [[ "$ITEMS" == *"Vault is locked."* ]]; then
+      echo "Vault is locked, requesting password..."
+      ask_password
+      continue
+    elif [[ -z "$ITEMS" || "$ITEMS" == "Not Found" ]]; then
+      echo "Failed to load items"
       exit 1
     fi
 
-    if [[ -z "$ITEMS" || "$ITEMS" == "Not Found" ]]; then
-      echo "Failed to load items from API"
-      exit 1
+    # Если получили данные, извлекаем их из ответа API
+    if ! $USE_CLI; then
+      ITEMS=$(echo "$ITEMS" | jq -r '.data.data')
     fi
-  fi
 
-  echo "Items loaded successfully."
+    echo "Items loaded successfully."
+    break
+  done
 }
 
 export -f monitor_inactivity
@@ -222,15 +225,19 @@ function bw_list() {
     • Session times out after ${TIMEOUT} of inactivity
     "
 
-  jq -r '.[] | "\(.name) (\(.id)) \(.login.username)"' "$TEMP_ITEMS_FILE" |
+jq -r '.[] | "\u001b[1;36m" + .name + "\u001b[0m" + (if .login.username != null and .login.username != "" then " 👤 \u001b[33m" + .login.username + "\u001b[0m" else "" end) + "\t\u001b[90m" + .id + "\u001b[0m"' "$TEMP_ITEMS_FILE" |
     FZF_PREVIEW_FILE="$TEMP_ITEMS_FILE" SHELL="bash" fzf \
       --cycle --inline-info --ansi --no-mouse --layout=reverse \
       --prompt="$prompt" \
+      --delimiter='\t' \
+      --with-nth=1 \
       --bind="change:execute-silent(touch $TIMESTAMP_FILE)+top" \
       --bind="focus:execute-silent(touch $TIMESTAMP_FILE)" \
-      --bind="ctrl-u:execute(item_id=\$(echo {} | sed -n 's/.*(\(.*\)).*/\1/p'); username=\$(jq -r --arg id \"\$item_id\" '.[] | select(.id == \$id) | .login.username' \"$TEMP_ITEMS_FILE\"); echo -n \"\$username\" | $CLIP_COMMAND $CLIP_ARGS)+execute-silent(touch $TIMESTAMP_FILE)" \
-      --bind="enter:execute(item_id=\$(echo {} | sed -n 's/.*(\(.*\)).*/\1/p'); password=\$(jq -r --arg id \"\$item_id\" '.[] | select(.id == \$id) | .login.password' \"$TEMP_ITEMS_FILE\"); echo -n \"\$password\" | $CLIP_COMMAND $CLIP_ARGS)+execute-silent(touch $TIMESTAMP_FILE)+abort" \
-      --bind="ctrl-o:execute(item_id=\$(echo {} | sed -n 's/.*(\(.*\)).*/\1/p'); totp_secret=\$(jq -r --arg id \"\$item_id\" '.[] | select(.id == \$id) | .login.totp' \"$TEMP_ITEMS_FILE\"); if [[ \"\$totp_secret\" != \"null\" ]]; then if command -v oathtool &> /dev/null; then totp=\$(oathtool --totp -b \"\$totp_secret\"); else totp=\$(bw get totp \"\$item_id\"); fi; echo -n \"\$totp\" | $CLIP_COMMAND $CLIP_ARGS; else echo \"No TOTP available for this item\"; fi)+execute-silent(touch $TIMESTAMP_FILE)" \
+      --bind="ctrl-z:execute(echo {} | cut -f2 | sed 's/\x1b\[[0-9;]*m//g')" \
+      --bind="ctrl-u:execute(item_id=\$(echo {} | cut -f2 | sed 's/\x1b\[[0-9;]*m//g'); username=\$(jq -r --arg id \"\$item_id\" '.[] | select(.id == \$id) | .login.username' \"$TEMP_ITEMS_FILE\"); echo -n \"\$username\" | $CLIP_COMMAND $CLIP_ARGS; touch $TIMESTAMP_FILE)" \
+      --bind="ctrl-p:execute(item_id=\$(echo {} | cut -f2 | sed 's/\x1b\[[0-9;]*m//g'); password=\$(jq -r --arg id \"\$item_id\" '.[] | select(.id == \$id) | .login.password' \"$TEMP_ITEMS_FILE\"); echo -n \"\$password\" | $CLIP_COMMAND $CLIP_ARGS; touch $TIMESTAMP_FILE)" \
+      --bind="enter:execute-silent(item_id=\$(echo {} | cut -f2 | sed 's/\x1b\[[0-9;]*m//g'); password=\$(jq -r --arg id \"\$item_id\" '.[] | select(.id == \$id) | .login.password' \"$TEMP_ITEMS_FILE\"); echo -n \"\$password\" | $CLIP_COMMAND $CLIP_ARGS; touch $TIMESTAMP_FILE)+abort" \
+      --bind="ctrl-o:execute(item_id=\$(echo {} | cut -f2 | sed 's/\x1b\[[0-9;]*m//g'); totp_secret=\$(jq -r --arg id \"\$item_id\" '.[] | select(.id == \$id) | .login.totp' \"$TEMP_ITEMS_FILE\"); if [[ \"\$totp_secret\" != \"null\" ]]; then if command -v oathtool &> /dev/null; then totp=\$(oathtool --totp -b \"\$totp_secret\"); else totp=\$(bw get totp \"\$item_id\"); fi; echo -n \"\$totp\" | $CLIP_COMMAND $CLIP_ARGS; else echo \"No TOTP available for this item\"; fi)+execute-silent(touch $TIMESTAMP_FILE)" \
       --bind="ctrl-h:preview(echo \"$HELP_TEXT\")" \
       --bind="ctrl-y:toggle-preview" \
       --header="Press ctrl-h for help" \
@@ -239,7 +246,7 @@ function bw_list() {
         if [[ "{}" == "HELP" ]]; then
             echo "$HELP_TEXT"
         else
-            item_id=$(echo {} | sed -n "s/.*(\(.*\)).*/\1/p")
+            item_id=$(echo {} | cut -f2 | sed "s/\x1b\[[0-9;]*m//g")
             touch '"$TIMESTAMP_FILE"'
             item=$(jq -r --arg id "$item_id" ".[] | select(.id == \$id)" "$FZF_PREVIEW_FILE")
 
@@ -332,6 +339,9 @@ function main() {
       shift
       SEARCH_TERM="$1"
       ;;
+    -c | --cli)
+      USE_CLI=true
+      ;;
     *)
       echo "Invalid option: $1"
       help
@@ -361,7 +371,6 @@ function main() {
   check_dependencies
   monitor_inactivity
 
-  ask_password
   load_items "$SEARCH_TERM"
   bw_list
 }
