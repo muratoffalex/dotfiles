@@ -1,0 +1,63 @@
+#!/bin/sh
+
+# ThinkPad T480s: Battery Conservation Mode Management
+
+ACTION=$1
+
+[[ -z "$2" ]] && START=75 || START=$2
+[[ -z "$3" ]] && STOP=80 || STOP=$3
+
+# Paths specific for T480s
+CONSERVATION_MODE_PATH="/sys/class/power_supply/BAT0/charge_control_start_threshold"
+STOP_CHARGE_PATH="/sys/class/power_supply/BAT0/charge_control_end_threshold"
+
+# Verify that the paths exist
+if [ ! -e "$CONSERVATION_MODE_PATH" ] || [ ! -e "$STOP_CHARGE_PATH" ]; then
+    echo "Could not find battery conservation mode interface for T480s"
+    exit 1
+fi
+
+enable() {
+    # Set thresholds
+    sudo sh -c "echo $START > $CONSERVATION_MODE_PATH"
+    sudo sh -c "echo $STOP > $STOP_CHARGE_PATH"
+    echo "Battery conservation mode enabled (start charging: $START%, stop: $STOP%)"
+}
+
+disable() {
+    # Reset thresholds to default
+    sudo sh -c "echo 0 > $CONSERVATION_MODE_PATH"
+    sudo sh -c "echo 100 > $STOP_CHARGE_PATH"
+    echo "Battery conservation mode disabled"
+}
+
+status() {
+    start_threshold=$(cat "$CONSERVATION_MODE_PATH")
+    stop_threshold=$(cat "$STOP_CHARGE_PATH")
+    
+    if [ "$start_threshold" -eq 0 ]; then
+        echo "Battery conservation mode: disabled"
+    else
+        echo "Battery conservation mode: enabled"
+        echo "Start charging: $start_threshold%"
+        echo "Stop charging: $stop_threshold%"
+    fi
+}
+
+case $ACTION in
+    enable|on|1)
+        enable
+        ;;
+    disable|off|0)
+        disable
+        ;;
+    status)
+        status
+        ;;
+    *)
+        echo "Usage: $0 {enable|disable|status} [start_threshold] [stop_threshold]"
+        echo "Example: $0 enable 60 80  # Enables conservation mode, start charging at 60%, stop at 80%"
+        echo "Example: $0 disable       # Disables conservation mode"
+        echo "Example: $0 status        # Shows current status"
+        ;;
+esac

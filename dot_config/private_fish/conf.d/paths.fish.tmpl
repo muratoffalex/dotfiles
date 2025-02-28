@@ -16,3 +16,5 @@ fish_add_path /usr/local/opt/ruby/bin
 
 # custom bin/raycast scripts
 fish_add_path  {{ .chezmoi.homeDir }}/scripts
+# specific scripts for os
+fish_add_path {{ .chezmoi.homeDir }}/scripts/{{ .chezmoi.os }}
