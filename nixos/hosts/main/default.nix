@@ -36,8 +36,21 @@
     kernelPackages = pkgs.linuxPackages_6_13;
   };
 
-  networking.hostName = "nixos-laptop";
-  networking.networkmanager.enable = true;
+  networking = {
+    hostName = "nixos-laptop";
+    wireless.iwd.enable = true;
+    useNetworkd = true;
+  };
+
+  systemd.network = {
+    enable = true;
+    networks."40-wired" = {
+      matchConfig.Name = "enp*";
+      networkConfig = {
+        DHCP = "yes";
+      };
+    };
+  };
 
   console = {
     keyMap = "colemak";
@@ -74,10 +87,6 @@
       package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
       portalPackage =
         inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
-    };
-    nm-applet = {
-      enable = true;
-      indicator = true;
     };
     hyprlock = {
       enable = true;
@@ -148,7 +157,6 @@
     libnotify
 
     # hyprland packages
-    networkmanagerapplet
     brightnessctl
     playerctl
     pavucontrol
@@ -207,7 +215,7 @@
       extraGroups = [
         "wheel"
         "docker"
-        "networkmanager"
+        "network"
         "video"
       ];
       # mkpasswd --method=sha-512

@@ -18,6 +18,8 @@
       yazi
       gitmux
       direnv
+      bluetui
+      impala # wifi tui
 
       # services
       maestral
