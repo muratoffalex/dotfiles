@@ -93,7 +93,6 @@
   };
 
   systemd.user.services = {
-    };
     swayosd = {
       Unit = {
         Description = "Sway On-Screen-Display";
@@ -126,6 +125,20 @@
       Install = {
         WantedBy = [ "graphical-session.target" ];
       };
+    };
+    bwapi = {
+      Unit = {
+        Description = "Bitwarden API";
+        PartOf = [ "graphical-session.target" ];
+      };
+      Service = {
+        ExecStart = "${pkgs.bitwarden-cli}/bin/bw serve --port 49186";
+        Restart = "on-failure";
+      };
+      Install = {
+        WantedBy = [ "graphical-session.target" ];
+      };
+      enable = false;
     };
   };
 }
