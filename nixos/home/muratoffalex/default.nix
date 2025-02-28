@@ -136,9 +136,9 @@
         Restart = "on-failure";
       };
       Install = {
-        WantedBy = [ "graphical-session.target" ];
+        WantedBy = pkgs.lib.mkForce []; # disable by default
+        # WantedBy = [ "graphical-session.target" ];
       };
-      enable = false;
     };
   };
 }
