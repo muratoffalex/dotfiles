@@ -1,5 +1,4 @@
 {
-  config,
   pkgs,
   inputs,
   ...
@@ -69,7 +68,11 @@
   };
 
   virtualisation.docker = {
-    enable = true;
+    enable = false;
+    rootless = {
+      enable = true;
+      setSocketVariable = true;
+    };
     enableOnBoot = false;
   };
 
@@ -91,9 +94,7 @@
       portalPackage =
         inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
     };
-    hyprlock = {
-      enable = true;
-    };
+    hyprlock.enable = true;
     # fix unpatched dynamic libraries (ex., installed via neovim mason)
     nix-ld = {
       enable = true;
@@ -181,7 +182,6 @@
     xserver.enable = false;
     displayManager.sddm.enable = false;
     openssh.enable = true;
-    blueman.enable = true;
     logind = {
       lidSwitch = "suspend";
       extraConfig = ''
