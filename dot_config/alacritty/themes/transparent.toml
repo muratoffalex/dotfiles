@@ -1,5 +1,5 @@
 [general]
-import = ["~/.config/alacritty/themes/tokyonight-night.toml"]
+import = ["~/.config/alacritty/themes/kanagawa-wave.toml"]
 
 [window]
 opacity = 0.85

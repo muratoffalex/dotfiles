@@ -9,15 +9,15 @@ if [ -n "$1" ]; then
     case "$theme" in
         "󰖨 Light Theme") 
             ~/scripts/change_theme light > /dev/null
-            notify-send "Theme changed" "Light theme activated" -i "preferences-color"
+            notify-send "Theme changed" "Light theme activated" -i "preferences-color" -t 1000
             ;;
         " Dark Theme") 
             ~/scripts/change_theme dark > /dev/null
-            notify-send "Theme changed" "Dark theme activated" -i "preferences-color"
+            notify-send "Theme changed" "Dark theme activated" -i "preferences-color" -t 1000
             ;;
         " Transparent Theme") 
             ~/scripts/change_theme transparent > /dev/null
-            notify-send "Theme changed" "Transparent theme activated" -i "preferences-color"
+            notify-send "Theme changed" "Transparent theme activated" -i "preferences-color" -t 1000
             ;;
     esac
     exit 0
