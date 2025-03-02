@@ -67,13 +67,9 @@
     };
   };
 
-  virtualisation.docker = {
-    enable = false;
-    rootless = {
-      enable = true;
-      setSocketVariable = true;
-    };
-    enableOnBoot = false;
+  virtualisation.docker.rootless = {
+    enable = true;
+    setSocketVariable = true;
   };
 
   programs = {
@@ -168,7 +164,6 @@
     wlsunset # night shift
     nautilus
     waybar
-    wofi
     swaynotificationcenter
     wl-clipboard
     hyprpaper

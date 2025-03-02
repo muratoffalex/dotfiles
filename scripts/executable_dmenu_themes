@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+# Получаем текущий путь скрипта
+SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
+
+# Если передан аргумент, значит скрипт вызывается для обработки выбора
+if [ -n "$1" ]; then
+    theme="$1"
+    case "$theme" in
+        "󰖨 Light Theme") 
+            ~/scripts/change_theme light > /dev/null
+            notify-send "Theme changed" "Light theme activated" -i "preferences-color"
+            ;;
+        " Dark Theme") 
+            ~/scripts/change_theme dark > /dev/null
+            notify-send "Theme changed" "Dark theme activated" -i "preferences-color"
+            ;;
+        " Transparent Theme") 
+            ~/scripts/change_theme transparent > /dev/null
+            notify-send "Theme changed" "Transparent theme activated" -i "preferences-color"
+            ;;
+    esac
+    exit 0
+fi
+
+# Если аргументов нет, выводим список доступных тем с иконками
+echo -e "󰖨 Light Theme"
+echo -e " Dark Theme"
+echo -e " Transparent Theme"

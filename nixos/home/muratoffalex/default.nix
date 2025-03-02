@@ -20,6 +20,7 @@
       direnv
       bluetui
       impala # wifi tui
+      rofi-power-menu
 
       # services
       maestral
@@ -49,6 +50,16 @@
     };
   };
 
+  programs.rofi = {
+    enable = true;
+    package = pkgs.rofi-wayland;
+    plugins = with pkgs; [
+      rofi-emoji-wayland
+      rofi-calc
+    ];
+  };
+
+  wayland.windowManager.hyprland.systemd.enable = false;
   services.lorri.enable = true;
   programs.home-manager.enable = true;
   # programs.gauntlet = {
