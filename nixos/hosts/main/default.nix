@@ -8,6 +8,8 @@
     ./hardware-configuration.nix
   ];
 
+  home-manager.backupFileExtension = "backup";
+
   nix = {
     settings = {
       trusted-users = [
