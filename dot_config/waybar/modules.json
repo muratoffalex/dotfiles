@@ -46,12 +46,12 @@
 		"format-source": " {volume}%",
 		"format-source-muted": "",
 		"format-icons": {
-			"headphone": "",
-			"hands-free": "",
-			"headset": "",
+			"headphone": " ",
+			"hands-free": " ",
+			"headset": " ",
 			"phone": "",
 			"portable": "",
-			"car": "",
+			"car": " ",
 			"default": [
 				"",
 				"",
@@ -62,9 +62,9 @@
 	},
 	"network": {
 		"format-wifi": "   {essid} ({signalStrength}%)",
-		"format-ethernet": "{ipaddr}/{cidr} ",
-		"tooltip-format": "{ifname} via {gwaddr} ",
-		"format-linked": "{ifname} (No IP) ",
+		"format-ethernet": "{ipaddr}/{cidr} 󱎔",
+		"tooltip-format": "{ifname} via {gwaddr}",
+		"format-linked": "{ifname} (No IP)",
 		"format-disconnected": "Disconnected ⚠"
 	},
 	"cpu": {
@@ -94,7 +94,7 @@
 		},
 		"format": "{icon}  {capacity}%",
 		"format-full": "{icon}  {capacity}%",
-		"format-charging": "  {capacity}%",
+		"format-charging": "  {capacity}%",
 		"format-plugged": "  {capacity}%",
 		"format-alt": "{time}  {icon}",
 		"format-icons": [

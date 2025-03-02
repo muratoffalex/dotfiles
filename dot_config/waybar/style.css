@@ -101,12 +101,11 @@ window#waybar {
   box-shadow: none;
 }
 
-#custom-arch {
-    margin-left: 5px;
-    padding: 0 10px;
+#custom-nixos {
+    padding: 0 0;
     font-size: 25px;
     transition: color .5s;
 }
-#custom-arch:hover {
+#custom-nixos:hover {
     color: #1793d1;
 }
