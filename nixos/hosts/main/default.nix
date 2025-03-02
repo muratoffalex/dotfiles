@@ -78,6 +78,7 @@
       loginShellInit = ''
         if test (tty) = "/dev/tty1"
           if uwsm check may-start
+            sleep 1
             exec uwsm start hyprland-uwsm.desktop
           end
         end
@@ -177,6 +178,7 @@
     xserver.enable = false;
     displayManager.sddm.enable = false;
     openssh.enable = true;
+    blueman.enable = true;
     logind = {
       lidSwitch = "suspend";
       extraConfig = ''
@@ -198,7 +200,10 @@
           "bluez5.enable-aptx-hd" = true;
           "bluez5.enable-ldac" = true;
           "bluez5.a2dp.assume-no-resampling" = true;
+          "bluez5.default-profile" = "a2dp-sink";
           "bluez5.roles" = [
+            "a2dp_sink"
+            "a2dp_source" 
             "hsp_hs"
             "hsp_ag"
             "hfp_hf"
@@ -223,7 +228,6 @@
     powerOnBoot = true;
     settings = {
       General = {
-        Enable = "Source,Sink,Media,Socket";
         Experimental = true;
         FastConnectable = true;
       };
