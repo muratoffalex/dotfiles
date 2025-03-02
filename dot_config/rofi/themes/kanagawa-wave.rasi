@@ -1,7 +1,7 @@
 * {
     font:   "CaskaydiaCove Nerd Font 16";
 
-    bg0:     #1f1f28;  /* background from Kanagawa */
+    bg0:     #181616;  /* background from Kanagawa Dragon */
     bg1:     #2a2a37;  /* slightly lighter background */
     fg0:     #dcd7ba;  /* foreground from Kanagawa */
 
