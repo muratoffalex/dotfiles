@@ -9,6 +9,7 @@
   ];
 
   home-manager.backupFileExtension = "backup";
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   nix = {
     settings = {
@@ -41,6 +42,16 @@
     hostName = "nixos-laptop";
     wireless.iwd.enable = true;
     useNetworkd = true;
+  };
+
+  systemd = {
+    user.services.pipewire = {
+      serviceConfig = {
+        TimeoutStopSec = 5;
+        Restart = "always";
+        RestartSec = 2;
+      };
+    };
   };
 
   systemd.network = {
@@ -80,7 +91,6 @@
       loginShellInit = ''
         if test (tty) = "/dev/tty1"
           if uwsm check may-start
-            sleep 1
             exec uwsm start hyprland-uwsm.desktop
           end
         end
@@ -205,7 +215,7 @@
           "bluez5.default-profile" = "a2dp-sink";
           "bluez5.roles" = [
             "a2dp_sink"
-            "a2dp_source" 
+            "a2dp_source"
             "hsp_hs"
             "hsp_ag"
             "hfp_hf"
