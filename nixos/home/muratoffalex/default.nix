@@ -50,36 +50,35 @@
     };
   };
 
-  programs.rofi = {
-    enable = true;
-    package = pkgs.rofi-wayland;
-    plugins = with pkgs; [
-      rofi-emoji-wayland
-      rofi-calc
-    ];
+  programs = {
+    home-manager.enable = true;
+    rofi = {
+      enable = true;
+      package = pkgs.rofi-wayland;
+      plugins = with pkgs; [
+        rofi-emoji-wayland
+        rofi-calc
+      ];
+    };
+    neovim = {
+      enable = true;
+      package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
+      extraPackages = with pkgs; [
+        nixfmt-rfc-style
+        marksman
+        lua-language-server
+        intelephense
+        gopls
+        mysql-client # for dadbod
+      ];
+    };
   };
+
+  # use existing config created by chezmoi instead hm
+  xdg.configFile."rofi/config.rasi".enable = false;
 
   wayland.windowManager.hyprland.systemd.enable = false;
   services.lorri.enable = true;
-  programs.home-manager.enable = true;
-  # programs.gauntlet = {
-  #   enable = true;
-  #   package = inputs.gauntlet.packages.${pkgs.system}.default;
-  #   service.enable = true;
-  #   config = {};
-  # };
-  programs.neovim = {
-    enable = true;
-    package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
-    extraPackages = with pkgs; [
-      nixfmt-rfc-style
-      marksman
-      lua-language-server
-      intelephense
-      gopls
-      mysql-client # for dadbod
-    ];
-  };
 
   gtk = {
     enable = true;
@@ -147,7 +146,7 @@
         Restart = "on-failure";
       };
       Install = {
-        WantedBy = pkgs.lib.mkForce []; # disable by default
+        WantedBy = pkgs.lib.mkForce [ ]; # disable by default
         # WantedBy = [ "graphical-session.target" ];
       };
     };
