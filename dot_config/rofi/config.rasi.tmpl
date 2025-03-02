@@ -2,7 +2,7 @@ configuration {
  modi: "combi,calc,emoji";
  combi-modi: "drun,power:rofi-power-menu,themes:~/scripts/dmenu_themes";
  show-icons: true;
- terminal: "alacritty";
+ terminal: "{{ .terminal }}";
  sort: true;
  sorting-method: "fzf";
  matching: "fuzzy";
