@@ -15,15 +15,15 @@ if [[ "$connected" != "true" ]]; then
     exit 0
 fi
 
-BAT_CHAR_LEFT="${DEVICE_PATH}/service0010/char0011"
-BAT_CHAR_RIGHT="${DEVICE_PATH}/service0015/char0016"
+BAT_CHAR_FIRST="${DEVICE_PATH}/service0010/char0011"
+BAT_CHAR_SECOND="${DEVICE_PATH}/service0015/char0016"
 
 get_value() {
     busctl call org.bluez $1 org.bluez.GattCharacteristic1 ReadValue "a{sv}" 0 | 
     awk '{print $NF}'
 }
 
-bat_level_left=$(get_value $BAT_CHAR_LEFT)
-bat_level_right=$(get_value $BAT_CHAR_RIGHT)
+bat_level_left=$(get_value $BAT_CHAR_SECOND)
+bat_level_right=$(get_value $BAT_CHAR_FIRST)
 
 echo "$bat_level_left% 🦀 $bat_level_right%"

@@ -2,7 +2,7 @@
 
 sesh_connect() {
   sesh list --icons | fzf \
-    --tmux='center,40%,50%' \
+    --tmux='center,40%,60%' \
     --layout reverse \
     --no-sort \
     --ansi \
@@ -13,7 +13,7 @@ sesh_connect() {
     --no-separator \
     --border bold \
     --no-scrollbar \
-    --header '  ^a all ^t tmux ^g configs ^x zoxide ^d tmux kill ^f find' \
+    --header '  ^a all ^d tmux kill ^f find' \
     --bind change:top \
     --bind 'ctrl-a:change-prompt(⚡  )+reload(sesh list --icons)' \
     --bind 'ctrl-t:change-prompt(🪟  )+reload(sesh list -t --icons)' \
