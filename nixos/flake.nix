@@ -14,6 +14,8 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    nixpkgs-stable.url = "github:nixos/nixpkgs?ref=release-24.11";
+    nixpkgs-unstable-small.url = "github:nixos/nixpkgs?ref=nixos-unstable-small";
     hyprland.url = "github:hyprwm/Hyprland";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     zen-browser.url = "github:muratoffalex/zen-browser-flake";
@@ -26,12 +28,21 @@
   };
 
   outputs =
-    { self, nixpkgs, home-manager, nixos-hardware, ... }@inputs:
+    { self, nixpkgs, nixpkgs-stable, nixpkgs-unstable-small, home-manager, nixos-hardware, ... }@inputs:
+    let
+      system = "x86_64-linux";
+      pkgs-stable = nixpkgs-stable.legacyPackages.${system};
+      pkgs-unstable-small = nixpkgs-unstable-small.legacyPackages.${system};
+    in
     {
       nixosConfigurations = {
         main = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = { inherit inputs; };
+          system = system;
+          specialArgs = {
+            inherit inputs;
+            inherit pkgs-stable;
+            inherit pkgs-unstable-small;
+          };
           modules = [
             ./hosts/main
             nixos-hardware.nixosModules.lenovo-thinkpad-t480s
@@ -39,7 +50,11 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs = { inherit inputs; };
+              home-manager.extraSpecialArgs = {
+                inherit inputs;
+                inherit pkgs-stable;
+                inherit pkgs-unstable-small;
+              };
               home-manager.users.muratoffalex = import ./home/muratoffalex;
             }
           ];
