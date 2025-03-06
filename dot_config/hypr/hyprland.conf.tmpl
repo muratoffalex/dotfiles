@@ -1,15 +1,17 @@
 monitor=,preferred,auto,1
+monitor=desc:XXX Beyond TV,preferred,auto,2
 
 $terminal = {{ .terminal}}
 $browser = zen
 $fileManager = nautilus
 $menu = rofi -show
 
+exec-once = systemctl --user start hyprpolkitagent
 exec-once = $HOME/.config/hypr/restart_portal.sh
 exec-once = sleep 2 && $HOME/.config/hypr/handle_monitor_connect.sh &
 exec-once = sleep 3 && hyprctl dispatch workspace 2
 exec-once = sway-audio-idle-inhibit
-exec-once = systemctl --user restart pipewire # sometimes it's not started
+exec-once = systemctl --user restart pipewire # HACK: because sometimes it's not started
 exec-once = waybar &
 exec-once = swaync &
 exec-once = hyprpaper

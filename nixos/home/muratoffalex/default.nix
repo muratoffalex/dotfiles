@@ -21,6 +21,7 @@
       bluetui
       impala # wifi tui
       rofi-power-menu
+      libreoffice-fresh
 
       # services
       maestral
@@ -36,7 +37,6 @@
       inputs.zen-browser.packages."${system}".twilight
       hiddify-app
       telegram-desktop
-      yandex-music
     ];
 
     pointerCursor = {

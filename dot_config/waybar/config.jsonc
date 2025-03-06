@@ -13,7 +13,7 @@
 		"hyprland/window"
 	],
 	"modules-right": [
-		// "tray",
+		"tray",
 		"idle_inhibitor",
 		"custom/audio_idle_inhibitor",
 		"custom/keyboard-battery-level",
