@@ -3,6 +3,12 @@
   inputs,
   ...
 }:
+let
+  dnsServers = [
+    "1.1.1.1"
+    "8.8.8.8"
+  ];
+in
 {
   imports = [
     ./hardware-configuration.nix
@@ -38,20 +44,15 @@
     kernelPackages = pkgs.linuxPackages_6_13;
   };
 
+  console = {
+    keyMap = "colemak";
+  };
+
   networking = {
     hostName = "nixos-laptop";
     wireless.iwd.enable = true;
     useNetworkd = true;
-  };
-
-  systemd = {
-    user.services.pipewire = {
-      serviceConfig = {
-        TimeoutStopSec = 5;
-        Restart = "always";
-        RestartSec = 2;
-      };
-    };
+    nameservers = dnsServers;
   };
 
   systemd.network = {
@@ -64,8 +65,22 @@
     };
   };
 
-  console = {
-    keyMap = "colemak";
+  virtualisation.docker.rootless = {
+    enable = true;
+    setSocketVariable = true;
+    daemon.settings = {
+      dns = dnsServers;
+    };
+  };
+
+  systemd = {
+    user.services.pipewire = {
+      serviceConfig = {
+        TimeoutStopSec = 5;
+        Restart = "always";
+        RestartSec = 2;
+      };
+    };
   };
 
   xdg.portal = {
@@ -80,14 +95,10 @@
     };
   };
 
-  virtualisation.docker.rootless = {
-    enable = true;
-    setSocketVariable = true;
-  };
-
   programs = {
     fish = {
       enable = true;
+      package = pkgs.fish;
       loginShellInit = ''
         if test (tty) = "/dev/tty1"
           if uwsm check may-start
@@ -184,6 +195,7 @@
     hyprpicker
     hyprcursor
     hyprshot
+    hyprpolkitagent
   ];
 
   services = {
