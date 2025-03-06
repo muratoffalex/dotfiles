@@ -1,0 +1,17 @@
+function no_proxy --description 'Execute command without proxy settings'
+    {{ if not .proxy.enable }}
+        command $argv
+        return
+    {{ end }}
+
+    set -l old_http_proxy $http_proxy
+    set -l old_https_proxy $https_proxy
+
+    set -x http_proxy
+    set -x https_proxy
+
+    command $argv
+
+    set -x http_proxy $old_http_proxy
+    set -x https_proxy $old_https_proxy
+end

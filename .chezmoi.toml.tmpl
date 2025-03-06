@@ -1,0 +1,14 @@
+{{- $host := promptStringOnce . "host" "Enter host for this machine" -}}
+{{- $baseProxy := promptStringOnce . "proxy" "Enter proxy server (format: http://proxy.example.com:port)" -}}
+{{- $noProxy := promptStringOnce . "noProxy" "Enter no_proxy addresses (format: localhost,127.0.0.1,.local,.example.com)" -}}
+{{- $enableProxyByDefault := promptBoolOnce . "enableProxy" "Enable proxy by default for terminal? If no, you can use it via proxy command" -}}
+
+[data]
+host = {{ $host | quote }}
+
+[data.proxy]
+enable = {{ $enableProxyByDefault }}
+https = {{ $baseProxy | quote }}
+http = {{ $baseProxy | quote }}
+ftp = {{ $baseProxy | quote }}
+no_proxy = {{ $noProxy | quote }}
