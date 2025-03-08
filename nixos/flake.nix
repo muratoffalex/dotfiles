@@ -20,6 +20,7 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     zen-browser.url = "github:muratoffalex/zen-browser-flake";
     neovim-nightly-overlay.url = "github:muratoffalex/neovim-nightly-overlay";
+    ags.url = "github:Aylur/ags";
 
     home-manager = {
       url = "github:nix-community/home-manager";
