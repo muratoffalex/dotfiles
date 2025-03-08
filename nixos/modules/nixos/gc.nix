@@ -1,4 +1,3 @@
-{ ... }:
 {
   nix.gc = {
     automatic = true;
