@@ -605,32 +605,16 @@
     },
     "nixpkgs-stable": {
       "locked": {
-        "lastModified": 1741382293,
-        "narHash": "sha256-YdWOZCa4h2L9bxS/nUdqkimUhDkaQSI0gJot6vi67Os=",
+        "lastModified": 1741421697,
+        "narHash": "sha256-pe0TjtbHO3yh0Qsz4Owb5X3jl2T6WInuA8bHO41YNpo=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "efa54e7d3a1f4b475f29aade61a234672343a2ca",
+        "rev": "f440e5c22432c00970790a8dd9b261d5075a3ac8",
         "type": "github"
       },
       "original": {
         "owner": "nixos",
         "ref": "release-24.11",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs-unstable-small": {
-      "locked": {
-        "lastModified": 1741323510,
-        "narHash": "sha256-zQL0iErtVTxywxyWc7ajRmRNCncny95uD+2wmBHYOzc=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "f104cca31ba6c0403b678ad9428726476b503782",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "ref": "nixos-unstable-small",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -731,7 +715,6 @@
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_4",
         "nixpkgs-stable": "nixpkgs-stable",
-        "nixpkgs-unstable-small": "nixpkgs-unstable-small",
         "zen-browser": "zen-browser"
       }
     },
