@@ -1,14 +1,10 @@
-{
-  config,
-  pkgs,
-  inputs,
-  ...
-}:
-
+{ pkgs, inputs, ... }:
 {
   imports = [
-    inputs.ags.homeManagerModules.default
     ../../modules/home/hypr.nix
+    ../../modules/home/programs/ags.nix
+    ../../modules/home/programs/neovim.nix
+    ../../modules/home/programs/rofi.nix
   ];
   home = {
     username = "muratoffalex";
@@ -42,7 +38,6 @@
       jujutsu
       chezmoi
       direnv
-      rofi-power-menu
 
       # services
       maestral
@@ -81,73 +76,6 @@
       };
     };
   };
-
-  programs = {
-    home-manager.enable = true;
-    ags = {
-      enable = true;
-      configDir = null;
-      extraPackages = [
-        inputs.ags.packages.${pkgs.system}.bluetooth
-        inputs.ags.packages.${pkgs.system}.wireplumber
-        inputs.ags.packages.${pkgs.system}.hyprland
-        inputs.ags.packages.${pkgs.system}.battery
-        inputs.ags.packages.${pkgs.system}.network
-        inputs.ags.packages.${pkgs.system}.tray
-        inputs.ags.packages.${pkgs.system}.notifd
-        inputs.ags.packages.${pkgs.system}.apps
-      ];
-    };
-    rofi = {
-      enable = true;
-      package = pkgs.rofi-wayland;
-      plugins = with pkgs; [
-        rofi-emoji-wayland
-        rofi-calc
-      ];
-    };
-    neovim = {
-      enable = true;
-      package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
-      extraPackages = with pkgs; [
-        # lsp
-        marksman
-        lua-language-server
-        intelephense
-        gopls
-        nil
-        clang-tools
-        typescript-language-server
-        vue-language-server
-        tailwindcss-language-server
-        vscode-langservers-extracted # css,html,json,eslint
-        pyright
-        rust-analyzer
-        # TODO: uncomment when accepted -- https://nixpkgs-tracker.ocfox.me/?pr=385105
-        # kulala-ls
-
-        # linters
-        markdownlint-cli
-        golangci-lint
-        php.packages.php-codesniffer
-
-        # formatters
-        gotools # goimports inside
-        stylua
-        prettierd
-        nodePackages.prettier
-        nixfmt-rfc-style
-        kulala-fmt
-
-        # other
-        mysql-client # for dadbod
-      ];
-    };
-  };
-
-  # use existing config created by chezmoi instead hm
-  xdg.configFile."rofi/config.rasi".enable = false;
-  xdg.configFile."fish/config.fish".enable = false;
 
   services.lorri.enable = true;
 
@@ -208,4 +136,6 @@
       };
     };
   };
+
+  programs.home-manager.enable = true;
 }
