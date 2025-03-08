@@ -84,15 +84,19 @@ input {
   kb_options = grp:ctrl_space_toggle
 
   follow_mouse = 1
-  sensitivity = 0
   natural_scroll = true
-  force_no_accel = true
+  force_no_accel = false
+}
+
+device {
+  name = logitech-mx-ergo-multi-device-trackball-
+  sensitivity = 0.8
 }
 
 device {
   name = synps/2-synaptics-touchpad
-  sensitivity = 0
-  natural_scroll = true
+  sensitivity = 1.0
+  accel_profile = flat
 }
 
 device {
