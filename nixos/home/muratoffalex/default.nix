@@ -8,6 +8,7 @@
 {
   imports = [
     inputs.ags.homeManagerModules.default
+    ../../modules/home/hypr.nix
   ];
   home = {
     username = "muratoffalex";
@@ -16,15 +17,32 @@
 
     packages = with pkgs; [
       home-manager
+
+      # tui
       aerc
-      sesh
       yazi
-      gitmux
-      direnv
       bluetui
-      impala # wifi tui
+      impala
+      btop
+      lazygit
+      lazydocker
+
+      # cli
+      fish
+      sesh
+      gitmux
+      gh
+      zoxide
+      fzf
+      eza
+      ripgrep
+      fd
+      bitwarden-cli
+      wakatime-cli
+      jujutsu
+      chezmoi
+      direnv
       rofi-power-menu
-      libreoffice-fresh
 
       # services
       maestral
@@ -32,14 +50,25 @@
       sway-audio-idle-inhibit
 
       # apps
+      alacritty
       kooha
       swappy
       gnome-calculator
       vlc
-      alacritty
       inputs.zen-browser.packages."${system}".twilight
       hiddify-app
       telegram-desktop
+      nautilus
+      libreoffice-fresh
+
+      # themes
+      starship
+
+      # build tools
+      clang
+      nodejs_23
+      go_1_24
+      cargo
     ];
 
     pointerCursor = {
@@ -81,11 +110,36 @@
       enable = true;
       package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
       extraPackages = with pkgs; [
-        nixfmt-rfc-style
+        # lsp
         marksman
         lua-language-server
         intelephense
         gopls
+        nil
+        clang-tools
+        typescript-language-server
+        vue-language-server
+        tailwindcss-language-server
+        vscode-langservers-extracted # css,html,json,eslint
+        pyright
+        rust-analyzer
+        # TODO: uncomment when accepted -- https://nixpkgs-tracker.ocfox.me/?pr=385105
+        # kulala-ls
+
+        # linters
+        markdownlint-cli
+        golangci-lint
+        php.packages.php-codesniffer
+
+        # formatters
+        gotools # goimports inside
+        stylua
+        prettierd
+        nodePackages.prettier
+        nixfmt-rfc-style
+        kulala-fmt
+
+        # other
         mysql-client # for dadbod
       ];
     };
@@ -93,8 +147,8 @@
 
   # use existing config created by chezmoi instead hm
   xdg.configFile."rofi/config.rasi".enable = false;
+  xdg.configFile."fish/config.fish".enable = false;
 
-  wayland.windowManager.hyprland.systemd.enable = false;
   services.lorri.enable = true;
 
   gtk = {
@@ -151,20 +205,6 @@
 
       Install = {
         WantedBy = [ "graphical-session.target" ];
-      };
-    };
-    bwapi = {
-      Unit = {
-        Description = "Bitwarden API";
-        PartOf = [ "graphical-session.target" ];
-      };
-      Service = {
-        ExecStart = "${pkgs.bitwarden-cli}/bin/bw serve --port 49186";
-        Restart = "on-failure";
-      };
-      Install = {
-        WantedBy = pkgs.lib.mkForce [ ]; # disable by default
-        # WantedBy = [ "graphical-session.target" ];
       };
     };
   };

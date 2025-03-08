@@ -8,6 +8,7 @@ let
     "1.1.1.1"
     "8.8.8.8"
   ];
+  hyprPackages = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system};
 in
 {
   imports = [
@@ -15,7 +16,7 @@ in
   ];
 
   home-manager.backupFileExtension = "backup";
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  nixpkgs.config.allowUnfree = true;
 
   nix = {
     settings = {
@@ -86,13 +87,7 @@ in
   xdg.portal = {
     enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-    config = {
-      common = {
-        default = [
-          "gtk"
-        ];
-      };
-    };
+    config.common.default = [ "gtk" ];
   };
 
   programs = {
@@ -110,21 +105,17 @@ in
     hyprland = {
       enable = true;
       withUWSM = true;
-      package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-      portalPackage =
-        inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+      package = hyprPackages.hyprland;
+      portalPackage = hyprPackages.xdg-desktop-portal-hyprland;
     };
-    hyprlock.enable = true;
-    # fix unpatched dynamic libraries (ex., installed via neovim mason)
     nix-ld = {
+      # fix unpatched dynamic libraries (ex., installed via neovim mason)
       enable = true;
       libraries = with pkgs; [
         stdenv.cc.cc
       ];
     };
   };
-
-  nixpkgs.config.allowUnfree = true;
 
   fonts = {
     fontDir.enable = true;
@@ -136,31 +127,21 @@ in
       enable = true;
       defaultFonts = {
         monospace = [ "CaskaydiaCove Nerd Font" ];
-        # sansSerif = [ "CaskaydiaCove Nerd Font" ];
-        # serif = [ "CaskaydiaCove Nerd Font" ];
       };
     };
   };
 
   environment.systemPackages = with pkgs; [
-    starship
-    zoxide
     vim
     tmux
-    chezmoi
-    jujutsu
-    fzf
-    eza
-    ripgrep
-    fd
-    bitwarden-cli
-    wakatime-cli
-    lazygit
-    lazydocker
     git
+    jq
+    libnotify
+    apfs-fuse
+
+    # networking
     curl
     wget
-    btop
     traceroute
     mtr
 
@@ -168,34 +149,6 @@ in
     gcc
     pkg-config
     unzip
-
-    clang
-    nodejs_23
-    go_1_24
-    cargo
-
-    # utils
-    acpi # hypridle
-    socat # hyprland monitors
-    apfs-fuse
-    jq
-    libnotify
-
-    # hyprland packages
-    brightnessctl
-    playerctl
-    pavucontrol
-    wlsunset # night shift
-    nautilus
-    waybar
-    swaynotificationcenter
-    wl-clipboard
-    hyprpaper
-    hypridle
-    hyprpicker
-    hyprcursor
-    hyprshot
-    hyprpolkitagent
   ];
 
   services = {
