@@ -5,6 +5,7 @@
     ../../modules/home/programs/ags.nix
     ../../modules/home/programs/neovim.nix
     ../../modules/home/programs/rofi.nix
+    ../../modules/home/programs/direnv.nix
   ];
   home = {
     username = "muratoffalex";
@@ -37,7 +38,6 @@
       wakatime-cli
       jujutsu
       chezmoi
-      direnv
 
       # services
       maestral
@@ -76,8 +76,6 @@
       };
     };
   };
-
-  services.lorri.enable = true;
 
   gtk = {
     enable = true;
