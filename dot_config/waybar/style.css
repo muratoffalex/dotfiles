@@ -1,6 +1,6 @@
 * {
     /* `otf-font-awesome` and SpaceMono Nerd Font are required to be installed for icons */
-    font-family: "CaskadyiaCove Nerd Font Mono", FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+    font-family: "Rubik", "CaskadyiaCove Nerd Font Mono", FontAwesome, Roboto, Helvetica, Arial, sans-serif;
     font-size: 15px;
     transition: background-color .3s ease-out;
 }
@@ -84,7 +84,7 @@ window#waybar {
   font-family:
     SpaceMono Nerd Font,
     feather;
-  font-weight: 900;
+  font-weight: 500;
   font-size: 13pt;
   color: #c0caf5;
   border:none;

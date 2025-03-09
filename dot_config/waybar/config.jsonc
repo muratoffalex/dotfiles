@@ -1,4 +1,4 @@
-// -*- mode: jsonc -*-
+// vim: set ft=jsonc
 {
 	"layer": "top",
 	"position": "top",
@@ -25,10 +25,10 @@
 		"hyprland/language",
 		"battery",
 		"clock",
-		"custom/notifications"
+		"custom/notifications",
 	],
 	//Modules configuration
 	"include": [
 		"~/.config/waybar/modules.json"
-	]
+	],
 }

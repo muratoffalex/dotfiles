@@ -94,8 +94,8 @@
     };
 
     font = {
-      name = "Sans";
-      size = 11;
+      name = "Rubik";
+      size = 12;
     };
   };
 
