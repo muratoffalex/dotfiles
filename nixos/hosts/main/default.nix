@@ -65,6 +65,7 @@ in
     jq
     libnotify
     apfs-fuse
+    nvd
 
     # networking
     curl
@@ -82,6 +83,10 @@ in
     xserver.enable = false;
     displayManager.sddm.enable = false;
     openssh.enable = true;
+    upower = {
+      enable = true;
+      ignoreLid = true;
+    };
     logind = {
       lidSwitch = "suspend";
       extraConfig = ''
