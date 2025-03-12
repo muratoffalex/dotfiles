@@ -1,4 +1,4 @@
 [opener]
 edit = [
-	{ run = 'nvim -c ":DontSaveCurrentSession" "$@"', block = true },
+  { run = 'nvim -c ":DontSaveCurrentSession" "$@"', block = true },
 ]
