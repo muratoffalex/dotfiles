@@ -1,6 +1,7 @@
-initial-command = "/usr/local/bin/fish -l -c session_manager"
+initial-command = "/usr/bin/env fish -l -c session_manager"
 
-theme = light:tokyonight-day,dark:tokyonight_night
+# change light theme to kanagawa lotus later
+theme = light:GruvboxLight,dark:Kanagawa Wave
 
 font-family = CaskaydiaCove Nerd Font
 font-style = SemiLight
