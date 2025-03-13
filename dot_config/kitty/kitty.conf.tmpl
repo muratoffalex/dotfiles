@@ -1,0 +1,39 @@
+# vim:ft=kitty
+
+startup_session startup.conf
+
+confirm_os_window_close 0
+enable_audio_bell no
+update_check_interval 0
+
+font_family      CaskaydiaCove Nerd Font
+bold_font        auto
+italic_font      auto
+bold_italic_font auto
+disable_ligatures always
+# bolder font
+text_composition_strategy 1.7 0
+
+{{ if eq .chezmoi.os "darwin" }}
+font_size 20
+{{- else }}
+font_size 18
+{{- end }}
+
+cursor_shape block
+cursor_blink_interval 0
+
+initial_window_width  90c
+initial_window_height 30c
+window_padding_width 0
+hide_window_decorations {{ if eq .chezmoi.os "darwin" }}titlebar-only{{ else }}yes{{ end }}
+dynamic_background_opacity yes
+
+shell_integration enabled
+
+map cmd+l send_text all \x01\x4c
+map cmd+k send_text all \x01\x4b
+
+{{ if eq .chezmoi.os "darwin" }}
+macos_option_as_alt left
+{{- end }}
