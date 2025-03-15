@@ -1,5 +1,7 @@
 # vim:ft=kitty
 
+include light-theme.auto.conf
+
 startup_session startup.conf
 
 confirm_os_window_close 0
@@ -11,8 +13,10 @@ bold_font        auto
 italic_font      auto
 bold_italic_font auto
 disable_ligatures always
-# bolder font
+# bolder font as in alacritty
 text_composition_strategy 1.7 0
+# caskaydiacove some characters don't fit in the cell (e.g. `g`)
+modify_font cell_height +1px
 
 {{ if eq .chezmoi.os "darwin" }}
 font_size 20
@@ -26,10 +30,14 @@ cursor_blink_interval 0
 initial_window_width  90c
 initial_window_height 30c
 window_padding_width 0
+window_margin_width 0
 hide_window_decorations {{ if eq .chezmoi.os "darwin" }}titlebar-only{{ else }}yes{{ end }}
 dynamic_background_opacity yes
 
 shell_integration enabled
+# now use for zen-mode.nvim
+allow_remote_control socket-only
+listen_on unix:/tmp/kitty
 
 map cmd+l send_text all \x01\x4c
 map cmd+k send_text all \x01\x4b
