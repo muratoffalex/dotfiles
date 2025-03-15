@@ -46,6 +46,7 @@
 
       # apps
       alacritty
+      kitty
       kooha
       swappy
       gnome-calculator

@@ -98,6 +98,7 @@ device {
   name = synps/2-synaptics-touchpad
   sensitivity = 1.0
   accel_profile = flat
+  natural_scroll = true
 }
 
 device {
@@ -129,7 +130,7 @@ bind = $mainMod CTRL, up, resizeactive, 0 -50
 bind = $mainMod CTRL, down, resizeactive, 0 50
 bind = $mainMod CTRL, Q, exec, hyprlock
 bind = $mainMod ALT, S, swapnext
-bind = $mainMod, Y, exec, alacritty -t "bw-fzf" -e "$HOME/scripts/bwf"
+bind = $mainMod, Y, exec, {{ .terminal }} --title "bw-fzf" -e "$HOME/scripts/bwf"
 
 bind = ALT SHIFT CTRL, Return, exec, hyprctl dispatch resizeactive exact 50% 90%; hyprctl dispatch centerwindow
 bind = ALT SHIFT CTRL, M, exec, hyprctl dispatch resizeactive exact 60% 80%; hyprctl dispatch centerwindow
@@ -202,7 +203,7 @@ windowrulev2 = float, class:dialog
 windowrulev2 = float, class:org.pulseaudio.pavucontrol
 windowrulev2 = float, class:.blueman-manager-wrapped
 windowrulev2 = size 800 500, class:.blueman-manager-wrapped
-windowrulev2 = float, class:Alacritty, title:bw-fzf
+windowrulev2 = float, title:bw-fzf
 
 # Ignore maximize requests from apps. You'll probably like this.
 windowrulev2 = suppressevent maximize, class:.*
