@@ -32,9 +32,14 @@
       nodePackages.prettier
       nixfmt-rfc-style
       kulala-fmt
+      libxml2 # xmllint
 
       # other
       mysql-client # for dadbod
+      # for images/pdf/video in snacks.image
+      imagemagick
+      ghostscript_headless
+      jellyfin-ffmpeg
     ];
   };
 }
