@@ -8,5 +8,5 @@ hash = "a04e157148549bacbb2831aab0e6e8cb"
 
 [[flavor.deps]]
 use = "muratoffalex/kanagawa-lotus"
-rev = "74cffa4"
-hash = "c9a6391a3ff53c1080ba16e49c928379"
+rev = "d84d61a"
+hash = "eef7cfa41fe51c19628d28cf453e967d"
