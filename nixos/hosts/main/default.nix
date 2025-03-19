@@ -41,7 +41,6 @@ in
   programs = {
     fish = {
       enable = true;
-      package = pkgs.fish;
       loginShellInit = ''
         if test (tty) = "/dev/tty1"
           if uwsm check may-start
