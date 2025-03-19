@@ -13,6 +13,11 @@
     homeDirectory = "/home/muratoffalex";
     stateVersion = "24.11";
 
+    sessionVariables = {
+      # HACK: for nvim snacks.picker for frecency and history
+      SQLITE_LIBRARY_PATH = "${pkgs.lib.makeLibraryPath (with pkgs; [ sqlite ])}";
+    };
+
     packages = with pkgs; [
       home-manager
 
@@ -45,7 +50,6 @@
       sway-audio-idle-inhibit
 
       # apps
-      alacritty
       kitty
       kooha
       swappy
@@ -87,10 +91,6 @@
     gtk4.extraConfig = {
       gtk-application-prefer-dark-theme = "false";
     };
-    # theme = {
-    #   package = pkgs.gruvbox-gtk-theme;
-    #   name = "Gruvbox-Light";
-    # };
 
     iconTheme = {
       package = pkgs.adwaita-icon-theme;
