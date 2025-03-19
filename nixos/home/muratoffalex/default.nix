@@ -2,8 +2,9 @@
 {
   imports = [
     ../../modules/home/hypr.nix
-    ../../modules/home/programs/ags.nix
+    ../../modules/home/programs/fish.nix
     ../../modules/home/programs/neovim.nix
+    ../../modules/home/programs/ags.nix
     ../../modules/home/programs/rofi.nix
     ../../modules/home/programs/direnv.nix
   ];
@@ -25,7 +26,6 @@
       lazydocker
 
       # cli
-      fish
       sesh
       gitmux
       gh
@@ -57,10 +57,7 @@
       nautilus
       libreoffice-fresh
 
-      # themes
-      starship
-
-      # build tools
+      # dev tools
       clang
       nodejs_23
       go_1_24
