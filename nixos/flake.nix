@@ -17,7 +17,7 @@
     nixpkgs-stable.url = "github:nixos/nixpkgs?ref=release-24.11";
     hyprland.url = "github:hyprwm/Hyprland";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-    zen-browser.url = "github:muratoffalex/zen-browser-flake";
+    zen-browser.url = "github:0xc000022070/zen-browser-flake";
     neovim-nightly-overlay.url = "github:muratoffalex/neovim-nightly-overlay";
     ags.url = "github:Aylur/ags";
 
