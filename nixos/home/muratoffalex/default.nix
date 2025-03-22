@@ -61,7 +61,7 @@
       nautilus
       libreoffice-fresh
       (yandex-music.overrideAttrs (oldAttrs: {
-        version = "5.41.1";
+        version = "5.42.0";
         src = oldAttrs.src.override {
           hash = "sha256-nE4KgiMdKspDJXeaD88EvrAX7CrscsN8STKpmG9t5x4=";
         };
