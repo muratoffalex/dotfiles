@@ -20,13 +20,15 @@ exec-once = hypridle
 exec-once = wlsunset -T 3600 -t 3500
 exec-once = [workspace 1 silent] sleep 2 && $browser
 exec-once = [workspace 2 silent] $terminal
-exec-once = [workspace 3 silent] sleep 2 && telegram-desktop
+exec-once = [workspace 3 silent] sleep 2 && XDG_CURRENT_DESKTOP=gnome telegram-desktop
 
 env = XCURSOR_SIZE,24
 env = HYPRCURSOR_SIZE,24
 env = XCURSOR_THEME,Adwaita
 env = HYPRCURSOR_THEME,Adwaita
 env = HYPRSHOT_DIR,$HOME/Pictures/screenshots
+env = XDG_CURRENT_DESKTOP,Hyprland
+env = XDG_SESSION_DESKTOP,Hyprland
 
 general {
   gaps_in = 0
@@ -202,6 +204,8 @@ windowrulev2 = float, class:file_progress
 windowrulev2 = float, class:dialog
 windowrulev2 = float, class:org.pulseaudio.pavucontrol
 windowrulev2 = float, class:.blueman-manager-wrapped
+windowrulev2 = float, class:.telegram-desktop-wrapped
+windowrulev2 = size 1200 800, class:.telegram-desktop-wrapped
 windowrulev2 = size 800 500, class:.blueman-manager-wrapped
 windowrulev2 = float, title:bw-fzf
 
