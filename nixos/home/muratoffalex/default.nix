@@ -43,6 +43,7 @@
       wakatime-cli
       jujutsu
       chezmoi
+      just
 
       # services
       maestral
