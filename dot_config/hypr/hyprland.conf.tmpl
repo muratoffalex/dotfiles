@@ -20,7 +20,7 @@ exec-once = hypridle
 exec-once = wlsunset -T 3600 -t 3500
 exec-once = [workspace 1 silent] sleep 2 && $browser
 exec-once = [workspace 2 silent] $terminal
-exec-once = [workspace 3 silent] sleep 2 && XDG_CURRENT_DESKTOP=gnome telegram-desktop
+exec-once = [workspace 3 silent] sleep 2 && XDG_CURRENT_DESKTOP=termfilechooser:gnome telegram-desktop
 
 env = XCURSOR_SIZE,24
 env = HYPRCURSOR_SIZE,24
@@ -199,27 +199,27 @@ bindl = , XF86AudioPlay, exec, playerctl play-pause
 bindl = , XF86AudioPrev, exec, playerctl previous
 
 
-windowrulev2 = float, class:confirm
-windowrulev2 = float, class:file_progress
-windowrulev2 = float, class:dialog
-windowrulev2 = float, class:org.pulseaudio.pavucontrol
-windowrulev2 = float, class:.blueman-manager-wrapped
-windowrulev2 = float, class:.telegram-desktop-wrapped
-windowrulev2 = size 1200 800, class:.telegram-desktop-wrapped
-windowrulev2 = size 800 500, class:.blueman-manager-wrapped
-windowrulev2 = float, title:bw-fzf
-windowrulev2 = size 800 800, title:bw-fzf
-windowrulev2 = float, title:termfilechooser
-windowrulev2 = size 1200 800, title:termfilechooser
+windowrule = float, class:confirm
+windowrule = float, class:file_progress
+windowrule = float, class:dialog
+windowrule = float, class:org.pulseaudio.pavucontrol
+windowrule = float, class:.blueman-manager-wrapped
+windowrule = float, class:.telegram-desktop-wrapped
+windowrule = size 1200 800, class:.telegram-desktop-wrapped
+windowrule = size 800 500, class:.blueman-manager-wrapped
+windowrule = float, title:bw-fzf
+windowrule = size 800 800, title:bw-fzf
+windowrule = float, title:termfilechooser
+windowrule = size 1200 800, title:termfilechooser
 
 # Ignore maximize requests from apps. You'll probably like this.
-windowrulev2 = suppressevent maximize, class:.*
+windowrule = suppressevent maximize, class:.*
 
 # Fix some dragging issues with XWayland
-windowrulev2 = nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0
+windowrule = nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0
 
-windowrulev2 = rounding 10, floating:1
-windowrulev2 = noshadow, floating:0
+windowrule = rounding 10, floating:1
+windowrule = noshadow, floating:0
 
 workspace = 1,defaultName:zen
 workspace = 2,defaultName:term
@@ -227,7 +227,7 @@ workspace = 3,defaultName:tg
 # Smart gaps
 workspace = w[tv1], gapsout:0, gapsin:0
 workspace = f[1], gapsout:0, gapsin:0
-windowrulev2 = bordersize 0, floating:0, onworkspace:w[tv1]
-windowrulev2 = rounding 0, floating:0, onworkspace:w[tv1]
-windowrulev2 = bordersize 0, floating:0, onworkspace:f[1]
-windowrulev2 = rounding 0, floating:0, onworkspace:f[1]
+windowrule = bordersize 0, floating:0, onworkspace:w[tv1]
+windowrule = rounding 0, floating:0, onworkspace:w[tv1]
+windowrule = bordersize 0, floating:0, onworkspace:f[1]
+windowrule = rounding 0, floating:0, onworkspace:f[1]
