@@ -9,6 +9,7 @@
         "nix-command"
         "flakes"
       ];
+      auto-optimise-store = true;
     };
     # keep nix develop derivations
     extraOptions = ''
