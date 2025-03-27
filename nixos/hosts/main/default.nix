@@ -68,6 +68,13 @@ in
       package = hyprPackages.hyprland;
       portalPackage = hyprPackages.xdg-desktop-portal-hyprland;
     };
+    nix-ld = {
+      # fix unpatched dynamic libraries (ex., installed via neovim mason)
+      enable = true;
+      libraries = with pkgs; [
+        stdenv.cc.cc
+      ];
+    };
   };
 
   environment.systemPackages = with pkgs; [
