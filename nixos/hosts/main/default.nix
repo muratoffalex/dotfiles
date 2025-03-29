@@ -1,7 +1,4 @@
 { pkgs, inputs, ... }:
-let
-  hyprPackages = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system};
-in
 {
   imports = [
     ./hardware-configuration.nix
@@ -65,8 +62,6 @@ in
     hyprland = {
       enable = true;
       withUWSM = true;
-      package = hyprPackages.hyprland;
-      portalPackage = hyprPackages.xdg-desktop-portal-hyprland;
     };
     nix-ld = {
       # fix unpatched dynamic libraries (ex., installed via neovim mason)
