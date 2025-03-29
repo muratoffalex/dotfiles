@@ -14,7 +14,6 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs?ref=release-24.11";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
     # neovim-nightly-overlay.url = "github:muratoffalex/neovim-nightly-overlay";
@@ -27,10 +26,9 @@
   };
 
   outputs =
-    { self, nixpkgs, nixpkgs-stable, home-manager, nixos-hardware, ... }@inputs:
+    { self, nixpkgs, home-manager, nixos-hardware, ... }@inputs:
     let
       system = "x86_64-linux";
-      pkgs-stable = nixpkgs-stable.legacyPackages.${system};
     in
     {
       nixosConfigurations = {
@@ -38,7 +36,6 @@
           system = system;
           specialArgs = {
             inherit inputs;
-            inherit pkgs-stable;
           };
           modules = [
             ./hosts/main
@@ -49,7 +46,6 @@
               home-manager.useUserPackages = true;
               home-manager.extraSpecialArgs = {
                 inherit inputs;
-                inherit pkgs-stable;
               };
               home-manager.users.muratoffalex = import ./home/muratoffalex;
             }
