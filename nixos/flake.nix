@@ -20,7 +20,7 @@
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
     # neovim-nightly-overlay.url = "github:muratoffalex/neovim-nightly-overlay";
     ags.url = "github:Aylur/ags";
-
+    tmux-nightly.url = "github:muratoffalex/tmux-nightly-flake";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";

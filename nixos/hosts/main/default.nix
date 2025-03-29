@@ -79,7 +79,8 @@ in
 
   environment.systemPackages = with pkgs; [
     vim
-    tmux
+    # change to stable when new version tmux is released > 3.5a
+    inputs.tmux-nightly.packages.${pkgs.system}.default
     git
     jq
     libnotify
