@@ -61,12 +61,6 @@
       telegram-desktop
       nautilus
       libreoffice-fresh
-      (yandex-music.overrideAttrs (oldAttrs: {
-        version = "5.42.0";
-        src = oldAttrs.src.override {
-          hash = "sha256-nE4KgiMdKspDJXeaD88EvrAX7CrscsN8STKpmG9t5x4=";
-        };
-      }))
 
       # dev tools
       clang
@@ -101,6 +95,20 @@
     font = {
       name = "Rubik";
       size = 12;
+    };
+  };
+
+  xdg = {
+    enable = true;
+    desktopEntries = {
+      yandex-music = {
+        name = "Yandex Music";
+        genericName = "Music Player";
+        exec = "zen -no-remote -new-window \"https://music.yandex.ru/\"";
+        terminal = false;
+        categories = [ "AudioVideo" "Audio" "Music" "Player" ];
+        comment = "Yandex Music web player";
+      };
     };
   };
 
