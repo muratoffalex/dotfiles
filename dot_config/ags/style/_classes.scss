@@ -1,0 +1,86 @@
+@use "mixins";
+
+.icon-material {
+    @include mixins.icon-material;
+}
+
+.icon-nerd {
+    @include mixins.icon-nerd;
+}
+
+.txt-gigantic {
+    font-size: 3rem;
+}
+
+.txt-massive {
+    font-size: 2.7273rem;
+}
+
+.txt-hugerass {
+    font-size: 2.045rem;
+}
+
+.txt-hugeass {
+    font-size: 1.8182rem;
+}
+
+.txt-larger {
+    font-size: 1.6363rem;
+}
+
+.txt-large {
+    //16pt
+    font-size: 1.4545rem;
+}
+
+.txt-norm {
+    //14pt
+    font-size: 1.2727rem;
+}
+
+.txt-small {
+    //12pt
+    font-size: 1.0909rem;
+}
+
+.txt-smallie {
+    //11pt
+    font-size: 1rem;
+}
+
+.txt-smaller {
+    //10pt
+    font-size: 0.9091rem;
+}
+
+.txt-tiny {
+    font-size: 0.7273rem;
+}
+
+.txt-poof {
+    font-size: 0px;
+}
+
+// .txt-subtext {
+//     @include subtext;
+// }
+//
+// .txt-action {
+//     @include actiontext;
+// }
+
+.txt-thin {
+    font-weight: 300;
+}
+
+.txt-semibold {
+    font-weight: 500;
+}
+
+.txt-bold {
+    font-weight: bold;
+}
+
+.txt-italic {
+    font-style: italic;
+}

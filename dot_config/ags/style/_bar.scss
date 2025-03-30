@@ -1,0 +1,169 @@
+@use "mixins";
+@use "colors";
+
+// https://gitlab.gnome.org/GNOME/gtk/-/blob/gtk-3-24/gtk/theme/Adwaita/_colors-public.scss
+$bg-color: #{"@theme_bg_color"};
+$fg-color: #{"@theme_fg_color"};
+$unfocused-fg-color: #{"@theme_unfocused_fg_color"};
+
+window.Bar {
+  @include mixins.mainfont;
+  background: transparent;
+  color: $fg-color;
+  font-weight: bold;
+  // min-height: 34px;
+
+  >centerbox {
+    border-radius: 0;
+    padding: 2px 16px;
+    background: colors.$background;
+  }
+
+  button {
+    padding: 0;
+    margin: 0;
+    min-width: unset;
+    min-height: unset;
+  }
+
+  .logo {
+    font-size: 24px;
+    color: $fg-color;
+    border: 0;
+    background: transparent;
+    padding: 0;
+    margin: 0;
+    min-width: unset;
+    min-height: unset;
+    transition: color 0.3s;
+    box-shadow: none;
+  }
+
+  .logo:hover {
+    color: #1793d1;
+  }
+
+  button.iconButton {
+    background: transparent;
+    border: 0;
+  }
+
+  .date {
+    color: #{"alpha(@theme_fg_color, 0.85)"};
+    font-weight: lighter;
+  }
+
+  button.notification-btn {
+    min-width: 28px;
+    min-height: 36px;
+    font-weight: normal;
+    margin: 0;
+    padding: 0 4px;
+    border: none;
+    box-shadow: none;
+    background: transparent;
+    border-radius: 50%;
+
+    &:hover {
+      background: #{"alpha(@theme_fg_color, 0.1)"};
+    }
+
+    &.dnd {
+      color: #{"@warning_color"};
+    }
+  }
+
+  .keyboard-battery {
+    font-weight: 500;
+  }
+
+  button.battery {
+    min-width: 40px;
+    min-height: 28px;
+    border-radius: 14px;
+    padding: 0 4px;
+    // background: rgba($bg-color, 0.5);
+    font-weight: normal;
+    border: none;
+    box-shadow: none;
+
+    // Стандартное состояние
+    &.normal {
+      color: $fg-color;
+    }
+
+    // Состояние предупреждения (ниже 30%)
+    &.warning {
+      color: #ffcc00; // Желтый
+    }
+
+    // Критическое состояние (ниже 15%)
+    &.critical {
+      color: #ff3300; // Красный
+      animation: blink 1s infinite;
+    }
+
+    // Состояние зарядки
+    &.charging {
+      color: #33cc33; // Зеленый
+    }
+  }
+
+  // Анимация мигания для критического уровня заряда
+  @keyframes blink {
+    0% {
+      opacity: 1;
+    }
+
+    50% {
+      opacity: 0.5;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
+}
+
+.workspaces {
+  @include mixins.mainfont;
+  margin: 0 4px;
+  padding: 2px;
+
+  .workspace-group {
+    margin: 0;
+    padding: 0;
+    background: $bg-color;
+    border-radius: 14px;
+  }
+
+  .workspace-btn {
+    min-width: 28px;
+    min-height: 28px;
+    border-radius: 14px;
+    padding: 0 4px;
+    background: transparent;
+    box-shadow: none;
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500;
+    border: none;
+    transition: all 0.2s ease;
+    color: #{"alpha(@theme_fg_color, 0.7)"};
+
+    // Убедимся, что иконка отображается
+    &:not(.active) {
+      color: #{"alpha(@theme_fg_color, 0.5)"};
+    }
+
+    &:hover {
+      background: transparent;
+      color: $fg-color;
+    }
+
+    &.active {
+      background: #eaeaea;
+      color: $fg-color;
+    }
+  }
+}
