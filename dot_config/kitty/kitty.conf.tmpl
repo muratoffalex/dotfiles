@@ -42,6 +42,16 @@ listen_on unix:/tmp/kitty
 map cmd+l send_text all \x01\x4c
 map cmd+k send_text all \x01\x4b
 
+map alt+1 send_text all \x01\x31
+map alt+2 send_text all \x01\x32
+map alt+3 send_text all \x01\x33
+map alt+4 send_text all \x01\x34
+map alt+5 send_text all \x01\x35
+map alt+6 send_text all \x01\x36
+map alt+7 send_text all \x01\x37
+map alt+8 send_text all \x01\x38
+map alt+9 send_text all \x01\x39
+
 {{ if eq .chezmoi.os "darwin" }}
 macos_option_as_alt left
 {{- end }}
