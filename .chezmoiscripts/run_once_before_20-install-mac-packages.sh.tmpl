@@ -1,5 +1,5 @@
 {{ if (eq .chezmoi.os "darwin") -}}
-#!/bin/bash
+#!/usr/bin/env bash
 
 set -eufo pipefail
 
@@ -32,8 +32,7 @@ packages=(
 )
 
 cask_packages=(
-  # wezterm
-  alacritty
+  kitty
   raycast
   stats
   rectangle
@@ -50,8 +49,10 @@ for package in ${packages[@]}; do
 done
 
 # Install Nerd font if not exists
-FONT_FILE=/Users/$USER/Library/Fonts/JetBrainsMonoNerdFontPropo-ThinItalic.ttf
-[[ ! -f "$FONT_FILE" ]] && brew install --cask font-jetbrains-mono-nerd-font
+JETBRAINS_FONT_FILE=/Users/$USER/Library/Fonts/JetBrainsMonoNerdFontPropo-ThinItalic.ttf
+CASKAYDIA_FONT_FILE=/Users/$USER/Library/Fonts/CaskaydiaCoveNerdFont-Regular.ttf
+[[ ! -f "$JETBRAINS_FONT_FILE" ]] && brew install --cask font-jetbrains-mono-nerd-font
+[[ ! -f "$CASKAYDIA_FONT_FILE" ]] && brew install --cask font-caskaydia-cove-nerd-font
 
 for package in ${cask_packages[@]}; do
     if [[ -z $(brew ls --versions --cask $package) ]]; then
