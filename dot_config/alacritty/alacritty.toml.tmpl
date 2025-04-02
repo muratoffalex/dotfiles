@@ -7,7 +7,7 @@ args = ["-l", "-c", "session_manager"]
 {{ if and (eq .chezmoi.os "linux") (hasKey .chezmoi.osRelease "id") (eq .chezmoi.osRelease.id "nixos") }}
 program = "/run/current-system/sw/bin/fish"
 {{- else }}
-program = "/usr/bin/fish"
+program = "/usr/local/bin/fish"
 {{- end }}
 
 [cursor]
