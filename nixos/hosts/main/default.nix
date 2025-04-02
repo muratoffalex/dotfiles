@@ -80,7 +80,10 @@
     jq
     libnotify
     apfs-fuse
+
+    # nix specific
     nvd
+    nix-search-cli
 
     # networking
     curl
