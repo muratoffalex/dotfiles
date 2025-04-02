@@ -2,11 +2,11 @@
 editor = '{{ .editor }}'
 diff-editor = ["nvim", "-c", "DiffEditor $left $right $output"]
 default-command = 'log'
-paginate = "never"
+pager = ["less", "-FRX"]
 
 [git]
 auto-local-bookmark = true
-subprocess = true # allow from 0.26.0
+push-bookmark-prefix = "{{ .username }}/push-"
 
 [user]
 name = "{{ .name }}"
@@ -18,4 +18,14 @@ backend = "ssh"
 key = "{{ .chezmoi.homeDir }}/.ssh/id_ed25519.pub"
 
 [snapshot]
-auto-update-stale = true # allow from 0.24.0
+auto-update-stale = true
+
+[aliases]
+cl = ['git', 'push', '-c', '@-']
+sync = ['git', 'fetch', '--all-remotes']
+evolve = ['rebase', '--skip-empty', '-d', 'main']
+setmain = ["bookmark", "set", "main", "-r", "@-"]
+
+[revset-aliases]
+# ref: https://v5.chriskrycho.com/notes/jj-tip-rebase-all-branches-matching-a-revset/
+wip = 'description(regex:"^(wip|WIP):?")'
