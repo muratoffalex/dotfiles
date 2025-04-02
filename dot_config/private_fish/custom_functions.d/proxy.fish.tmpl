@@ -1,6 +1,6 @@
 function proxy --description 'Execute command with proxy settings'
     {{ if .proxy.enable }}
-        command $argv
+        eval $argv
         return
     {{ end }}
 
@@ -9,6 +9,7 @@ function proxy --description 'Execute command with proxy settings'
     {{ if .proxy.ftp }}set -gx ftp_proxy {{ .proxy.ftp }}{{ end }}
     {{ if .proxy.no_proxy }}set -gx no_proxy {{ .proxy.no_proxy }}{{ end }}
 
-    command $argv
+    eval $argv
+
     set -e http_proxy https_proxy ftp_proxy no_proxy
 end
