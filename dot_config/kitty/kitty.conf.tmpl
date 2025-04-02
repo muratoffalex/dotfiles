@@ -13,10 +13,14 @@ bold_font        auto
 italic_font      auto
 bold_italic_font auto
 disable_ligatures always
-# bolder font as in alacritty
+{{ if ne .chezmoi.os "darwin" }}
+# Makes font bolder like in alacritty.
 text_composition_strategy 1.7 0
 # caskaydiacove some characters don't fit in the cell (e.g. `g`)
 modify_font cell_height +1px
+{{- else }}
+text_composition_strategy 5.0 0
+{{- end }}
 
 {{ if eq .chezmoi.os "darwin" }}
 font_size 20
