@@ -18,6 +18,7 @@
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
     # neovim-nightly-overlay.url = "github:muratoffalex/neovim-nightly-overlay";
     ags.url = "github:Aylur/ags";
+    mcp-hub.url = "github:ravitemer/mcp-hub";
     tmux-nightly.url = "github:muratoffalex/tmux-nightly-flake";
     home-manager = {
       url = "github:nix-community/home-manager";

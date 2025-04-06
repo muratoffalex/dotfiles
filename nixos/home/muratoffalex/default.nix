@@ -45,6 +45,11 @@
       chezmoi
       just
 
+      # ai
+      vectorcode
+      aider-chat-with-browser
+      inputs.mcp-hub.packages."${system}".default
+
       # services
       maestral
       swayosd
@@ -67,6 +72,7 @@
       nodejs_23
       go_1_24
       cargo
+      uv
     ];
 
     pointerCursor = {
