@@ -187,6 +187,10 @@ bind = $mainMod SHIFT, S, movetoworkspace, special:magic
 bindm = SUPER, mouse:272, movewindow
 bindm = SUPER, mouse:273, resizewindow
 
+bind = $mainMod ALT, T, exec, swaync-client -t -sw
+bind = $mainMod ALT, D, exec, swaync-client -d -sw
+bind = $mainMod ALT, H, exec, swaync-client --hide-latest -sw
+
 bindel = ,XF86AudioRaiseVolume, exec, swayosd-client --output-volume 5
 bindel = ,XF86AudioLowerVolume, exec, swayosd-client --output-volume -5
 bindel = ,XF86AudioMute, exec, swayosd-client --output-volume mute-toggle
