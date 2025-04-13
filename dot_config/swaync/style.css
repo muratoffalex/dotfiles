@@ -1,6 +1,6 @@
 * {
   font-size: 16px;
-  font-family: "Rubik";
+  font-family: "Rubik", sans-serif;
   transition: 100ms;
   box-shadow: unset;
 }
@@ -9,6 +9,29 @@
   background-color: unset;
   border: 1px solid rgba(164, 162, 167, 0.6);
   border-radius: 1.159rem;
+}
+
+.floating-notifications .notification-default-action {
+  background-color: unset;
+}
+
+.notification-action {
+  background-color: #2D2D33;
+  border-bottom-left-radius: 1.159rem;
+  border-bottom-right-radius: 1.159rem;
+}
+
+.notification-action:hover {
+    background-color: #3a3a41;
+}
+
+.notification-action label {
+  font-weight: 200;
+  letter-spacing: 0.05em;
+}
+
+.text-box:not(:first-child):last-child {
+    margin-left: 8px;
 }
 
 .control-center .notification {
@@ -20,7 +43,7 @@
 }
 
 .floating-notifications .notification-row:last-child {
-  margin-bottom: 2.5rem;
+  margin-bottom: 4rem;
 }
 
 .control-center .notification-row .notification-background .notification,
@@ -131,6 +154,16 @@
 .control-center .notification-row .close-button:hover,
 .floating-notifications.background .close-button:hover {
   background-color: rgba(255, 255, 255, 0.15);
+}
+
+.floating-notifications.background .notification-background .notification .notification-default-action:first-child:last-child .notification-content,
+.control-center .notification-background .notification .notification-default-action:first-child:last-child .notification-content {
+    border-radius: 1.159rem;
+}
+
+.floating-notifications.background .notification-background .notification .notification-default-action:not(:last-child) .notification-content,
+.control-center .notification-background .notification .notification-default-action:not(:last-child) .notification-content {
+    border-radius: 1.159rem 1.159rem 0 0;
 }
 
 .control-center {
