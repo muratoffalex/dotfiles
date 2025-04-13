@@ -8,6 +8,8 @@
     portalPackage = null;
   };
 
+  services.swayosd.enable = true;
+
   home.packages = with pkgs; [
     # hyprland packages
     brightnessctl
