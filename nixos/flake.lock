@@ -126,11 +126,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1744307637,
-        "narHash": "sha256-XNaH6Lkg1xR+BU/VNIHKHnuuk7weyho/jMxgQTrdPgg=",
+        "lastModified": 1744535548,
+        "narHash": "sha256-t7ve/79nl6XCZXukH50DuFUcvnKoyVPWMEU0KNNRo0I=",
         "owner": "ravitemer",
         "repo": "mcp-hub",
-        "rev": "a3f3692d1f991ea02940096992fb8e744cc52fec",
+        "rev": "f4f627220b3d01fe56c767dceeca5fd97b72c211",
         "type": "github"
       },
       "original": {
