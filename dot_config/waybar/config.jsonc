@@ -21,14 +21,14 @@
 		"network",
 		"cpu",
 		"memory",
-		"temperature",
+		// "temperature",
 		"hyprland/language",
 		"battery",
 		"clock",
-		"custom/notifications",
+		"custom/notifications"
 	],
 	//Modules configuration
 	"include": [
 		"~/.config/waybar/modules.json"
-	],
+	]
 }
