@@ -3,12 +3,15 @@
 {{- $noProxy := promptStringOnce . "noProxy" "Enter no_proxy addresses (format: localhost,127.0.0.1,.local,.example.com)" -}}
 {{- $enableProxyByDefault := promptBoolOnce . "enableProxy" "Enable proxy by default for terminal? If no, you can use it via proxy command" -}}
 {{- $deepseekApiKey := promptStringOnce . "deepseekApiKey" "Enter deepseek api key, if needed" -}}
+{{- $openrouterApiKey := promptStringOnce . "openrouterApiKey" "Enter openrouter.ai api key, if needed" -}}
 
 [data]
 host = {{ $host | quote }}
 
 [data.ai.deepseek]
 api_key = {{ $deepseekApiKey | quote }}
+[data.ai.openrouter]
+api_key = {{ $openrouterApiKey | quote }}
 
 [data.proxy]
 enable = {{ $enableProxyByDefault }}
