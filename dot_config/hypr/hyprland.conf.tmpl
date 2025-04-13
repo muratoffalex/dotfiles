@@ -5,7 +5,7 @@ monitor=desc:XXX Beyond TV,preferred,auto-up,2
 $terminal = {{ .terminal }}
 $browser = zen
 $fileManager = nautilus
-$menu = rofi -show
+$menu = rofi -run-command "uwsm app -- {cmd}" -show
 $uwsm = uwsm app --
 $uwsmb = uwsm app -s b --
 
