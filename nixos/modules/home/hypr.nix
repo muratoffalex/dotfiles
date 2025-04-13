@@ -8,8 +8,6 @@
     portalPackage = null;
   };
 
-  services.swayosd.enable = true;
-
   home.packages = with pkgs; [
     # hyprland packages
     brightnessctl
@@ -33,6 +31,8 @@
     jq
     libnotify
   ];
+
+  services.swayosd.enable = true;
 
   home.sessionVariables = {
     NIXOS_OZONE_WL = "1";
