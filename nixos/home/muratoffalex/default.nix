@@ -52,7 +52,6 @@
 
       # services
       maestral
-      swayosd
       sway-audio-idle-inhibit
 
       # apps
@@ -120,20 +119,6 @@
   };
 
   systemd.user.services = {
-    swayosd = {
-      Unit = {
-        Description = "Sway On-Screen-Display";
-        PartOf = [ "graphical-session.target" ];
-      };
-      Service = {
-        ExecStart = "${pkgs.swayosd}/bin/swayosd-server";
-        Restart = "always";
-        RestartSec = "5s";
-      };
-      Install = {
-        WantedBy = [ "graphical-session.target" ];
-      };
-    };
     maestral = {
       Unit = {
         Description = "Maestral Dropbox Client";
