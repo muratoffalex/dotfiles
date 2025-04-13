@@ -59,6 +59,7 @@
       kitty
       kooha
       swappy
+      oculante
       gnome-calculator
       vlc
       inputs.zen-browser.packages."${system}".twilight
