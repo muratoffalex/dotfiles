@@ -3,8 +3,8 @@
 	url = "git@github.com:muratoffalex/nvim.git"
 	refreshPeriod = "1h"
 
-# various images - wallpapers, etc.
-["images"]
+# various assets - images, sounds, etc.
+["assets"]
 	type = "git-repo"
-	url = "git@github.com:muratoffalex/images.git"
+	url = "git@github.com:muratoffalex/assets.git"
 	refreshPeriod = "168h"
