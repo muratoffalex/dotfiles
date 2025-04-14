@@ -45,6 +45,7 @@
       jujutsu
       chezmoi
       just
+      clipse
 
       # ai
       vectorcode
