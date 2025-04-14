@@ -7,6 +7,7 @@
     ../../modules/home/programs/ags.nix
     ../../modules/home/programs/rofi.nix
     ../../modules/home/programs/direnv.nix
+    inputs.zen-browser.homeModules.twilight
   ];
   home = {
     username = "muratoffalex";
@@ -61,7 +62,6 @@
       oculante
       gnome-calculator
       vlc
-      inputs.zen-browser.packages."${system}".twilight
       hiddify-app
       telegram-desktop
       nautilus
@@ -84,6 +84,11 @@
         defaultCursor = "Adwaita";
       };
     };
+  };
+
+  programs.zen-browser = {
+    enable = true;
+    nativeMessagingHosts = [ pkgs.tridactyl-native ];
   };
 
   gtk = {

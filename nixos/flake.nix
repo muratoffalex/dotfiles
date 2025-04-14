@@ -15,7 +15,11 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-    zen-browser.url = "github:0xc000022070/zen-browser-flake";
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
     # neovim-nightly-overlay.url = "github:muratoffalex/neovim-nightly-overlay";
     ags.url = "github:Aylur/ags";
     mcp-hub.url = "github:ravitemer/mcp-hub";
