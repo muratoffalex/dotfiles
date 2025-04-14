@@ -109,20 +109,6 @@
     };
   };
 
-  xdg = {
-    enable = true;
-    desktopEntries = {
-      yandex-music = {
-        name = "Yandex Music";
-        genericName = "Music Player";
-        exec = "zen -no-remote -new-window \"https://music.yandex.ru/\"";
-        terminal = false;
-        categories = [ "AudioVideo" "Audio" "Music" "Player" ];
-        comment = "Yandex Music web player";
-      };
-    };
-  };
-
   systemd.user.services = {
     maestral = {
       Unit = {
