@@ -18,6 +18,7 @@ exec-once = $uwsmb swaync
 exec-once = $uwsmb hyprpaper
 exec-once = $uwsmb hypridle
 exec-once = $uwsmb wlsunset -T 3600 -t 3500
+exec-once = $uwsm clipse -listen
 exec-once = sleep 2 && $HOME/.config/hypr/handle_monitor_connect.sh
 exec-once = sleep 3 && hyprctl dispatch workspace 2
 exec-once = [workspace 1 silent] sleep 3 && $uwsm $browser
@@ -135,6 +136,7 @@ bind = $mainMod CTRL, down, resizeactive, 0 50
 bind = $mainMod CTRL, Q, exec, hyprlock
 bind = $mainMod ALT, S, swapnext
 bind = $mainMod, Y, exec, $uwsm {{ .terminal }} --title "bw-fzf" -e "$HOME/scripts/bwf"
+bind = $mainMod, C, exec, $terminal --class clipse -e clipse
 
 bind = ALT SHIFT CTRL, Return, exec, hyprctl dispatch resizeactive exact 50% 90%; hyprctl dispatch centerwindow
 bind = ALT SHIFT CTRL, M, exec, hyprctl dispatch resizeactive exact 60% 80%; hyprctl dispatch centerwindow
@@ -217,6 +219,9 @@ windowrule = float, title:bw-fzf
 windowrule = size 800 800, title:bw-fzf
 windowrule = float, title:termfilechooser
 windowrule = size 1200 800, title:termfilechooser
+
+windowrule = float, class:(clipse)
+windowrule = size 900 800, class:(clipse)
 
 # Ignore maximize requests from apps. You'll probably like this.
 windowrule = suppressevent maximize, class:.*
