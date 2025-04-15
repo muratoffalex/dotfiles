@@ -1,0 +1,50 @@
+{
+  "nativeMCPServers": [],
+  "mcpServers": {
+    "sequentialthinking": {
+      "disabled": false,
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
+      ]
+    },
+    "memory": {
+      "disabled": false,
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-memory"
+      ]
+    },
+    "echo-mcp": {
+      "disabled": false,
+      "command": "node",
+      "args": [
+        "/home/muratoffalex/.mcphub/servers/echo-mcp/build/index.js"
+      ]
+    },
+    "time": {
+      "disabled": false,
+      "command": "uvx",
+      "args": [
+        "mcp-server-time",
+        "--local-timezone=Asia/Yekaterinburg"
+      ]
+    },
+    "fetch-mcp": {
+      "disabled": false,
+      "command": "node",
+      "args": [
+        "/home/muratoffalex/.mcphub/servers/fetch-mcp/dist/index.js"
+      ]
+    },
+    "duckduckgo-search": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "duckduckgo-mcp-server"
+      ]
+    }
+  }
+}
