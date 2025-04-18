@@ -11,11 +11,14 @@ if type -q nix
 
   abbr nix-latest 'ls -d /nix/var/nix/profiles/system-*-link | sort -V | tail -n1'
   abbr nrs "chezmoi apply && sudo nixos-rebuild switch --flake {{ .nixos_path }}#{{ .host }} && nix-diff && chezmoi add {{ .nixos_path }}/flake.lock"
-  abbr nfu "chezmoi apply && sudo nix flake update --flake {{ .nixos_path }} && sudo nixos-rebuild switch --flake {{ .nixos_path }}#{{ .host }} && nix-diff && chezmoi add {{ .nixos_path }}/flake.lock"
+  abbr nfu "chezmoi apply && sudo nix flake update --flake {{ .nixos_path }} && chezmoi add {{ .nixos_path }}/flake.lock"
   abbr nix-deps "nix-store --query --references $QUERY_FZF_SEARCH"
   abbr nix-rdeps "nix-store --query --referrers $QUERY_FZF_SEARCH"
   abbr nix-tree "nix-store --query --tree $QUERY_FZF_SEARCH"
   abbr nix-gens "sudo nix-env -p /nix/var/nix/profiles/system --list-generations"
+
+  alias nix-system "cd /run/current-system"
+  alias nix-home "cd $HOME/.local/state/home-manager/gcroots/current-home"
 end
 
 
@@ -76,7 +79,6 @@ if type -q chezmoi
   abbr cha   chezmoi apply 
   abbr chadd chezmoi add
   abbr chcd  chezmoi cd
-  abbr chef  chezmoi edit --apply $FISH_CONFIG_PATH
 end
 
 if type -q gh
@@ -88,19 +90,6 @@ set -gx TMUX_CONFIG_PATH $HOME/.config/tmux/tmux.conf
 set -gx NVIM_CONFIG_PATH $HOME/.config/nvim
 set -gx WEZTERM_CONFIG_PATH $HOME/.config/wezterm/wezterm.lua
 set -gx GIT_CONFIG_PATH $HOME/.gitconfig
-
-if type -q chezmoi
-  abbr chea 'chezmoi edit --apply'
-  abbr etmux chea $TMUX_CONFIG_PATH
-  abbr efish chea $FISH_CONFIG_PATH
-  abbr ewez chea $WEZTERM_CONFIG_PATH
-  abbr egit chea $GIT_CONFIG_PATH
-else
-  abbr etmux nvim $TMUX_CONFIG_PATH
-  abbr efish nvim $FISH_CONFIG_PATH
-  abbr ewez nvim $WEZTERM_CONFIG_PATH
-  abbr egit nvim $GIT_CONFIG_PATH
-end
 
 if type -q git
   abbr ga git add
