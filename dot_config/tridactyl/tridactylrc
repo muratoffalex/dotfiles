@@ -1,1 +1,24 @@
 bind gl buffer #
+bind gm buffer 6
+set hintfiltermode vimperator
+set hintchars trsanioedhuqjklfpgmwybvxz
+
+unbind ;l
+" links
+bind ;l hint a[href]
+
+unbind ;y
+" yank links
+bind ;y hint -y a[href]
+
+unbind ;t
+" open links in new tab
+bind ;t hint -b a[href]
+
+unbind ;b
+" buttons
+bind ;b hint .btn, button, [role="button"], input[type="button"], input[type="submit"]
+
+unbind ;i
+" inputs
+bind ;i hint input:not([type="hidden"]), textarea, [contenteditable]
