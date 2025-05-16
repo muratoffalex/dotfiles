@@ -13,7 +13,7 @@ echo -e "<<< Begin Setting Up Fish Shell"
 		if [[ -z $(command -v fish) ]]; then
 			sudo pacman -S --noconfirm fish
 		fi
-	{{ else if (eq .chezmoi.osRelease.id "ubuntu" "debian") -}}
+	{{ else if (eq .chezmoi.osRelease.id "ubuntu") -}}
 		sudo apt install fish
 	{{ end }}
 {{ end }}
