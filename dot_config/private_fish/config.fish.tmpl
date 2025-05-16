@@ -13,6 +13,10 @@ if type -q direnv
   direnv hook fish | source
 end
 
+if test -e ~/.nix-profile/etc/profile.d/nix.fish
+    source ~/.nix-profile/etc/profile.d/nix.fish
+end
+
 ## Load in end of the file, because nixos will overwrite it
 if test -d $__fish_config_dir/custom_functions.d/override
   for file in $__fish_config_dir/custom_functions.d/override/*.fish
