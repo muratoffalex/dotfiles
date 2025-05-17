@@ -34,8 +34,10 @@
       kulala-fmt
       libxml2 # xmllint
 
-      # other
-      mysql-client # for dadbod
+      # dadbod clients
+      mysql-client
+      postgresql
+
       # for images/pdf/video in snacks.image
       imagemagick
       ghostscript_headless
