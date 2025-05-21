@@ -49,6 +49,9 @@
 
       # ai
       vectorcode
+      python312Full
+      python312Packages.python-dotenv # for vectorcode
+      python312Packages.socksio # for vectorcode
       aider-chat-with-browser
       inputs.mcp-hub.packages."${system}".default
 
@@ -70,7 +73,7 @@
 
       # dev tools
       clang
-      nodejs_23
+      nodejs_latest
       go_1_24
       cargo
       uv
