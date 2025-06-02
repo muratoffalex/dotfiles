@@ -29,6 +29,7 @@ packages=(
   direnv
   jujutsu
   libnotify
+  unzip
 {{- if eq .window_manager "hyprland" }}
   # base
   wayland
@@ -54,10 +55,16 @@ packages=(
   hyprpolkitagent
   hyprlock
   swayosd
+  rofi-wayland
+  rofi-emoji
+  rofi-calc
   acpi
   socat
   jq
 {{- end }}
+{{   if or (not (index . "headless")) (not .headless) -}}
+  kitty
+{{   end -}}
 )
 
 aur_packages=(
@@ -66,16 +73,12 @@ aur_packages=(
 {{- if eq .window_manager "hyprland" }}
   hyprshot
   sway-audio-idle-inhibit-git
-  clipse
+  clipse-bin
   zen-browser-bin
+  rofi-power-menu
 {{- end }}
 )
 
-{{   if or (not (index . "headless")) (not .headless) -}}
-packages+=(
-  kitty
-)
-{{   end -}}
 
 echo "updating packages"
 {{   if ne .chezmoi.username "root" -}}
