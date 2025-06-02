@@ -1,1 +1,12 @@
+model: or/r1
+weak-model: or/v3
+chat-language: Russian
+cache-prompts: true
+cache-keepalive-pings: 6
+analytics-disable: true
 vim: true
+alias:
+  - "or/r1:openrouter/deepseek/deepseek-r1"
+  - "or/v3:openrouter/deepseek/deepseek-chat-v3-0324"
+  - "r1:deepseek/deepseek-reasoner"
+  - "v3:deepseek/deepseek-chat"
