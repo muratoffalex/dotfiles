@@ -7,6 +7,7 @@ echo -e "<<< Begin Install Packages"
 
 packages=(
   curl
+  openssh
   git
   make
   tmux
@@ -21,21 +22,55 @@ packages=(
   eza
   lazygit
   ttf-jetbrains-mono-nerd
+  ttf-cascadia-code-nerd
   chezmoi
   yq
   yazi
   direnv
+  jujutsu
+  libnotify
+{{- if eq .window_manager "hyprland" }}
+  # base
+  wayland
+  wlroots
+  pipewire
+  wireplumber
+  polkit
+  mesa
+  vulkan-intel
+
+  hyprland
+  uwsm
+  xdg-desktop-portal-hyprland
+  brightnessctl
+  playerctl
+  wlsunset
+  waybar
+  swaync
+  wl-clipboard
+  hyprpaper
+  hypridle
+  hyprpicker
+  hyprpolkitagent
+  hyprlock
+  swayosd
+  acpi
+  socat
+  jq
+{{- end }}
 )
 
 aur_packages=(
-  tlrc-bin
   sesh-bin
   gitmux-bin
+{{- if eq .window_manager "hyprland" }}
+  hyprshot
+{{- end }}
 )
 
 {{   if or (not (index . "headless")) (not .headless) -}}
 packages+=(
-  alacritty
+  kitty
 )
 {{   end -}}
 

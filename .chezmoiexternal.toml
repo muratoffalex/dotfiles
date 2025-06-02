@@ -1,10 +1,10 @@
 [".config/nvim"]
 	type = "git-repo"
-	url = "git@github.com:muratoffalex/nvim.git"
+	url = "https://github.com/muratoffalex/nvim.git"
 	refreshPeriod = "1h"
 
 # various assets - images, sounds, etc.
 ["assets"]
 	type = "git-repo"
-	url = "git@github.com:muratoffalex/assets.git"
+	url = "https://github.com/muratoffalex/assets.git"
 	refreshPeriod = "168h"

@@ -1,0 +1,5 @@
+{{ if eq .window_manager "hyprland"}}
+if uwsm check may-start; then
+  exec uwsm start hyprland.desktop
+fi
+{{ end }}
