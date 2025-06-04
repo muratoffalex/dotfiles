@@ -30,6 +30,7 @@ packages=(
   jujutsu
   libnotify
   unzip
+  btop
 {{- if eq .window_manager "hyprland" }}
   # base
   wayland
@@ -60,6 +61,7 @@ packages=(
   rofi-calc
   acpi
   socat
+  less
   jq
 {{- end }}
 {{   if or (not (index . "headless")) (not .headless) -}}
@@ -76,6 +78,7 @@ aur_packages=(
   clipse-bin
   zen-browser-bin
   rofi-power-menu
+  ttf-rubik-vf
 {{- end }}
 )
 
