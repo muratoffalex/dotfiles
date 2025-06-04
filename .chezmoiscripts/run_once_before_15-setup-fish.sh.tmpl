@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-{{ if not (and (eq .chezmoi.os "linux") (hasKey .chezmoi.osRelease "id") (eq .chezmoi.osRelease.id "nixos")) }}
+{{- if not .is_nixos }}
 
 set -eufo pipefail
 
