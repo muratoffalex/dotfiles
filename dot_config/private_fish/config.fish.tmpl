@@ -23,3 +23,13 @@ if test -d $__fish_config_dir/custom_functions.d/override
     source $file
   end
 end
+
+{{- if not (and (eq .chezmoi.os "linux") (hasKey .chezmoi.osRelease "id") (eq .chezmoi.osRelease.id "nixos")) -}}
+    {{- if eq .window_manager "hyprland" -}}
+    if type -q uwsm
+        if uwsm check may-start
+            exec uwsm start hyprland.desktop
+        end
+    end
+    {{- end -}}
+{{- end -}}

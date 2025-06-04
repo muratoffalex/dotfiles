@@ -3,8 +3,8 @@ monitor=desc:STD Computer Inc N270 1234567890123,preferred,auto-left,1
 monitor=desc:XXX Beyond TV,preferred,auto-up,2
 
 $terminal = {{ .terminal }}
-$browser = zen
-$fileManager = nautilus
+$browser = {{ .browser }}
+$fileManager = {{ .file_manager }}
 $menu = rofi -run-command "uwsm app -- {cmd}" -show
 $uwsm = uwsm app --
 $uwsmb = uwsm app -s b --
