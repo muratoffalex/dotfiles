@@ -6,7 +6,7 @@
 	// "width": 1280,
 	"spacing": 4,
 	"modules-left": [
-		"custom/nixos",
+		"custom/system_logo",
 		"hyprland/workspaces"
 	],
 	"modules-center": [

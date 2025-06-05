@@ -101,11 +101,11 @@ window#waybar {
   box-shadow: none;
 }
 
-#custom-nixos {
+#custom-system_logo {
     padding: 0 0;
     font-size: 25px;
     transition: color .5s;
 }
-#custom-nixos:hover {
+#custom-system_logo:hover {
     color: #1793d1;
 }

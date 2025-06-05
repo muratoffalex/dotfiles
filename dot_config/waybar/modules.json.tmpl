@@ -1,6 +1,6 @@
 {
-	"custom/nixos": {
-		"format": "  ",
+	"custom/system_logo": {
+		"format": {{- if .is_nixos -}}"  "{{- else -}}" 󰣇 "{{- end -}},
 		"tooltip": true,
 		"tooltip-format": "btw"
 	},
