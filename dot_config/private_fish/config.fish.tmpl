@@ -27,7 +27,7 @@ end
 {{ if not .is_nixos -}}
     {{- if eq .window_manager "hyprland" -}}
 if type -q uwsm
-    if uwsm check may-start
+    if uwsm check may-start > /dev/null 2>&1
         exec uwsm start hyprland.desktop
     end
 end
