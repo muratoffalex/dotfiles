@@ -4,7 +4,12 @@ function aicommit
         return
     end
 
-    set -l commit_msg (git diff --cached | aichat --role conventional-commit-message | string collect)
+    set -l prompt ""
+    if set -q argv[1]
+        set prompt $argv[1]
+    end
+
+    set -l commit_msg (git diff --cached | aichat --role conventional-commit-message $prompt | string collect)
 
     echo $commit_msg
     read -n1 -P (set_color -o)"Commit? "(set_color normal)"["(set_color green)"y"(set_color normal)"es/"(set_color blue)"r"(set_color normal)"eword/"(set_color red)"N"(set_color normal)"o] " confirm
