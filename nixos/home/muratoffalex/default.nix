@@ -4,7 +4,7 @@
     ../../modules/home/hypr.nix
     ../../modules/home/programs/fish.nix
     ../../modules/home/programs/neovim.nix
-    ../../modules/home/programs/ags.nix
+    # ../../modules/home/programs/ags.nix
     ../../modules/home/programs/rofi.nix
     ../../modules/home/programs/direnv.nix
     inputs.zen-browser.homeModules.twilight
@@ -48,11 +48,8 @@
       clipse
 
       # ai
-      vectorcode
-      python312Full
-      python312Packages.python-dotenv # for vectorcode
-      python312Packages.socksio # for vectorcode
-      aider-chat-with-browser
+      aider-chat
+      aichat
       inputs.mcp-hub.packages."${system}".default
 
       # services
@@ -70,6 +67,7 @@
       telegram-desktop
       nautilus
       libreoffice-fresh
+      qbittorrent
 
       # dev tools
       clang
@@ -77,6 +75,8 @@
       go_1_24
       cargo
       uv
+      python3
+      python3Packages.pysocks # for aider
     ];
 
     pointerCursor = {
