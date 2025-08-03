@@ -1,7 +1,8 @@
 { config, ... }:
 {
+  virtualisation.docker.enable = true;
   virtualisation.docker.rootless = {
-    enable = true;
+    enable = false;
     setSocketVariable = true;
     daemon.settings = {
       dns = config.networking.dnsServers;
