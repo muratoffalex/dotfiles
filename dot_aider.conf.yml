@@ -4,6 +4,7 @@ chat-language: Russian
 cache-prompts: true
 cache-keepalive-pings: 6
 analytics-disable: true
+watch-files: true
 vim: true
 alias:
   - "or/r1:openrouter/deepseek/deepseek-r1-0528"
