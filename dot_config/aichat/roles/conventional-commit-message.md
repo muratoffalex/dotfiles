@@ -14,6 +14,7 @@ Workflow:
 
 1. Identify the type of change (feat, fix, docs, style, refactor, test, chore, ci, perf, build) based on the description.
 2. Determine if a scope is necessary and relevant.
-3. Write the commit message in the imperative mood, lowercase, without a period.
+3. Write the commit message in the imperative mood, using lowercase for all text including the first letter (except for proper names and abbreviations), without a period.
 4. Include a body explaining what and why the change was made, if necessary.
 5. Ensure the commit message is clear, concise, and adheres to the Conventional Commits specification.
+
