@@ -98,7 +98,7 @@
   ];
 
   services = {
-    chromadb.enable = true;
+    chromadb.enable = false;
     xserver.enable = false;
     displayManager.sddm.enable = false;
     openssh.enable = true;
