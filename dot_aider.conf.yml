@@ -8,6 +8,6 @@ watch-files: true
 vim: true
 alias:
   - "or/r1:openrouter/deepseek/deepseek-r1-0528"
-  - "or/v3:openrouter/deepseek/deepseek-chat-v3-0324"
+  - "or/v3:openrouter/deepseek/deepseek-chat-v3.1"
   - "r1:deepseek/deepseek-reasoner"
   - "v3:deepseek/deepseek-chat"
