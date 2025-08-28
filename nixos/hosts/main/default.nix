@@ -42,7 +42,10 @@
           "hyprland"
           "gtk"
         ];
-        "org.freedesktop.impl.portal.FileChooser" = [ "termfilechooser" "gtk" ];
+        "org.freedesktop.impl.portal.FileChooser" = [
+          "termfilechooser"
+          "gtk"
+        ];
       };
     };
     xdgOpenUsePortal = true;
@@ -107,10 +110,11 @@
       ignoreLid = true;
     };
     logind = {
-      lidSwitch = "suspend";
-      extraConfig = ''
-        			HandlePowerKey=suspend
-        		'';
+      settings.Login = {
+        HandleLidSwitch = "suspend";
+        HandlePowerKey = "suspend";
+        HandlePowerKeyLongPress = "shutdown";
+      };
     };
   };
 
