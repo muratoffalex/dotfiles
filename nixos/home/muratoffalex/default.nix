@@ -63,7 +63,6 @@
       oculante
       gnome-calculator
       vlc
-      hiddify-app
       telegram-desktop
       nautilus
       libreoffice-fresh
