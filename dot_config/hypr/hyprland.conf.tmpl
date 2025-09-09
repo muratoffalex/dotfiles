@@ -23,7 +23,7 @@ exec-once = sleep 2 && $HOME/.config/hypr/handle_monitor_connect.sh
 exec-once = sleep 3 && hyprctl dispatch workspace 2
 exec-once = [workspace 1 silent] sleep 3 && $uwsm $browser
 exec-once = [workspace 2 silent] $uwsm $terminal
-exec-once = [workspace 3 silent] sleep 2 && $uwsm "env XDG_CURRENT_DESKTOP=termfilechooser:gnome Telegram"
+exec-once = [workspace 3 silent] sleep 2 && $uwsm env XDG_CURRENT_DESKTOP=termfilechooser:gnome Telegram
 
 env = XCURSOR_SIZE,24
 env = HYPRCURSOR_SIZE,24
