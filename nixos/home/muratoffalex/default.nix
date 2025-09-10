@@ -7,7 +7,7 @@
     # ../../modules/home/programs/ags.nix
     ../../modules/home/programs/rofi.nix
     ../../modules/home/programs/direnv.nix
-    inputs.zen-browser.homeModules.twilight
+    ../../modules/home/programs/zen.nix
   ];
   home = {
     username = "muratoffalex";
@@ -87,11 +87,6 @@
         defaultCursor = "Adwaita";
       };
     };
-  };
-
-  programs.zen-browser = {
-    enable = true;
-    nativeMessagingHosts = [ pkgs.tridactyl-native ];
   };
 
   gtk = {
