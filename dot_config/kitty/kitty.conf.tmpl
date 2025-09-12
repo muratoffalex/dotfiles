@@ -43,9 +43,12 @@ shell_integration enabled
 allow_remote_control socket-only
 listen_on unix:/tmp/kitty
 
-map cmd+l send_text all \x01\x4c
+# switch to last tmux session (ctrl+a L)
+map cmd+l send_text all \x01\x4
+# open tmux session manager (ctrl+a K)
 map cmd+k send_text all \x01\x4b
 
+# change tmux window (ctrl+a <number>)
 map alt+1 send_text all \x01\x31
 map alt+2 send_text all \x01\x32
 map alt+3 send_text all \x01\x33
