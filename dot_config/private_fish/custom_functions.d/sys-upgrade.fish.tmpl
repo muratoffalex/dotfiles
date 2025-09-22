@@ -1,0 +1,7 @@
+function sys-upgrade
+{{ if .is_nixos }}
+    nix-upgrade
+{{- else }}
+    sudo pacman -Syu && paru -Syu
+{{- end }}
+end
