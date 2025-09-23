@@ -71,7 +71,7 @@
       # dev tools
       clang
       nodejs_latest
-      go_1_24
+      go_1_25
       cargo
       uv
       python3
