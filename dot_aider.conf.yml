@@ -1,5 +1,5 @@
-model: or/r1
-weak-model: or/v3
+model: r1
+weak-model: v3
 chat-language: Russian
 cache-prompts: true
 cache-keepalive-pings: 6
@@ -7,7 +7,5 @@ analytics-disable: true
 watch-files: true
 vim: true
 alias:
-  - "or/r1:openrouter/deepseek/deepseek-r1-0528"
-  - "or/v3:openrouter/deepseek/deepseek-v3.1-terminus"
   - "r1:deepseek/deepseek-reasoner"
   - "v3:deepseek/deepseek-chat"
