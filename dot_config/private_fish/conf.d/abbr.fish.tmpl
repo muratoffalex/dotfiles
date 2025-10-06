@@ -6,7 +6,7 @@ abbr icloud --position anywhere "$HOME/Library/Mobile\ Documents/com~apple~Cloud
 
 abbr se session_end
 
-alias recreate-nightly "git push origin :/refs/tags/nightly && git tag -d nightly && git tag nightly && git push origin nightly"
+alias recreate-nightly "git push origin :refs/tags/nightly && git tag -d nightly && git tag nightly && git push origin nightly"
 
 if type -q nix
   set -l QUERY_FZF_SEARCH '$(nix-store --query --requisites /run/current-system | fzf)'
