@@ -21,14 +21,11 @@ packages=(
   fd
   eza
   lazygit
-  ttf-jetbrains-mono-nerd
-  ttf-cascadia-code-nerd
   chezmoi
   yq
   yazi
   direnv
   jujutsu
-  libnotify
   unzip
   btop
 {{- if eq .window_manager "hyprland" }}
@@ -62,6 +59,10 @@ packages=(
   socat
   less
   jq
+  libnotify
+
+  ttf-jetbrains-mono-nerd
+  ttf-cascadia-code-nerd
 {{- end }}
 {{   if or (not (index . "headless")) (not .headless) -}}
   kitty
