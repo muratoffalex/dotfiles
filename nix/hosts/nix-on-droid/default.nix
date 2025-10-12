@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   environment.etcBackupExtension = ".bak";
@@ -18,10 +18,8 @@
 
   home-manager = {
     backupFileExtension = "hm-bak";
-    useGlobalPkgs = true;
 
-    config =
-      { config, lib, pkgs, ... }:
+    config = { config, lib, pkgs, inputs, ... }:
       {
         imports = [
           ../../modules/home/base.nix
