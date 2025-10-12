@@ -14,6 +14,9 @@
 
   environment.packages = with pkgs; [
     vim
+    git
+    curl
+    wget
   ];
 
   home-manager = {
