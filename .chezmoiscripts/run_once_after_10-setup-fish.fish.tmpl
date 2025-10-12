@@ -1,3 +1,4 @@
+{{- if not .is_nixos }}
 #!{{ lookPath "fish" }}
 
 echo ">>> Begin install fisher and plugins"
@@ -13,3 +14,4 @@ end
 fisher update
 
 echo "<<< End install fisher and plugins"
+{{- end }}
