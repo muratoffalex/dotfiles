@@ -1,5 +1,10 @@
 { pkgs, inputs, ... }:
 {
+  home.sessionVariables = {
+    # HACK: for nvim snacks.picker for frecency and history
+    SQLITE_LIBRARY_PATH = "${pkgs.lib.makeLibraryPath (with pkgs; [ sqlite ])}";
+  };
+
   programs.neovim = {
     enable = true;
     # package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
@@ -37,6 +42,7 @@
       # dadbod clients
       mysql-client
       postgresql
+      sqlite
 
       # for images/pdf/video in snacks.image
       imagemagick
