@@ -20,6 +20,7 @@
     wget
     fish
     busybox
+    openssh
     nerd-fonts.caskaydia-mono
   ];
 
