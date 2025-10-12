@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-{{- if not .is_nixos }}
+{{- if and (not .is_nixos) (not .is_nix_on_droid) }}
 
 set -eufo pipefail
 
