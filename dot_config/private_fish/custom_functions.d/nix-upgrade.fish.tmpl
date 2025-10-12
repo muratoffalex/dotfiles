@@ -3,7 +3,8 @@ function nix-upgrade
     set -l old_system_gen (command ls -d /nix/var/nix/profiles/system-*-link | sort -V | tail -n1 | grep -o '[0-9]*')
     set -l old_home (command ls -d ~/.local/state/nix/profiles/home-manager* | sort -V | tail -n1)
 
-    if chezmoi apply && sudo nix flake update --flake {{ .nixos_path }} && sudo nixos-rebuild switch --flake {{ .nixos_path }}#{{ .host }} && chezmoi add {{ .nixos_path }}/flake.lock
+    if chezmoi apply && sudo nix flake update --flake {{ .nixconf_path }} &&
+        sudo nixos-rebuild switch --flake {{ .nixconf_path }}#{{ .host }} && chezmoi add {{ .nixconf_path }}/flake.lock
         echo -e "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
         set -l new_system (readlink /run/current-system)
