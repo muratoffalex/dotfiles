@@ -17,6 +17,7 @@
     curl
     wget
     fish
+    busybox
   ];
 
   home-manager = {
