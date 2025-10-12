@@ -10,6 +10,7 @@
   time.timeZone = "Asia/Yekaterinburg";
 
   user.shell = "${pkgs.fish}/bin/fish";
+  terminal.font = "${pkgs.nerd-fonts.caskaydia-mono}/share/fonts/truetype/NerdFonts/CaskaydiaMono/CaskaydiaMonoNerdFont-Regular.ttf";
 
   environment.packages = with pkgs; [
     vim
@@ -18,6 +19,7 @@
     wget
     fish
     busybox
+    nerd-fonts.caskaydia-mono
   ];
 
   home-manager = {
