@@ -9,11 +9,14 @@
   '';
   time.timeZone = "Asia/Yekaterinburg";
 
+  user.shell = "${pkgs.fish}/bin/fish";
+
   environment.packages = with pkgs; [
     vim
     git
     curl
     wget
+    fish
   ];
 
   home-manager = {
@@ -24,7 +27,6 @@
         imports = [
           ../../modules/home/base.nix
           ../../modules/home/ai.nix
-          ../../modules/home/apps.nix
           ../../modules/home/dev.nix
           ../../modules/home/tui.nix
           ../../modules/home/programs/fish.nix
