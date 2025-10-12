@@ -1,4 +1,4 @@
-{{- if not .is_nixos }}
+{{- if and (not .is_nixos) (not .is_nix_on_droid) }}
 #!{{ lookPath "fish" }}
 
 echo ">>> Begin install fisher and plugins"

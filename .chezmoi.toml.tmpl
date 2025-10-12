@@ -5,6 +5,7 @@
 {{- $deepseekApiKey := promptStringOnce . "deepseekApiKey" "Enter deepseek api key, if needed" -}}
 {{- $openrouterApiKey := promptStringOnce . "openrouterApiKey" "Enter openrouter.ai api key, if needed" -}}
 {{- $isNixos := and (eq .chezmoi.os "linux") (hasKey .chezmoi.osRelease "id") (eq .chezmoi.osRelease.id "nixos") -}}
+{{- $isNixOnDroid := and (eq .chezmoi.os "linux") (eq .chezmoi.username "nix-on-droid") -}}
 
 [data]
 host = {{ $host | quote }}
@@ -12,6 +13,7 @@ window_manager = ""
 browser = {{- if $isNixos -}}"zen"{{- else -}}"zen-browser"{{- end }}
 file_manager = "nautilus"
 is_nixos = {{ $isNixos }}
+is_nix_on_droid = {{ $isNixOnDroid }}
 
 [data.ai.deepseek]
 api_key = {{ $deepseekApiKey | quote }}
