@@ -16,18 +16,6 @@
     wget
   ];
 
-  programs.fish.enable = true;
-
-  users.users = {
-    nix-on-droid = {
-      isNormalUser = true;
-      extraGroups = [ "docker" ];
-      # mkpasswd --method=sha-512
-      hashedPassword = "$6$6E4ccds90qX/D6P3$iMcNxicNyi5g5UAF9ykJzoooiykikLmzJ4Cq6.vv5HgNl2Ra8UDxJ/HczWBFznVhyMTY56VjctHeBu0Q9q/NZ1";
-      shell = pkgs.fish;
-    };
-  };
-
   home-manager = {
     backupFileExtension = "hm-bak";
 
@@ -36,6 +24,7 @@
         imports = [
           ../../modules/home/base.nix
           ../../modules/home/ai.nix
+          ../../modules/home/apps.nix
           ../../modules/home/dev.nix
           ../../modules/home/tui.nix
           ../../modules/home/programs/fish.nix
