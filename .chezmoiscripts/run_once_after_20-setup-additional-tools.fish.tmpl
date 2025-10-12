@@ -1,3 +1,4 @@
+{{- if not .is_nixos }}
 #!{{ lookPath "fish" }}
 
 echo ">>> Begin setup additional tools"
@@ -10,3 +11,4 @@ if not test -d ~/.config/tmux/plugins/tpm
 end
 
 echo "<<< End setup additional tools"
+{{- end }}
