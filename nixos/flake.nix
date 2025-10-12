@@ -20,20 +20,25 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
-    # neovim-nightly-overlay.url = "github:muratoffalex/neovim-nightly-overlay";
-    ags.url = "github:Aylur/ags";
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     mcp-hub.url = "github:ravitemer/mcp-hub";
     tmux-nightly.url = "github:muratoffalex/tmux-nightly-flake";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-on-droid = {
+      url = "github:nix-community/nix-on-droid/release-24.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
   };
 
   outputs =
-    { self, nixpkgs, home-manager, nixos-hardware, ... }@inputs:
+    { self, nixpkgs, home-manager, nixos-hardware, nix-on-droid, ... }@inputs:
     let
       system = "x86_64-linux";
+      mobileSystem = "aarch64-linux";
     in
     {
       nixosConfigurations = {
@@ -56,6 +61,11 @@
             }
           ];
         };
+      };
+
+      nixOnDroidConfigurations.default = nix-on-droid.lib.nixOnDroidConfiguration {
+        pkgs = import nixpkgs { system = mobileSystem; };
+        modules = [ ./hosts/nix-on-droid ];
       };
 
       formatter.${system} = nixpkgs.legacyPackages.${system}.nixpkgs-fmt;

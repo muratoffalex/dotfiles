@@ -1,10 +1,14 @@
 { pkgs, inputs, ... }:
 {
   imports = [
-    ../../modules/home/hypr.nix
+    ../../modules/home/base.nix
+    ../../modules/home/ai.nix
+    ../../modules/home/apps.nix
+    ../../modules/home/dev.nix
+    ../../modules/home/tui.nix
+    ../../modules/home/programs/hypr.nix
     ../../modules/home/programs/fish.nix
     ../../modules/home/programs/neovim.nix
-    # ../../modules/home/programs/ags.nix
     ../../modules/home/programs/rofi.nix
     ../../modules/home/programs/direnv.nix
     ../../modules/home/programs/zen.nix
@@ -14,68 +18,18 @@
     homeDirectory = "/home/muratoffalex";
     stateVersion = "24.11";
 
-    sessionVariables = {
-      # HACK: for nvim snacks.picker for frecency and history
-      SQLITE_LIBRARY_PATH = "${pkgs.lib.makeLibraryPath (with pkgs; [ sqlite ])}";
-    };
-
     packages = with pkgs; [
       home-manager
 
-      # tui
-      aerc
-      yazi
-      bluetui
-      impala
-      btop
-      lazygit
-      lazydocker
-
       # cli
-      sesh
-      gitmux
       gh
-      zoxide
-      fzf
-      eza
-      ripgrep
-      fd
       bitwarden-cli
       wakatime-cli
-      jujutsu
-      chezmoi
-      just
       clipse
-
-      # ai
-      aider-chat
-      aichat
-      inputs.mcp-hub.packages."${system}".default
 
       # services
       maestral
       sway-audio-idle-inhibit
-
-      # apps
-      kitty
-      kooha
-      swappy
-      oculante
-      gnome-calculator
-      vlc
-      telegram-desktop
-      nautilus
-      libreoffice-fresh
-      qbittorrent
-
-      # dev tools
-      clang
-      nodejs_latest
-      go_1_25
-      cargo
-      uv
-      python3
-      python3Packages.pysocks # for aider
     ];
 
     pointerCursor = {
