@@ -81,12 +81,6 @@
     inputs.tmux-nightly.packages.${pkgs.system}.default
     git
     jq
-    libnotify
-    apfs-fuse
-
-    # nix specific
-    nvd
-    nix-search-cli
 
     # networking
     curl
