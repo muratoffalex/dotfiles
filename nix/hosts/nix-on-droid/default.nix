@@ -13,6 +13,7 @@
   terminal.font = "${pkgs.nerd-fonts.caskaydia-mono}/share/fonts/truetype/NerdFonts/CaskaydiaMono/CaskaydiaMonoNerdFont-Regular.ttf";
 
   environment.packages = with pkgs; [
+    tmux
     vim
     git
     curl
