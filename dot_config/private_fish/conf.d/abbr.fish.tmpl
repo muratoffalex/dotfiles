@@ -12,8 +12,10 @@ if type -q nix
   set -l QUERY_FZF_SEARCH '$(nix-store --query --requisites /run/current-system | fzf)'
 
   abbr nix-latest 'ls -d /nix/var/nix/profiles/system-*-link | sort -V | tail -n1'
-  abbr nrs "chezmoi apply && sudo nixos-rebuild switch --flake {{ .nixos_path }}#{{ .host }} && nix-diff && chezmoi add {{ .nixos_path }}/flake.lock"
-  abbr nfu "chezmoi apply && sudo nix flake update --flake {{ .nixos_path }} && chezmoi add {{ .nixos_path }}/flake.lock"
+  abbr nrs "chezmoi apply && sudo nixos-rebuild switch --flake {{ .nixconf_path
+    }}#{{ .host }} && nix-diff && chezmoi add {{ .nixconf_path }}/flake.lock"
+  abbr nfu "chezmoi apply && sudo nix flake update --flake {{ .nixconf_path }}
+    && chezmoi add {{ .nixconf_path }}/flake.lock"
   abbr nix-deps "nix-store --query --references $QUERY_FZF_SEARCH"
   abbr nix-rdeps "nix-store --query --referrers $QUERY_FZF_SEARCH"
   abbr nix-tree "nix-store --query --tree $QUERY_FZF_SEARCH"

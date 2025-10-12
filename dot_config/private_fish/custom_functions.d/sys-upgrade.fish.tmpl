@@ -2,7 +2,7 @@ function sys-upgrade
 {{ if .is_nixos }}
     nix-upgrade
 {{- else if eq .chezmoi.username "nix-on-droid" }}
-    nix-on-droid switch --flake ~/nixos/flake.nix#default
+    nix-on-droid switch --flake ~/nix#default
 {{- else }}
     sudo pacman -Syu && paru -Syu
 {{- end }}

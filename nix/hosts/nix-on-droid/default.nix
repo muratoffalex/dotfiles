@@ -3,10 +3,7 @@
 {
   environment.etcBackupExtension = ".bak";
   system.stateVersion = "24.05";
-  nixpkgs.config.allowUnfree = true;
-  console = {
-    keyMap = "colemak";
-  };
+
   nix.extraOptions = ''
     experimental-features = nix-command flakes
   '';
