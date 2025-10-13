@@ -1,6 +1,5 @@
+#!/usr/bin/env fish
 {{- if and (not .is_nixos) (not .is_nix_on_droid) }}
-#!{{ lookPath "fish" }}
-
 echo ">>> Begin setup additional tools"
 
 # Install tpm for tmux
