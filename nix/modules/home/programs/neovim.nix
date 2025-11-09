@@ -40,7 +40,7 @@
       libxml2 # xmllint
 
       # dadbod clients
-      mysql-client
+      mariadb.client
       postgresql
       sqlite
 
