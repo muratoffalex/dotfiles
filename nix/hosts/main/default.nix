@@ -94,7 +94,7 @@
   ];
 
   services = {
-    chromadb.enable = false;
+    netbird.enable = true;
     xserver.enable = false;
     displayManager.sddm.enable = false;
     openssh.enable = true;

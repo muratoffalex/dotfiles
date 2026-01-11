@@ -22,6 +22,7 @@
       vscode-langservers-extracted # css,html,json,eslint
       pyright
       rust-analyzer
+      protobuf-language-server
       # TODO: uncomment when accepted -- https://nixpkgs-tracker.ocfox.me/?pr=385105
       # kulala-ls
 

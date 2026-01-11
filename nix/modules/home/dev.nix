@@ -4,6 +4,7 @@
     clang
     nodejs_latest
     go_1_25
+    delve
     cargo
     uv
     python3

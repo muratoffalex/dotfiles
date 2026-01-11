@@ -22,10 +22,8 @@ THEME=$1
 LIGHTTHEME="kanagawa-lotus"
 DARKTHEME="kanagawa-wave"
 TRANSPARENTTHEME="transparent"
-VIMCONF="$HOME/.config/nvim/lua/config/init.lua"
 ALACRITTYCONF="$HOME/.config/alacritty/alacritty.toml"
 TMUXCONF="$HOME/.config/tmux/tmux.conf"
-THEMEENV="theme"
 
 {{ if (eq .chezmoi.os "darwin") }}
 CURRENT_MODE=$(defaults read -g AppleInterfaceStyle 2> /dev/null)
