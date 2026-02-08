@@ -9,5 +9,9 @@
     uv
     python3
     python3Packages.pysocks # for aider
+    tokei
+    postgresql
+    golangci-lint
+    go-mockery
   ];
 }
