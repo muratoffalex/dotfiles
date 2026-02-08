@@ -36,7 +36,6 @@
   };
 
   environment.packages = with pkgs; [
-    tmux
     vim
     git
     curl

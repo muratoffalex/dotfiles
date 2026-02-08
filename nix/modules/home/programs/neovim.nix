@@ -36,7 +36,7 @@
       stylua
       prettierd
       nodePackages.prettier
-      nixfmt-rfc-style
+      nixfmt
       kulala-fmt
       libxml2 # xmllint
 
