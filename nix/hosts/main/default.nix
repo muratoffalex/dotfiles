@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ pkgs, config, inputs, ... }:
 {
   imports = [
     ./hardware-configuration.nix
@@ -54,10 +54,11 @@
   programs = {
     fish = {
       enable = true;
+      # TODO: temporary solution https://github.com/hyprwm/Hyprland/discussions/12661#discussioncomment-15390105
       loginShellInit = ''
         if test (tty) = "/dev/tty1"
           if uwsm check may-start
-            exec uwsm start hyprland-uwsm.desktop
+            exec uwsm start ${config.programs.hyprland.package}/share/wayland-sessions/hyprland.desktop
           end
         end
       '';
