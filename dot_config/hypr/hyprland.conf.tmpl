@@ -38,7 +38,6 @@ general {
   gaps_out = 0
 
   border_size = 1
-  no_border_on_floating = true
 
   col.active_border = rgba(d75f00ee)
   col.inactive_border = rgba(59595900)
@@ -206,30 +205,111 @@ bindl = , XF86AudioPlay, exec, playerctl play-pause
 bindl = , XF86AudioPrev, exec, playerctl previous
 
 
-windowrule = float, class:confirm
-windowrule = float, class:file_progress
-windowrule = float, class:dialog
-windowrule = float, class:org.pulseaudio.pavucontrol
-windowrule = float, class:.blueman-manager-wrapped
-windowrule = float, class:.telegram-desktop-wrapped
-windowrule = size 1200 800, class:.telegram-desktop-wrapped
-windowrule = size 800 500, class:.blueman-manager-wrapped
-windowrule = float, title:bw-fzf
-windowrule = size 800 800, title:bw-fzf
-windowrule = float, title:termfilechooser
-windowrule = size 1200 800, title:termfilechooser
+windowrule {
+  name = windowrule-1
+  float = on
+  match:class = confirm
+}
 
-windowrule = float, class:(clipse)
-windowrule = size 1000 800, class:(clipse)
+windowrule {
+  name = windowrule-2
+  float = on
+  match:class = file_progress
+}
+
+windowrule {
+  name = windowrule-3
+  float = on
+  match:class = dialog
+}
+
+windowrule {
+  name = windowrule-4
+  float = on
+  match:class = org.pulseaudio.pavucontrol
+}
+
+windowrule {
+  name = windowrule-5
+  float = on
+  size = 800 500
+  match:class = .blueman-manager-wrapped
+}
+
+windowrule {
+  name = windowrule-6
+  float = on
+  size = 1200 800
+  match:class = .telegram-desktop-wrapped
+}
+
+windowrule {
+  name = windowrule-7
+  float = on
+  size = 800 800
+  match:title = bw-fzf
+}
+
+windowrule {
+  name = windowrule-8
+  float = on
+  size = 1200 800
+  match:title = termfilechooser
+}
+
+windowrule {
+  name = windowrule-9
+  float = on
+  size = 1000 800
+  match:class = (clipse)
+}
 
 # Ignore maximize requests from apps. You'll probably like this.
-windowrule = suppressevent maximize, class:.*
+windowrule {
+  name = windowrule-10
+  suppress_event = maximize
+  match:class = .*
+}
 
 # Fix some dragging issues with XWayland
-windowrule = nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0
+windowrule {
+  name = windowrule-11
+  no_focus = on
+  match:class = ^$
+  match:title = ^$
+  match:xwayland = 1
+  match:float = 1
+  match:fullscreen = 0
+  match:pin = 0
+}
 
-windowrule = rounding 10, floating:1
-windowrule = noshadow, floating:0
+windowrule {
+  name = windowrule-12
+  rounding = 10
+  match:float = 1
+}
+
+windowrule {
+  name = windowrule-13
+  no_shadow = on
+  match:float = 0
+}
+
+windowrule {
+  name = windowrule-14
+  border_size = 0
+  rounding = 0
+  match:float = 0
+  match:workspace = w[tv1]
+}
+
+windowrule {
+  name = windowrule-15
+  border_size = 0
+  rounding = 0
+  match:float = 0
+  match:workspace = f[1]
+}
 
 workspace = 1,defaultName:zen
 workspace = 2,defaultName:term
@@ -237,7 +317,3 @@ workspace = 3,defaultName:tg
 # Smart gaps
 workspace = w[tv1], gapsout:0, gapsin:0
 workspace = f[1], gapsout:0, gapsin:0
-windowrule = bordersize 0, floating:0, onworkspace:w[tv1]
-windowrule = rounding 0, floating:0, onworkspace:w[tv1]
-windowrule = bordersize 0, floating:0, onworkspace:f[1]
-windowrule = rounding 0, floating:0, onworkspace:f[1]
