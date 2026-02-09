@@ -1,9 +1,11 @@
 {{- $host := promptStringOnce . "host" "Enter host for this machine" -}}
-{{- $baseProxy := promptStringOnce . "proxy" "Enter proxy server (format: http://proxy.example.com:port)" -}}
+{{- $baseProxy := promptStringOnce . "proxy" "Enter http(s) proxy server (format: http://proxy.example.com:port)" -}}
+{{- $socksProxy := promptStringOnce . "proxy" "Enter socks proxy server (format: socks5://proxy.example.com:port)" -}}
 {{- $noProxy := promptStringOnce . "noProxy" "Enter no_proxy addresses (format: localhost,127.0.0.1,.local,.example.com)" -}}
 {{- $enableProxyByDefault := promptBoolOnce . "enableProxy" "Enable proxy by default for terminal? If no, you can use it via proxy command" -}}
 {{- $deepseekApiKey := promptStringOnce . "deepseekApiKey" "Enter deepseek api key, if needed" -}}
 {{- $openrouterApiKey := promptStringOnce . "openrouterApiKey" "Enter openrouter.ai api key, if needed" -}}
+{{- $claudeApiKey := promptStringOnce . "claudeApiKey" "Enter claude api key, if needed" -}}
 {{- $isNixos := and (eq .chezmoi.os "linux") (hasKey .chezmoi.osRelease "id") (eq .chezmoi.osRelease.id "nixos") -}}
 {{- $isNixOnDroid := and (eq .chezmoi.os "linux") (eq .chezmoi.username "nix-on-droid") -}}
 
@@ -19,10 +21,13 @@ is_nix_on_droid = {{ $isNixOnDroid }}
 api_key = {{ $deepseekApiKey | quote }}
 [data.ai.openrouter]
 api_key = {{ $openrouterApiKey | quote }}
+[data.ai.claude]
+api_key = {{ $claudeApiKey | quote }}
 
 [data.proxy]
 enable = {{ $enableProxyByDefault }}
 https = {{ $baseProxy | quote }}
 http = {{ $baseProxy | quote }}
+socks = {{ $socksProxy | quote }}
 ftp = {{ $baseProxy | quote }}
 no_proxy = {{ $noProxy | quote }}
