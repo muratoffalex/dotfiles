@@ -1,1 +1,15 @@
 command_timeout = 1000
+
+[custom.jj]
+when = "jj-starship detect"
+shell = ["jj-starship", "--bookmarks-display-limit", "1"]
+format = "$output "
+
+[git_branch]
+disabled = true
+
+[git_commit]
+disabled = true
+
+[git_status]
+disabled = true

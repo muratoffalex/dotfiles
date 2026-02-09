@@ -13,5 +13,6 @@
     postgresql
     golangci-lint
     go-mockery
+    tree
   ];
 }
