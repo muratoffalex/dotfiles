@@ -7,8 +7,12 @@
 
   programs.neovim = {
     enable = true;
+    withRuby = false;
+    withPython3 = false;
     # package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
     extraPackages = with pkgs; [
+      tree-sitter
+
       # lsp
       marksman
       lua-language-server
@@ -23,8 +27,6 @@
       pyright
       rust-analyzer
       protobuf-language-server
-      # TODO: uncomment when accepted -- https://nixpkgs-tracker.ocfox.me/?pr=385105
-      # kulala-ls
 
       # linters
       markdownlint-cli
@@ -35,7 +37,7 @@
       gotools # goimports inside
       stylua
       prettierd
-      nodePackages.prettier
+      prettier
       nixfmt
       kulala-fmt
       libxml2 # xmllint

@@ -3,7 +3,7 @@
   home.packages = with pkgs; [
     clang
     nodejs_latest
-    go_1_25
+    go_1_26
     delve
     cargo
     uv

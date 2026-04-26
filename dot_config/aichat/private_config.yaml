@@ -1,4 +1,4 @@
-model: openrouter:google/gemini-2.5-flash-lite
+model: openrouter:deepseek/deepseek-v4-flash
 keybinding: vi
 clients:
 - type: openai-compatible
