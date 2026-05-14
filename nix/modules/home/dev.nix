@@ -14,5 +14,6 @@
     golangci-lint
     go-mockery
     tree
+    insomnia
   ];
 }

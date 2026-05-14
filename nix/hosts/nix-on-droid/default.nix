@@ -61,6 +61,16 @@
           ../../modules/home/programs/direnv.nix
         ];
         home.stateVersion = "24.05";
+
+        home.activation.setupTpm = let
+          tpmDir = "${config.xdg.configHome}/tmux/plugins/tpm";
+        in pkgs.lib.hm.dag.entryAfter ["writeBoundary"] ''
+          if [ ! -d "${tpmDir}" ]; then
+            $DRY_RUN_CMD mkdir -p ${config.xdg.configHome}/tmux/plugins
+            $DRY_RUN_CMD ${pkgs.git}/bin/git clone https://github.com/tmux-plugins/tpm ${tpmDir}
+            $DRY_RUN_CMD ${tpmDir}/bin/install_plugins
+          fi
+        '';
       };
   };
 }

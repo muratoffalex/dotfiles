@@ -9,6 +9,13 @@
       enable = true;
       allowedTCPPorts = [ 8085 9000 ];
     };
+    extraHosts = ''
+      127.0.0.1    frontend-sl.local
+      127.0.0.1    backend-sl.local
+      127.0.0.1    apidoc.backend-sl.local
+      127.0.0.1    apidoc.frontend-sl.local
+      127.0.0.1    www.frontend-sl.local
+    '';
   };
 
   systemd.network = {

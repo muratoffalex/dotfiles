@@ -1,8 +1,12 @@
-{ pkgs, inputs, ... }:
+{ pkgs, lib, ... }:
 {
   home.sessionVariables = {
     # HACK: for nvim snacks.picker for frecency and history
     SQLITE_LIBRARY_PATH = "${pkgs.lib.makeLibraryPath (with pkgs; [ sqlite ])}";
+  };
+
+  xdg.configFile."nvim/init.lua" = {
+    enable = lib.mkForce false;  # forces disabling the creation of init.lua
   };
 
   programs.neovim = {
@@ -13,6 +17,9 @@
     extraPackages = with pkgs; [
       tree-sitter
 
+      # for codecompanion
+      file
+
       # lsp
       marksman
       lua-language-server
@@ -21,7 +28,7 @@
       nil
       clang-tools
       typescript-language-server
-      vue-language-server
+      # vue-language-server # pnpm vulnerability, uncomment later
       tailwindcss-language-server
       vscode-langservers-extracted # css,html,json,eslint
       pyright

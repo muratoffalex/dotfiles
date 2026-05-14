@@ -6,6 +6,7 @@
     # ref: https://wiki.hyprland.org/Nix/Hyprland-on-Home-Manager/#using-the-home-manager-module-with-nixos
     package = null;
     portalPackage = null;
+    configType = "hyprlang";
   };
 
   home.packages = with pkgs; [

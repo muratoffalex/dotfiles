@@ -25,16 +25,42 @@
       inputs.home-manager.follows = "home-manager";
     };
     # neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
-    mcp-hub.url = "github:ravitemer/mcp-hub";
     nix-on-droid = {
       url = "github:nix-community/nix-on-droid/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
+    codex = {
+      url = "github:sadjow/codex-cli-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    claude-code = {
+      url = "github:sadjow/claude-code-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    claude-agent-acp = {
+      url = "github:muratoffalex/claude-agent-acp-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    jj-starship = {
+      url = "github:dmmulroy/jj-starship";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    peon-ping = {
+      url = "github:PeonPing/peon-ping";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
-    { self, nixpkgs, home-manager, nixos-hardware, nix-on-droid, ... }@inputs:
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      nixos-hardware,
+      nix-on-droid,
+      ...
+    }@inputs:
     let
       system = "x86_64-linux";
       mobileSystem = "aarch64-linux";

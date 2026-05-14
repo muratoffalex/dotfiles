@@ -1,11 +1,24 @@
 [ui]
 editor = '{{ .editor }}'
 diff-editor = ["nvim", "-c", "DiffEditor $left $right $output"]
+merge-editor = [
+  "nvim",
+  "-c", "let g:jj_diffconflicts_marker_length=$marker_length"
+  "-c", "JJDiffConflicts!", "$output", "$base", "$left", "$right",
+]
 default-command = 'log'
 pager = ["less", "-FRX"]
 
-[git]
-auto-local-bookmark = true
+[merge-tools.diffconflicts]
+program = "nvim"
+merge-args = [
+    "-c", "let g:jj_diffconflicts_marker_length=$marker_length",
+    "-c", "JJDiffConflicts!", "$output", "$base", "$left", "$right",
+]
+merge-tool-edits-conflict-markers = true
+
+[remotes.origin]
+auto-track-bookmarks = '*'
 
 [user]
 name = "{{ .name }}"

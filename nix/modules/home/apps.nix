@@ -4,7 +4,7 @@
     kitty
     kooha
     swappy
-    oculante
+    # oculante
     gnome-calculator
     vlc
     telegram-desktop

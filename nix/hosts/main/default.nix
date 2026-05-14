@@ -1,4 +1,4 @@
-{ pkgs, config, inputs, ... }:
+{ pkgs, ... }:
 {
   imports = [
     ./hardware-configuration.nix
@@ -15,7 +15,16 @@
   ];
 
   home-manager.backupFileExtension = "backup";
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs = {
+    config.allowUnfree = true;
+    overlays = [
+      (final: prev: {
+        throttled = prev.throttled.overrideAttrs (oldAttrs: {
+          pythonPath = oldAttrs.pythonPath ++ [ final.python3Packages.dbus-next ];
+        });
+      })
+    ];
+  };
 
   boot = {
     loader = {
@@ -54,11 +63,10 @@
   programs = {
     fish = {
       enable = true;
-      # TODO: temporary solution https://github.com/hyprwm/Hyprland/discussions/12661#discussioncomment-15390105
       loginShellInit = ''
         if test (tty) = "/dev/tty1"
           if uwsm check may-start
-            exec uwsm start ${config.programs.hyprland.package}/share/wayland-sessions/hyprland.desktop
+            exec uwsm start hyprland-uwsm.desktop
           end
         end
       '';
@@ -74,6 +82,7 @@
         stdenv.cc.cc
       ];
     };
+    dconf.enable = true;
   };
 
   environment.systemPackages = with pkgs; [
@@ -99,6 +108,7 @@
     xserver.enable = false;
     displayManager.sddm.enable = false;
     openssh.enable = true;
+    dbus.enable = true;
     upower = {
       enable = true;
       ignoreLid = true;

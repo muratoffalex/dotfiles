@@ -7,6 +7,7 @@ abbr icloud --position anywhere "$HOME/Library/Mobile\ Documents/com~apple~Cloud
 abbr se session_end
 abbr p proxy
 abbr np no_proxy
+abbr simap 'GOPROXY=https://prod-svc.sima-land.ru/gitlab-go-redirect-proxy-3397/,https://proxy.golang.org,direct GOPRIVATE="" GONOSUMDB="gitlab.sima-land.ru,pkg.sima.sh"'
 
 alias recreate-nightly "git push origin :refs/tags/nightly && git tag -d nightly && git tag nightly && git push origin nightly"
 

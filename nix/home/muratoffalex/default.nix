@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ pkgs, ... }:
 {
   imports = [
     ../../modules/home/base.nix
@@ -33,6 +33,7 @@
     ];
 
     pointerCursor = {
+      enable  = true;
       name = "Adwaita";
       package = pkgs.adwaita-icon-theme;
       size = 24;
@@ -45,11 +46,6 @@
 
   gtk = {
     enable = true;
-    gtk4.theme = null;
-
-    gtk4.extraConfig = {
-      gtk-application-prefer-dark-theme = "false";
-    };
 
     iconTheme = {
       package = pkgs.adwaita-icon-theme;
