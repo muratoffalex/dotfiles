@@ -6,14 +6,14 @@
   };
 
   xdg.configFile."nvim/init.lua" = {
-    enable = lib.mkForce false;  # forces disabling the creation of init.lua
+    enable = lib.mkForce false; # forces disabling the creation of init.lua
   };
 
   programs.neovim = {
     enable = true;
     withRuby = false;
     withPython3 = false;
-    # package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
+    # package = inputs.neovim-nightly-overlay.packages.${pkgs.stdenv.hostPlatform.system}.default;
     extraPackages = with pkgs; [
       tree-sitter
 

@@ -9,7 +9,7 @@
     vlc
     telegram-desktop
     nautilus
-    libreoffice-fresh
+    libreoffice
     qbittorrent
   ];
 }

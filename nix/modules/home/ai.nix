@@ -1,4 +1,7 @@
 { pkgs, inputs, ... }:
+let
+  platformSystem = pkgs.stdenv.hostPlatform.system;
+in
 {
   imports = [ inputs.peon-ping.homeManagerModules.default ];
 
@@ -7,15 +10,15 @@
     aichat
     opencode
     codex-acp
-    inputs.codex.packages.${system}.default
-    inputs.claude-code.packages.${system}.default
-    inputs.claude-agent-acp.packages.${system}.default
-    inputs.peon-ping.packages.${pkgs.system}.default
+    inputs.codex.packages.${platformSystem}.default
+    inputs.claude-code.packages.${platformSystem}.default
+    inputs.claude-agent-acp.packages.${platformSystem}.default
+    inputs.peon-ping.packages.${platformSystem}.default
   ];
 
   programs.peon-ping = {
     enable = true;
-    package = inputs.peon-ping.packages.${pkgs.system}.default;
+    package = inputs.peon-ping.packages.${platformSystem}.default;
     claudeCodeIntegration = true;
 
     settings = {

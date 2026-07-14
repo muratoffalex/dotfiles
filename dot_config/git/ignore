@@ -3,5 +3,6 @@
 ._*
 .jj
 .aider*
+.direnv
 
 **/.claude/settings.local.json

@@ -26,6 +26,7 @@
       bitwarden-cli
       wakatime-cli
       clipse
+      httpie
 
       # services
       maestral
